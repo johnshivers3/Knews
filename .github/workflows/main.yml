@@ -19,7 +19,7 @@ jobs:
   build:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
-    env: HEROKU_API_KEY:${{e0e3ea08-79b8-4532-8cba-b61b13d84c4b}}
+    env: ${{HEROKU_API_KEY:e0e3ea08-79b8-4532-8cba-b61b13d84c4b}}
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it

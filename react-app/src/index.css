@@ -11,13 +11,21 @@ body {
   padding: 0;
   overflow-x: hidden;
   font-family: "Open Sans", sans-serif;
-  background-color: var(--main-light);
+  background-color: rgba(0, 0, 0, 0.781);
+  color: var(--main-highlight);
 }
 
 a {
   color: var(--main-highlight);
   text-decoration: none;
+
 }
+
 a:active {
   color: var(--active-highlight);
+}
+
+input {
+  border: 1px solid var(--main-highlight);
+  border-radius: .2rem;
 }

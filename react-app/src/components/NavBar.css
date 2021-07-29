@@ -60,12 +60,12 @@ li:not(#menu-arrows) {
 
 #logo-nav {
   grid-area: logo-nav;
-  background-color: blue;
+  background-color:grey;
   width: 33.33vw;
 }
 
 #middle-nav {
   grid-area: middle-nav;
-  background-color: red;
+  background-color: grey;
   width: 33.33vw;
 }

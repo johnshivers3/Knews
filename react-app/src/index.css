@@ -1,6 +1,31 @@
 /* TODO Add site wide styles */
-body{
+:root {
+  --main-highlight: rgb(255, 227, 71);
+  --main-dark: grey;
+  --main-light: lightgrey;
+  --active-highlight: rgb(255, 227, 71);
+}
+
+body {
   margin: 0;
   padding: 0;
   overflow-x: hidden;
+  font-family: "Open Sans", sans-serif;
+  background-color: rgba(0, 0, 0, 0.781);
+  color: var(--main-highlight);
+}
+
+a {
+  color: var(--main-highlight);
+  text-decoration: none;
+
+}
+
+a:active {
+  color: var(--active-highlight);
+}
+
+input {
+  border: 1px solid var(--main-highlight);
+  border-radius: .2rem;
 }

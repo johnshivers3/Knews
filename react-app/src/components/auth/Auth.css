@@ -1,5 +1,23 @@
+form {
+  display: flex;
+  flex-direction: column;
+  border-right: 1px solid var(--main-highlight);
+  /* border-bottom: 1px solid var(--main-highlight); */
+  border-radius: 0 0 2rem 0;
+  justify-content: space-around;
+  align-items: center;
+  width: 15%;
+  padding: 5rem;
+  height: 300px;
+  background: linear-gradient(grey, transparent);
+}
 
-button {
-  border: none;
-  background-color: white;
+form label {
+  margin: 0.5rem;
+}
+
+.auth-errors-div {
+  width: 1005;
+  color: red;
+  font-weight: 600;
 }

@@ -1,6 +1,7 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 import LogoutButton from "./auth/LogoutButton";
+import { Arrows } from "./images/Arrows";
 import "./NavBar.css";
 
 const NavBar = () => {
@@ -34,6 +35,10 @@ const NavBar = () => {
             </li>
             <li>
               <LogoutButton />
+            </li>
+            <li></li>
+            <li>
+              <Arrows id='menu-arrows'/>
             </li>
           </ul>
         </div>

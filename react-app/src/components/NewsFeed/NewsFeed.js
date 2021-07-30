@@ -42,7 +42,7 @@ export const NewsFeed = () => {
                         article.content.indexOf("[")
                       )}
                     </p>
-                    <a href={article.url}>Source</a>
+                    <a href={article.url}>External: Source</a>
                     <p>{article.author}</p>
                     </div>
                   </div>

@@ -1,7 +1,7 @@
 #main-newsfeed-div {
   display: grid;
   grid-template-columns: 30vw 30vw;
-  gap: 20vw;
+  gap: 15vw;
   padding: 5vw;
 }
 
@@ -10,10 +10,14 @@
   height: 25%;
   object-fit: contain;
 }
+
 .upper-section{
   width: 40vw;
   background-color: var(--main-dark);
+  border-radius: .5rem;
+  padding: 2rem;
 }
+
 .lower-section{
-  width: 50vw;
+  width: 30vw;
 }

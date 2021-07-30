@@ -6,6 +6,7 @@ import { Logo } from "./images/Logo";
 import { authenticate, login } from "../store/session";
 import "./NavBar.css";
 
+
 const NavBar = () => {
   const [errors, setErrors] = useState([]);
   const [close, setClose] = useState('')

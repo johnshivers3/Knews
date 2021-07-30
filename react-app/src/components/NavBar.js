@@ -1,14 +1,30 @@
-import React from "react";
-import { Link, NavLink } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { Link, NavLink, Redirect } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 import LogoutButton from "./auth/LogoutButton";
 import { Logo } from "./images/Logo";
+import { authenticate, login } from "../store/session";
 import "./NavBar.css";
 
 const NavBar = () => {
+  const [errors, setErrors] = useState([]);
+  const user = useSelector((state) => state.session.user);
+
+  const dispatch = useDispatch();
+  const loginDemoUser = () => {
+    const email = 'demo@aa.io';
+    const password = 'password';
+    dispatch(login(email, password));
+    dispatch(authenticate())
+  };
+
+  if (user) {
+    return <Redirect to="/" />;
+  }
   return (
     <nav>
       <div id="logo-nav">
-        <Link to='/'>
+        <Link to="/">
           <Logo />
         </Link>
       </div>
@@ -41,7 +57,13 @@ const NavBar = () => {
               <li>
                 <LogoutButton />
               </li>
-              <li></li>
+              <li>
+                {/* {errors && errors.map((error, ind) => (
+                  <div key={ind}>{error}</div>
+                ))} */}
+                <button onClick={loginDemoUser}>Demo</button>
+              </li>
+
               <li id="ellipsis-li">
                 <i className="fas fa-ellipsis-h"></i>
               </li>

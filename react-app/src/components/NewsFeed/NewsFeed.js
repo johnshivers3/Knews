@@ -23,12 +23,12 @@ export const NewsFeed = () => {
       {topHeadlines &&
         topHeadlines.map((article, i) => {
           switch (i) {
+            case 0:
             case 1:
             case 2:
             case 3:
-            case 4:
               return (
-                <div id="upper-section" key={i}>
+                <div className="upper-section" key={i}>
                   <h3>{article.title}</h3>
                   <img
                     src={article.urlToImage}
@@ -46,7 +46,7 @@ export const NewsFeed = () => {
 
             default:
               return (
-                <div id="lower-section" key={i}>
+                <div className="lower-section" key={i}>
                   <h3>{article.title}</h3>
                   <img
                     src={article.urlToImage}

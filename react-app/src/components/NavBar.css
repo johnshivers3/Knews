@@ -9,6 +9,10 @@ nav {
 nav a {
   font-weight: 600;
 }
+nav h1 {
+  font-weight: 600;
+  margin-left: 20px;
+}
 
 .fas.fa-ellipsis-h {
   font-size: 50px;

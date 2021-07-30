@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link, NavLink, Redirect } from "react-router-dom";
+import { Link, NavLink, useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import LogoutButton from "./auth/LogoutButton";
 import { Logo } from "./images/Logo";
@@ -8,35 +8,44 @@ import "./NavBar.css";
 
 const NavBar = () => {
   const [errors, setErrors] = useState([]);
+  const [close, setClose] = useState('')
+  const dispatch = useDispatch();
+  const history = useHistory();
   const user = useSelector((state) => state.session.user);
 
-  const dispatch = useDispatch();
+  useEffect(()=>{
+    // const check = document.getElementById('hidden-check')
+
+  },[])
+
   const loginDemoUser = () => {
     const email = 'demo@aa.io';
     const password = 'password';
     dispatch(login(email, password));
-    dispatch(authenticate())
+    // dispatch(authenticate())
   };
 
   if (user) {
-    return <Redirect to="/" />;
-  }
+    history.push('/')
+  };
+
   return (
     <nav>
       <div id="logo-nav">
         <Link to="/">
           <Logo />
         </Link>
+          <h1>KNEWS</h1>
       </div>
       <div id="middle-nav"></div>
       <div id="links-nav">
         <input type="checkbox" id="hidden-check"></input>
-        <label htmlFor="hidden-check" className="transition-wrapper">
+        <label htmlFor="hidden-check" className={`transition-wrapper ${close}`}>
           <div className="transition-wrapper">
             <ul>
               <li>
                 <NavLink to="/" exact={true} activeClassName="active">
-                  Home
+                  {/* {check}Home */}
                 </NavLink>
               </li>
               <li>
@@ -58,9 +67,6 @@ const NavBar = () => {
                 <LogoutButton />
               </li>
               <li>
-                {/* {errors && errors.map((error, ind) => (
-                  <div key={ind}>{error}</div>
-                ))} */}
                 <button onClick={loginDemoUser}>Demo</button>
               </li>
 

@@ -1,9 +1,7 @@
 #main-newsfeed-div {
   display: grid;
-  grid-template-areas:
-  "uppersection"
-  "lowersection";
-  gap: 20px;
+  grid-template-columns: 30vw 30vw;
+  gap: 20vw;
   padding: 5vw;
 }
 
@@ -13,8 +11,9 @@
   object-fit: contain;
 }
 .upper-section{
-  width: 50%;
+  width: 40vw;
+  background-color: var(--main-dark);
 }
 .lower-section{
-  width: 25%;
+  width: 50vw;
 }

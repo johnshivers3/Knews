@@ -94,3 +94,16 @@ label.transition-wrapper {
 #hidden-check:checked + label.transition-wrapper {
   bottom: -380px;
 }
+
+.close{
+  animation: closeMenu 2s ease-out 5s;
+}
+
+@keyframes closeMenu {
+  from {
+    bottom: -380px;
+  }
+  to {
+    bottom: 0;
+  }
+}

@@ -18,7 +18,7 @@ nav h1 {
 .fas.fa-ellipsis-h {
   font-size: 50px;
   color: var(--main-highlight);
-  margin: 0;
+  margin: 10px 0 10px 0;
   padding: 0;
 }
 
@@ -85,7 +85,7 @@ label.transition-wrapper {
   justify-content: flex-end;
   height: 360px;
   margin-top: 180px;
-  background: linear-gradient(grey, transparent);
+  background: linear-gradient(grey,grey, transparent);
   position: absolute;
   bottom: 0px;
   right: 0;
@@ -100,15 +100,26 @@ label.transition-wrapper {
   bottom: -380px;
 }
 
-.close{
-  animation: closeMenu 2s ease-out 5s;
+/* .close{
+  animation: closeMenu 2s ease-out 2s;
+}
+.open{
+  animation: openMenu 2s ease-in-out .2s 1 ;
 }
 
 @keyframes closeMenu {
-  from {
+  0% {
     bottom: -380px;
   }
-  to {
+  100% {
     bottom: 0;
   }
 }
+@keyframes openMenu {
+  100% {
+    bottom: 0;
+  }
+  0% {
+    bottom: -380px;
+  }
+} */

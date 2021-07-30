@@ -9,7 +9,7 @@ form {
   width: 15%;
   padding: 5rem;
   height: 300px;
-  background: linear-gradient(grey, transparent);
+  background: linear-gradient(grey,grey, transparent);
 }
 
 form label {

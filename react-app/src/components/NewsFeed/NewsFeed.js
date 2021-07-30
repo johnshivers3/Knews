@@ -16,54 +16,63 @@ export const NewsFeed = () => {
   }, []);
 
   return (
-    <div id="main-newsfeed-div">
-      {/* {errors } */}
-      {topHeadlines &&
-        topHeadlines.map((article, i) => {
-          switch (i) {
-            case 0:
-            case 1:
-            case 2:
-            case 3:
-              return (
-                <>
-                  <div className="upper-section" key={i}>
-                  <img
-                    src={article.urlToImage}
-                    alt={article.title}
-                    height="100px"
-                    width="100px"
-                  />
-                    <div className='upper-content'>
-                    <h3>{article.title}</h3>
+    <>
+
+      <div id="main-newsfeed-div">
+        {topHeadlines &&
+          topHeadlines.map((article, i) => {
+            switch (i) {
+              case 0:
+              case 1:
+              case 2:
+              case 3:
+              case 4:
+              case 5:
+                return (
+                  <>
+                    <div className="upper-section" key={i}>
+                      <img
+                        src={article.urlToImage}
+                        alt={article.title}
+                        height="100px"
+                        width="100px"
+                      />
+                      <div className="upper-content">
+                        <h3>{article.title}</h3>
+                        <p>
+                          {article.content.substring(
+                            0,
+                            article.content.indexOf("[")
+                          )}
+                        </p>
+                        <a href={article.url}>External: Source</a>
+                        <p>{article.author}</p>
+                      </div>
+                    </div>
+                  </>
+                );
+
+              default:
+                return (
+                  <div className="lower-section" key={i}>
+                    <div>
+                      <h3>{article.title}</h3>
+                      <img src={article.urlToImage} alt={article.title} />
+                    </div>
                     <p>
                       {article.content.substring(
                         0,
                         article.content.indexOf("[")
                       )}
                     </p>
-                    <a href={article.url}>External: Source</a>
+                    <a href={article.url}>Source</a>
                     <p>{article.author}</p>
-                    </div>
                   </div>
-                </>
-              );
-
-            default:
-              return (
-                <span className="lower-section" key={i}>
-                  <h3>{article.title}</h3>
-                  <img src={article.urlToImage} alt={article.title} />
-                  <p>
-                    {article.content.substring(0, article.content.indexOf("["))}
-                  </p>
-                  <a href={article.url}>Source</a>
-                  <p>{article.author}</p>
-                </span>
-              );
-          }
-        })}
-    </div>
+                );
+            }
+          })}
+      </div>
+    </>
   );
 };
 

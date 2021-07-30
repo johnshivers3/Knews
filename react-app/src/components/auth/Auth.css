@@ -16,7 +16,10 @@ form label {
   margin: 0.5rem;
   color: var(--main-highlight);
 }
-
+form div {
+  display: flex;
+  justify-content: center;
+}
 .auth-errors-div {
   width: 1005;
   color: red;

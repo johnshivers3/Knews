@@ -59,6 +59,7 @@ const LoginForm = () => {
           onChange={updatePassword}
         />
       </div>
+      <NavLink to='/sign-up'>Don't have an account yet? Click here to sign up. </NavLink>
         <button type='submit'>Login</button>
     </form>
   );

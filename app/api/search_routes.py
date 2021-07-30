@@ -1,5 +1,4 @@
 from flask import Blueprint
-from app.models import db, User
 import requests
 from app.config import Config
 import urllib.parse

@@ -17,7 +17,9 @@ export const NewsFeed = () => {
 
   return (
     <>
-
+      <div id='header-div'>
+        <h1>Top Stories</h1>
+      </div>
       <div id="main-newsfeed-div">
         {topHeadlines &&
           topHeadlines.map((article, i) => {

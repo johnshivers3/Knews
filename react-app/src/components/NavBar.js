@@ -1,5 +1,5 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import LogoutButton from "./auth/LogoutButton";
 import { Logo } from "./images/Logo";
 import "./NavBar.css";
@@ -8,7 +8,9 @@ const NavBar = () => {
   return (
     <nav>
       <div id="logo-nav">
-        <Logo />
+        <Link to='/'>
+          <Logo />
+        </Link>
       </div>
       <div id="middle-nav"></div>
       <div id="links-nav">
@@ -40,7 +42,7 @@ const NavBar = () => {
                 <LogoutButton />
               </li>
               <li></li>
-              <li id='ellipsis-li'>
+              <li id="ellipsis-li">
                 <i className="fas fa-ellipsis-h"></i>
               </li>
             </ul>

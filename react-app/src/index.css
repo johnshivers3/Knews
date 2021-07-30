@@ -16,7 +16,7 @@ body {
 }
 
 a {
-  color: var(--main-highlight);
+  color: whitesmoke;
   text-decoration: none;
 
 }

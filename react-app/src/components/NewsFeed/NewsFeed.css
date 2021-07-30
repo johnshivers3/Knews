@@ -1,0 +1,11 @@
+#main-newsfeed-div {
+  padding: 5vw;
+}
+
+#main-newsfeed-div img{
+  width: 50%;
+  height: 50%;
+  object-fit: contain;
+}
+#upper-section{}
+#lower-section{}

@@ -27,7 +27,7 @@ def get_search_result_by_title(query):
     '''
     This is route is a general query without additional parameters
     '''
-    encoded_query = urllib.parse.quote_plus('query')
+    encoded_query = urllib.parse.quote_plus(query)
     response = requests.get(f'https://newsapi.org/v2/everything?qInTitle={encoded_query}&apiKey={Config.NEWS_KEY}')
     data = response.json()
 

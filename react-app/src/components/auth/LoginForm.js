@@ -1,14 +1,14 @@
-import React, { useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { Redirect, NavLink } from 'react-router-dom';
-import { login } from '../../store/session';
-import './Auth.css'
+import React, { useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { Redirect, Link } from "react-router-dom";
+import { login } from "../../store/session";
+import "./Auth.css";
 
 const LoginForm = () => {
   const [errors, setErrors] = useState([]);
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const user = useSelector(state => state.session.user);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const user = useSelector((state) => state.session.user);
   const dispatch = useDispatch();
 
   const onLogin = async (e) => {
@@ -28,39 +28,43 @@ const LoginForm = () => {
   };
 
   if (user) {
-    return <Redirect to='/' />;
+    return <Redirect to="/" />;
   }
 
   return (
     <form onSubmit={onLogin}>
       <h2>Login</h2>
-      <div className='auth-errors-div'>
+      <div className="auth-errors-div">
         {errors.map((error, ind) => (
           <div key={ind}>{error}</div>
         ))}
       </div>
-        <label htmlFor='email'>Email</label>
+      <label htmlFor="email">Email</label>
       <div>
         <input
-          name='email'
-          type='text'
-          placeholder='Email'
+          name="email"
+          type="text"
+          placeholder="Email"
           value={email}
           onChange={updateEmail}
         />
       </div>
-        <label htmlFor='password'>Password</label>
+      <label htmlFor="password">Password</label>
       <div>
         <input
-          name='password'
-          type='password'
-          placeholder='Password'
+          name="password"
+          type="password"
+          placeholder="Password"
           value={password}
           onChange={updatePassword}
         />
       </div>
-      <NavLink to='/sign-up'>Don't have an account yet? Click here to sign up. </NavLink>
-        <button type='submit'>Login</button>
+      <div>
+        <Link to="/sign-up">
+          Don't have an account yet? Click here to sign up.{" "}
+        </Link>
+      </div>
+      <button type="submit">Login</button>
     </form>
   );
 };

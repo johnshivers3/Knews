@@ -9,6 +9,7 @@ nav {
 
 nav a {
   font-weight: 600;
+  font-size: x-large;
 }
 nav h1 {
   font-weight: 600;
@@ -18,7 +19,7 @@ nav h1 {
 .fas.fa-ellipsis-h {
   font-size: 50px;
   color: var(--main-highlight);
-  margin: 10px 0 10px 0;
+  margin: 10px 0 0px 0;
   padding: 0;
 }
 
@@ -93,7 +94,7 @@ label.transition-wrapper {
   transition: bottom 1s ease-in-out 0.1s;
   border-radius: 0 0 0 2rem;
   border-left: 1px solid var(--main-highlight);
-  border-bottom: 1px solid var(--main-highlight);
+  /* border-bottom: 1px solid var(--main-highlight); */
 }
 
 #hidden-check:checked + label.transition-wrapper {

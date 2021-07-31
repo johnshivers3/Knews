@@ -5,14 +5,14 @@ form {
   border-radius: 0 0 2rem 0;
   justify-content: space-around;
   align-items: center;
-  width: 15%;
+  width: 10%;
   padding: 5rem;
   height: 240px;
   background: linear-gradient(grey,grey, transparent);
 }
 
 form label {
-  margin: 0.5rem;
+  margin: .2rem;
   color: var(--main-highlight);
 }
 
@@ -20,6 +20,7 @@ form div {
   display: flex;
   justify-content: center;
   width: 100%;
+  margin: .1rem;
 }
 
 form a {

@@ -15,7 +15,8 @@
   display: flex;
   align-self: center;
   width: 100%;
-  object-fit: scale-down;
+  object-fit: contain;
+  background: linear-gradient(0.25turn,transparent, rgba(255, 255, 255, 0.473),transparent);
 }
 
 .upper-section{
@@ -33,12 +34,15 @@
   display: flex;
   align-self: center;
   width: 100%;
-  object-fit: scale-down;
+  max-height: 100px;
+  object-fit: contain;
+  background: linear-gradient(0.25turn,transparent, rgba(255, 255, 255, 0.473),transparent);
+
 }
 .lower-section{
   display: flex;
   justify-self: center;
-  flex-direction: column;
+  /* flex-direction: column; */
   /* align-content: center; */
   text-align: center;
   width: 20vw;

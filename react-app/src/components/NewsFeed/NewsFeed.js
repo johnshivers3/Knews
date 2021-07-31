@@ -61,12 +61,12 @@ export const NewsFeed = () => {
                       <h3>{article.title}</h3>
                       <img src={article.urlToImage} alt={article.title} />
                     </div>
-                    <p>
+                    {/* <p>
                       {article.content.substring(
                         0,
                         article.content.indexOf("[")
                       )}
-                    </p>
+                    </p> */}
                     <a href={article.url}>Source</a>
                     <p>{article.author}</p>
                   </div>

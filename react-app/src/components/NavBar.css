@@ -4,10 +4,12 @@ nav {
   position: relative;
   height: 100px;
   background-color: var(--main-dark);
+  box-shadow: 0px 3px 50px var(--main-highlight);
 }
 
 nav a {
   font-weight: 600;
+  font-size: x-large;
 }
 nav h1 {
   font-weight: 600;
@@ -17,7 +19,7 @@ nav h1 {
 .fas.fa-ellipsis-h {
   font-size: 50px;
   color: var(--main-highlight);
-  margin: 0;
+  margin: 10px 0 0px 0;
   padding: 0;
 }
 
@@ -84,30 +86,16 @@ label.transition-wrapper {
   justify-content: flex-end;
   height: 360px;
   margin-top: 180px;
-  background: linear-gradient(grey, transparent);
+  background: linear-gradient(grey,grey, transparent);
   position: absolute;
   bottom: 0px;
   right: 0;
-  padding: 20px 80px 0 0;
+  padding: 20px 60px 0 0;
   transition: bottom 1s ease-in-out 0.1s;
   border-radius: 0 0 0 2rem;
   border-left: 1px solid var(--main-highlight);
-  border-bottom: 1px solid var(--main-highlight);
 }
 
 #hidden-check:checked + label.transition-wrapper {
   bottom: -380px;
-}
-
-.close{
-  animation: closeMenu 2s ease-out 5s;
-}
-
-@keyframes closeMenu {
-  from {
-    bottom: -380px;
-  }
-  to {
-    bottom: 0;
-  }
 }

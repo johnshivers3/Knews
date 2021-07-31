@@ -2,23 +2,32 @@ form {
   display: flex;
   flex-direction: column;
   border-right: 1px solid var(--main-highlight);
-  /* border-bottom: 1px solid var(--main-highlight); */
   border-radius: 0 0 2rem 0;
   justify-content: space-around;
   align-items: center;
-  width: 15%;
+  width: 10%;
   padding: 5rem;
-  height: 300px;
-  background: linear-gradient(grey, transparent);
+  height: 240px;
+  background: linear-gradient(grey,grey, transparent);
 }
 
 form label {
-  margin: 0.5rem;
+  margin: .2rem;
   color: var(--main-highlight);
 }
 
+form div {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin: .1rem;
+}
+
+form a {
+  font-size: small;
+}
 .auth-errors-div {
-  width: 1005;
-  color: red;
+  display: block;
+  color: var(--main-highlight);
   font-weight: 600;
 }

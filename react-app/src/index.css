@@ -5,11 +5,14 @@
   --main-light: lightgrey;
   --active-highlight: rgb(255, 227, 71);
 }
-
+html{
+  width: 100vw;
+}
 body {
   margin: 0;
   padding: 0;
   overflow-x: hidden;
+  width: 100vw;
   font-family: "Open Sans", sans-serif;
   background-color: rgba(0, 0, 0, 0.781);
   color: var(--main-highlight);
@@ -28,4 +31,5 @@ a:active {
 input {
   border: 1px solid var(--main-highlight);
   border-radius: .2rem;
+  width: 150%;
 }

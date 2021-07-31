@@ -9,6 +9,9 @@ from .models import db, User
 from .api.user_routes import user_routes
 from .api.auth_routes import auth_routes
 from .api.search_routes import search_routes
+from .api.follows_routes import follows_routes
+from .api.saved_article_routes import saved_article_routes
+from .api.pref_routes import pref_routes
 
 from .seeds import seed_commands
 
@@ -33,9 +36,9 @@ app.config.from_object(Config)
 app.register_blueprint(user_routes, url_prefix='/api/users')
 app.register_blueprint(auth_routes, url_prefix='/api/auth')
 app.register_blueprint(search_routes, url_prefix='/api/search')
-# app.register_blueprint(auth_routes, url_prefix='/api/auth')
-# app.register_blueprint(user_routes, url_prefix='/api/users')
-# app.register_blueprint(auth_routes, url_prefix='/api/auth')
+app.register_blueprint(follows_routes, url_prefix='/api/follows')
+app.register_blueprint(saved_article_routes, url_prefix='/api/saved')
+app.register_blueprint(pref_routes, url_prefix='/api/pref')
 db.init_app(app)
 Migrate(app, db)
 

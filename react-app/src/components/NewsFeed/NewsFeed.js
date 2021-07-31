@@ -17,7 +17,7 @@ export const NewsFeed = () => {
 
   return (
     <>
-      <div className='header-div'>
+      <div className="header-div">
         <h1>Top Stories</h1>
       </div>
       <div id="main-newsfeed-div">
@@ -40,15 +40,17 @@ export const NewsFeed = () => {
                         width="100px"
                       />
                       <div className="upper-content">
-                        <h3>{article.title}</h3>
+                        <a href={article.url}>
+                          <h3>{article.title}</h3>
+                        </a>
                         <p>
                           {article.content.substring(
                             0,
                             article.content.indexOf("[")
                           )}
                         </p>
-                        <a href={article.url}>External: Source</a>
-                        <p>{article.author}</p>
+                        <a href={article.url}>Source</a>
+                        <p>Author:{article.author}</p>
                       </div>
                     </div>
                   </>
@@ -58,8 +60,10 @@ export const NewsFeed = () => {
                 return (
                   <div className="lower-section" key={i}>
                     <div>
-                      <h3>{article.title}</h3>
                       <img src={article.urlToImage} alt={article.title} />
+                      <a href={article.url}>
+                        <h4>{article.title}</h4>
+                      </a>
                     </div>
                     {/* <p>
                       {article.content.substring(
@@ -67,8 +71,10 @@ export const NewsFeed = () => {
                         article.content.indexOf("[")
                       )}
                     </p> */}
-                    <a href={article.url}>Source</a>
-                    <p>{article.author}</p>
+                    {/* <div>
+                      <a href={article.url}>Source</a>
+                      <p>Author: {article.author}</p>
+                    </div> */}
                   </div>
                 );
             }

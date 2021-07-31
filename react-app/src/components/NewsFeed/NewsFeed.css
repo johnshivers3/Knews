@@ -6,45 +6,56 @@
 
 #main-newsfeed-div {
   display: grid;
-  grid-template-columns: repeat(3,auto);
+  grid-template-columns: repeat(3, auto);
   row-gap: 2rem;
   padding: 2rem;
 }
 
-.upper-section img{
+.upper-section img {
   display: flex;
   align-self: center;
   width: 100%;
   object-fit: contain;
-  background: linear-gradient(0.25turn,transparent, rgba(255, 255, 255, 0.473),transparent);
+  background: linear-gradient(
+    0.25turn,
+    transparent,
+    rgba(255, 255, 255, 0.473),
+    transparent
+  );
 }
 
-.upper-section{
+.upper-section {
   display: flex;
   justify-self: center;
   flex-direction: column;
   width: 20vw;
   height: 80%;
   background-color: var(--main-dark);
-  border-radius: .5rem;
+  border-radius: 0.5rem;
   padding: 2rem;
 }
 
-.lower-section img{
+.lower-section img {
   display: flex;
   align-self: center;
   width: 100%;
   max-height: 100px;
   object-fit: contain;
-  background: linear-gradient(0.25turn,transparent, rgba(255, 255, 255, 0.473),transparent);
-
+  background: linear-gradient(
+    0.25turn,
+    transparent,
+    rgba(255, 255, 255, 0.473),
+    transparent
+  );
 }
-.lower-section{
+.lower-section {
   display: flex;
   justify-self: center;
-  /* flex-direction: column; */
-  /* align-content: center; */
   text-align: center;
   width: 20vw;
-  height: 5%;
+  height: 50%;
+  background-color: var(--main-dark);
+  border-radius: 0.5rem;
+  padding: 2rem;
+  margin: 2rem;
 }

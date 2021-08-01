@@ -1,12 +1,18 @@
 const GET_FOLLOWS = 'follows/GET_FOLLOWS'
+const CLEAN_UP = 'follows/CLEAN_UP'
 
 const getFollows = (follows) => ({
   type: GET_FOLLOWS,
   payload: follows
 })
 
+const cleanUp = () => ({
+  type: CLEAN_UP
+})
+
+
 export const getAllFollows = () => async(dispatch) => {
-  const response = await fetch('/api/follows')
+  const response = await fetch('/api/follows/')
 
   if(response.ok) {
     const allFollows = await response.json()
@@ -15,6 +21,10 @@ export const getAllFollows = () => async(dispatch) => {
   } else {
     return ['An error occurred. Please try again.']
   }
+}
+
+export const cleanUpFollows = () => dispatch => {
+  dispatch(cleanUp())
 }
 
 const initialState = { allFollows: null}

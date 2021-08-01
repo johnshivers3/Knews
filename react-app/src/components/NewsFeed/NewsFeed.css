@@ -2,15 +2,28 @@
   padding: 0 8vw;
   width: 100%;
   font-size: x-large;
+  height:15em;
 }
 
 #main-newsfeed-div {
-  display: grid;
+  display: inline-grid;
   grid-template-columns: repeat(3, auto);
   row-gap: 2rem;
   padding: 2rem;
 }
 
+.highlight-section img {
+  display: flex;
+  align-self: center;
+  width: 100%;
+  object-fit: contain;
+  background: linear-gradient(
+    0.25turn,
+    transparent,
+    rgba(255, 255, 255, 0.473),
+    transparent
+  );
+}
 .upper-section img {
   display: flex;
   align-self: center;
@@ -22,6 +35,14 @@
     rgba(255, 255, 255, 0.473),
     transparent
   );
+}
+
+.highlight-section {
+  width: 35vw;
+  height: 80%;
+  background-color: var(--main-dark);
+  border-radius: 0.5rem;
+  padding: 2rem;
 }
 
 .upper-section {

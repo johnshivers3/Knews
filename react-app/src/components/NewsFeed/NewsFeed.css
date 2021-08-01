@@ -16,6 +16,7 @@
   display: flex;
   align-self: center;
   width: 100%;
+  height: 50%;
   object-fit: contain;
   background: linear-gradient(
     0.25turn,
@@ -40,9 +41,10 @@
 .highlight-section {
   width: 35vw;
   height: 80%;
-  background-color: var(--main-dark);
+  background: linear-gradient(grey,grey, transparent);
   border-radius: 0.5rem;
   padding: 2rem;
+  border-bottom: 1px solid var(--main-highlight);
 }
 
 .upper-section {
@@ -51,9 +53,11 @@
   flex-direction: column;
   width: 20vw;
   height: 80%;
-  background-color: var(--main-dark);
+  background: linear-gradient(grey,grey, transparent);
   border-radius: 0.5rem;
   padding: 2rem;
+  border-bottom: 1px solid var(--main-highlight);
+
 }
 
 .lower-section img {
@@ -75,8 +79,9 @@
   text-align: center;
   width: 20vw;
   height: 50%;
-  background-color: var(--main-dark);
+  background: linear-gradient(grey,grey, transparent);
   border-radius: 0.5rem;
   padding: 2rem;
   margin: 2rem;
+  border-bottom: 1px solid var(--main-highlight);
 }

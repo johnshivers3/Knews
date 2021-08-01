@@ -7,29 +7,60 @@ import "./NewsFeed.css";
 export const NewsFeed = () => {
   // const [newsfeed, setNewsFeed] = useState();
   // const [errors, setErrors] = useState();
-  const dispatch = useDispatch();
   // const history = useHistory();
+  const dispatch = useDispatch();
   const topHeadlines = useSelector((state) => state.newsfeed.news?.articles);
 
   useEffect(() => {
     dispatch(newsFeedActions.getTopHeadlines());
+    return () => dispatch(newsFeedActions.cleanUpFeed());
   }, [dispatch]);
 
   return (
     <>
-      <div className="header-div">
-        <h1>Top Stories</h1>
-      </div>
       <div id="main-newsfeed-div">
+        <div className="header-div">
+          <h1>Top Stories</h1>
+        </div>
+        <div>
+          {topHeadlines && (
+            <>
+              <div className="highlight-section">
+                <img
+                  src={topHeadlines[0].urlToImage}
+                  alt={topHeadlines[0].title}
+                  height="100px"
+                  width="100px"
+                />
+                <div className="highlight-content">
+                  <a href={topHeadlines[0].url}>
+                    <h3>{topHeadlines[0].title}</h3>
+                  </a>
+                  <p>
+                    {topHeadlines[0].content.substring(
+                      0,
+                      topHeadlines[0].content.indexOf("[")
+                    )}
+                  </p>
+                  <a href={topHeadlines[0].url}>Source</a>
+                  <p>Author:{topHeadlines[0].author}</p>
+                </div>
+              </div>
+            </>
+          )}
+        </div>
+        <div></div>
         {topHeadlines &&
           topHeadlines.map((article, i) => {
             switch (i) {
               case 0:
+                return null;
               case 1:
               case 2:
               case 3:
               case 4:
               case 5:
+              case 6:
                 return (
                   <>
                     <div className="upper-section" key={i}>
@@ -56,7 +87,18 @@ export const NewsFeed = () => {
                   </>
                 );
 
-              default:
+                case 7:
+                case 8:
+                case 9:
+                case 10:
+                case 11:
+                case 12:
+                case 13:
+                case 14:
+                case 15:
+                case 16:
+                case 17:
+                case 18:
                 return (
                   <div className="lower-section" key={i}>
                     <div>
@@ -65,18 +107,10 @@ export const NewsFeed = () => {
                         <h4>{article.title}</h4>
                       </a>
                     </div>
-                    {/* <p>
-                      {article.content.substring(
-                        0,
-                        article.content.indexOf("[")
-                      )}
-                    </p> */}
-                    {/* <div>
-                      <a href={article.url}>Source</a>
-                      <p>Author: {article.author}</p>
-                    </div> */}
                   </div>
                 );
+              default:
+                return null;
             }
           })}
       </div>

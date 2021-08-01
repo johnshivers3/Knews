@@ -1,14 +1,12 @@
-import React, { useState, useEffect } from "react";
+// import React, { useState, useEffect } from "react";
 import { Link, NavLink, useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import LogoutButton from "./auth/LogoutButton";
 import { Logo } from "./images/Logo";
-import { authenticate, login } from "../store/session";
+import { login } from "../store/session";
 import "./NavBar.css";
 
 const NavBar = () => {
-  const [errors, setErrors] = useState([]);
-
   const dispatch = useDispatch();
   const history = useHistory();
   const user = useSelector((state) => state.session.user);
@@ -18,7 +16,6 @@ const NavBar = () => {
     const email = "demo@aa.io";
     const password = "password";
     dispatch(login(email, password));
-    // dispatch(authenticate())
   };
 
   if (user) {

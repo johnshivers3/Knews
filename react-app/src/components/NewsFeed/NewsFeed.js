@@ -87,7 +87,18 @@ export const NewsFeed = () => {
                   </>
                 );
 
-              default:
+                case 7:
+                case 8:
+                case 9:
+                case 10:
+                case 11:
+                case 12:
+                case 13:
+                case 14:
+                case 15:
+                case 16:
+                case 17:
+                case 18:
                 return (
                   <div className="lower-section" key={i}>
                     <div>
@@ -98,6 +109,8 @@ export const NewsFeed = () => {
                     </div>
                   </div>
                 );
+              default:
+                return null;
             }
           })}
       </div>

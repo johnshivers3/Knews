@@ -6,7 +6,6 @@ follows_routes = Blueprint('follows', __name__)
 
 
 @follows_routes.route('/', methods=['POST'])
-# @login_required
 def post_user_follows():
     '''
     associate topic to user in database
@@ -15,8 +14,7 @@ def post_user_follows():
     return
 
 
-@follows_routes.route('/',methods=['GET'])
-# @login_required
+@follows_routes.route('/', methods=['GET'])
 def get_user_follows():
     '''
     get topics to associated with user
@@ -26,8 +24,8 @@ def get_user_follows():
 
     return topicsList
 
+
 @follows_routes.route('/:followId')
-# @login_required
 def get_one_user_follow(followId):
     '''
     get specific topic associated with user
@@ -36,9 +34,8 @@ def get_one_user_follow(followId):
 
 
 @follows_routes.route('/:followId')
-# @login_required
 def delete_user_follow():
     '''
-    get topics to associated with user
+    delete topics associated with user
     '''
     return

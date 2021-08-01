@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import LoginForm from './components/auth/LoginForm';
 import SignUpForm from './components/auth/SignUpForm';
 import NavBar from './components/NavBar';
+import Footer from './components/Footer/Footer';
 import NewsFeed from './components/NewsFeed/NewsFeed';
 import ProtectedRoute from './components/auth/ProtectedRoute';
 import UsersList from './components/UsersList';
@@ -45,6 +46,7 @@ function App() {
           <NewsFeed/>
         </Route>
       </Switch>
+      <Footer/>
     </BrowserRouter>
   );
 }

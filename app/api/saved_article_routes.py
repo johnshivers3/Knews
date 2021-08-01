@@ -36,6 +36,6 @@ def get_one_user_article(articleId):
 @saved_article_routes.route('/:articleId')
 def delete_user_article():
     '''
-    delete articles associated with user
+    delete specific article associated with user
     '''
     return

@@ -36,6 +36,6 @@ def get_one_user_follow(followId):
 @follows_routes.route('/:followId')
 def delete_user_follow():
     '''
-    delete topics associated with user
+    delete specific topics associated with user
     '''
     return

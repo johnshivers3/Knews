@@ -12,7 +12,7 @@ export const Dashboard = () => {
   useEffect(() => {
     dispatch(followsActions.getAllFollows());
     // dispatch(followsActions.getOneFollow());
-    dispatch(followsActions.addFollow("fitness"));
+    dispatch(followsActions.deleteOneFollow(11));
 
     return () => {
       dispatch(followsActions.cleanUpFollows());

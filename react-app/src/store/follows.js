@@ -1,3 +1,6 @@
+import { useHistory } from "react-router-dom"
+
+
 const GET_FOLLOWS = "follows/GET_FOLLOWS";
 const GET_FOLLOW_BY_ID = "follows/GET_FOLLOW_BY_ID";
 const CLEAN_UP = "follows/CLEAN_UP";
@@ -16,6 +19,7 @@ const cleanUp = () => ({
 });
 
 export const getAllFollows = () => async (dispatch) => {
+  const history = useHistory()
   const response = await fetch("/api/follows/");
 
   if (response.ok) {
@@ -28,6 +32,7 @@ export const getAllFollows = () => async (dispatch) => {
 };
 
 export const getOneFollow = (followId) => async (dispatch) => {
+  const history = useHistory()
   const response = await fetch(`/api/follows/${followId}`);
 
   if (response.ok) {
@@ -39,6 +44,7 @@ export const getOneFollow = (followId) => async (dispatch) => {
   }
 };
 export const addFollow = (topicString) => async (dispatch) => {
+  const history = useHistory()
   const response = await fetch(`/api/follows/`, {
     method: "POST",
     headers: { "CONTENT-TYPE": "application/json" },
@@ -55,6 +61,7 @@ export const addFollow = (topicString) => async (dispatch) => {
   }
 };
 export const deleteOneFollow = (followId) => async (dispatch) => {
+  const history = useHistory()
   const response = await fetch(`/api/follows/${followId}`, {
     method: "DELETE",
   });
@@ -76,6 +83,7 @@ export const cleanUpFollows = () => (dispatch) => {
 const initialState = { allFollows: null, oneFollow: null };
 
 export default function reducer(state = initialState, action) {
+
   switch (action.type) {
     case GET_FOLLOWS:
       return { ...state, allFollows: action.payload };

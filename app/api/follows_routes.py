@@ -11,10 +11,11 @@ def post_user_follows():
     associate topic to user in database
     '''
     topicString = request.json
-    newTopic = FollowedTopics(userId=current_user.id, topicString=topicString['topicString'])
+    newTopic = FollowedTopics(userId=current_user.id,
+                              topicString=topicString['topicString'])
     db.session.add(newTopic)
     db.session.commit()
-    return {'message': f'{topicString} POST successful'}
+    return {'message': f'{topicString} POST successful'}, 200
 
 
 @follows_routes.route('/', methods=['GET'])
@@ -34,7 +35,8 @@ def get_one_user_follow(followId):
     '''
     get specific topic associated with user
     '''
-    topic = FollowedTopics.query.filter_by(id=followId,userId=f'{current_user.id}').first()
+    topic = FollowedTopics.query.filter_by(
+        id=followId, userId=f'{current_user.id}').first()
     if topic is None:
         return {'errors': ['Unsuccessful']}, 404
     return topic.to_dict()
@@ -45,7 +47,8 @@ def delete_user_follow(followId):
     '''
     delete specific topics associated with user
     '''
-    topic = FollowedTopics.query.filter_by(id=followId,userId=f'{current_user.id}').first()
+    topic = FollowedTopics.query.filter_by(
+        id=followId, userId=f'{current_user.id}').first()
     if topic is None:
         return {'errors': ['Unsuccessful']}, 404
     else:

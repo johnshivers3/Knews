@@ -16,8 +16,7 @@ def patch_user_prefs():
     updated['userId'] = current_user.id
     currentPreferences.update(updated)
     db.session.commit()
-
-    return currentPreferences.to_dict()
+    return
 
 
 @pref_routes.route('/', methods=['GET'])

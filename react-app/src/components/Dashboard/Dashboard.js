@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import * as followsActions from "../../store/follows";
 import * as preferenceActions from "../../store/preferences";
+import * as articleActions from "../../store/articles";
 import "./Dashboard.css";
 
 export const Dashboard = () => {
@@ -12,8 +13,23 @@ export const Dashboard = () => {
   const selectedFollow = useSelector((state) => state.follows.oneFollow);
   useEffect(() => {
     dispatch(followsActions.getAllFollows());
-    dispatch(preferenceActions.updatePreferences({lang:'en',country:'us',defaultFeed:'sports', theme:'dark'}));
-
+    dispatch(
+      preferenceActions.updatePreferences({
+        lang: "en",
+        country: "us",
+        defaultFeed: "sports",
+        theme: "dark",
+      })
+    );
+    dispatch(
+      articleActions.addArticle({
+        source: "me",
+        description: "this",
+        url: "me.com",
+        urlToImage: "image.com",
+        publishedAt: "today",
+      })
+    );
     return () => {
       dispatch(followsActions.cleanUpFollows());
     };

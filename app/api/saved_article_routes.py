@@ -11,7 +11,8 @@ def post_user_articles():
     associate article to user in database
     '''
     article = request.json
-    newArticle = SavedArticle(userId=current_user.id)
+    newArticle = SavedArticle(userId=current_user.id, source=article['article']['source'], description=article['article']['description'],
+                              url=article['article']['url'], urlToImage=article['article']['urlToImage'], publishedAt=article['article']['publishedAt'])
     db.session.add(newArticle)
     db.session.commit()
     return {'message': f'{article} POST successful'}, 200
@@ -23,7 +24,8 @@ def get_user_articles():
     get articles to associated with user
     '''
     articles = SavedArticle.query.filter_by(userId=f'{current_user.id}').all()
-    articlesList = {article.to_dict()['id']: article.to_dict() for article in articles}
+    articlesList = {article.to_dict()['id']: article.to_dict()
+                    for article in articles}
     if articlesList is None:
         return {'errors': ['Unsuccessful']}, 404
     return articlesList

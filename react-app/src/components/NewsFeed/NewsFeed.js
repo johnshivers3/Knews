@@ -33,7 +33,11 @@ export const NewsFeed = () => {
                   width="100px"
                 />
                 <div className="highlight-content">
-                  <a href={topHeadlines[0].url}>
+                  <a
+                    href={topHeadlines[0].url}
+                    target="_blank"
+                    rel="noreferrer noopener"
+                  >
                     <h3>{topHeadlines[0].title}</h3>
                   </a>
                   <p>
@@ -42,7 +46,13 @@ export const NewsFeed = () => {
                       topHeadlines[0].content.indexOf("[")
                     )}
                   </p>
-                  <a href={topHeadlines[0].url}>Source</a>
+                  <a
+                    href={topHeadlines[0].url}
+                    target="_blank"
+                    rel="noreferrer noopener"
+                  >
+                    Source
+                  </a>
                   <p>Author:{topHeadlines[0].author}</p>
                 </div>
               </div>
@@ -71,7 +81,11 @@ export const NewsFeed = () => {
                         width="100px"
                       />
                       <div className="upper-content">
-                        <a href={article.url}>
+                        <a
+                          href={article.url}
+                          target="_blank"
+                          rel="noreferrer noopener"
+                        >
                           <h3>{article.title}</h3>
                         </a>
                         <p>
@@ -80,30 +94,40 @@ export const NewsFeed = () => {
                             article.content.indexOf("[")
                           )}
                         </p>
-                        <a href={article.url}>Source</a>
+                        <a
+                          href={article.url}
+                          target="_blank"
+                          rel="noreferrer noopener"
+                        >
+                          Source
+                        </a>
                         <p>Author:{article.author}</p>
                       </div>
                     </div>
                   </>
                 );
 
-                case 7:
-                case 8:
-                case 9:
-                case 10:
-                case 11:
-                case 12:
-                case 13:
-                case 14:
-                case 15:
-                case 16:
-                case 17:
-                case 18:
+              case 7:
+              case 8:
+              case 9:
+              case 10:
+              case 11:
+              case 12:
+              case 13:
+              case 14:
+              case 15:
+              case 16:
+              case 17:
+              case 18:
                 return (
                   <div className="lower-section" key={i}>
                     <div>
                       <img src={article.urlToImage} alt={article.title} />
-                      <a href={article.url}>
+                      <a
+                        href={article.url}
+                        target="_blank"
+                        rel="noreferrer noopener"
+                      >
                         <h4>{article.title}</h4>
                       </a>
                     </div>

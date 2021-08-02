@@ -55,7 +55,7 @@ export const Dashboard = () => {
             Object.values(userArticles).map((article) => (
               <li key={article.id}>
                 <img src={article.urlToImage} alt={article.title}/>
-                <a href={article.url}><h3>{article.title}</h3></a>
+                <a href={article.url} target='_blank' rel='noreferrer noopener'><h3>{article.title}</h3></a>
               </li>
             ))}
         </ul>

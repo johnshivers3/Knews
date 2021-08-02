@@ -1,9 +1,9 @@
 /* TODO Add site wide styles */
 :root {
-  --main-highlight: rgb(255, 227, 71);
-  --main-dark: grey;
+  --main-highlight: whitesmoke;
+  --main-dark: #808080;
   --main-light: lightgrey;
-  --active-highlight: rgb(255, 227, 71);
+  --active-highlight: whitesmoke;
 }
 html{
   width: 100vw;
@@ -19,7 +19,7 @@ body {
 }
 
 a {
-  color: whitesmoke;
+  color:whitesmoke;
   text-decoration: none;
 
 }

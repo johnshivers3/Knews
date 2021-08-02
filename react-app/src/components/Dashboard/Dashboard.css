@@ -1,22 +1,29 @@
 div#dashboard-main-div {
   width: 100%;
-  margin: 0 10%;
+  margin: 0 10% 10% 10%;
 }
 
 .dashboard-header-div {
-  padding: 0 4vw;
+  padding: 0 9vw;
   width: 100%;
   font-size: xx-large;
-  height: 5em;
+  height: 4em;
+  /* border-bottom:1px solid var(--main-highlight); */
 }
 
 ul.dashboard-list {
   width: 50vw;
 }
+
 ul.dashboard-list li h3 {
   width: 100%;
   text-align: left;
+}
 
+ul.dashboard-list li a {
+  /* width: 100%; */
+  text-align: left;
+  margin: 0 4vw;
 }
 
 ul.dashboard-list img {

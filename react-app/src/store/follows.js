@@ -53,7 +53,7 @@ export const addFollow = (topicString) => async (dispatch) => {
 
   if (response.ok) {
     const json = await response.json();
-    dispatch(cleanUp());
+    dispatch(cleanUpFollows());
     dispatch(getAllFollows());
     return json;
   } else {
@@ -68,7 +68,7 @@ export const deleteOneFollow = (followId) => async (dispatch) => {
 
   if (response.ok) {
     const follow = await response.json();
-    dispatch(cleanUp());
+    dispatch(cleanUpFollows());
     dispatch(getAllFollows());
     return follow;
   } else {

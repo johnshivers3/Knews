@@ -41,7 +41,7 @@ export const Dashboard = () => {
       </div>
       <div id="dashboard-main-div">
         <h2>Followed Topics</h2>
-        <ul id="topic-list">
+        <ul className="user-topics dashboard-list">
           {userFollows &&
             Object.values(userFollows).map((follow) => (
               <li key={follow.id}>
@@ -50,11 +50,12 @@ export const Dashboard = () => {
             ))}
         </ul>
         <h2>Saved Articles</h2>
-        <ul id="article-list">
+        <ul className="user-articles dashboard-list">
           {userArticles &&
             Object.values(userArticles).map((article) => (
               <li key={article.id}>
-                {/* <h3 onClick={searchTopic}>{article.topicString}</h3> */}
+                <img src={article.urlToImage} alt={article.title}/>
+                <a href={article.url}><h3>{article.title}</h3></a>
               </li>
             ))}
         </ul>

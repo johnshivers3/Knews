@@ -33,7 +33,7 @@ export const getOneArticle = (articleId) => async (dispatch) => {
   if (response.ok) {
     const follow = await response.json();
     dispatch(getArticleById(follow));
-    return null;
+    return follow;
   } else {
     return ["An error occurred. Please try again."];
   }

@@ -18,7 +18,7 @@ export const getUserPreferences = () => async (dispatch) => {
   if (response.ok) {
     const preferences = await response.json();
     dispatch(getPreferences(preferences));
-    return null;
+    return preferences;
   } else {
     return ["An error occurred. Please try again."];
   }
@@ -32,10 +32,10 @@ export const updatePreferences = (preferences) => async (dispatch) => {
   });
 
   if (response.ok) {
-    const json = await response.json();
+    const update = await response.json();
     dispatch(cleanUpPreferences());
     dispatch(getPreferences());
-    return null;
+    return update;
   } else {
     return ["An error occurred. Please try again."];
   }

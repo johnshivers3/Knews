@@ -7,13 +7,27 @@ div#dashboard-main-div {
   padding: 0 4vw;
   width: 100%;
   font-size: xx-large;
-  height:5em;
+  height: 5em;
 }
 
-ul#topic-list {
-  width: 15vw;
+ul.dashboard-list {
+  width: 50vw;
 }
-ul#topic-list li h3{
-  width: 15vw;
+ul.dashboard-list li h3 {
+  width: 100%;
   text-align: left;
+
+}
+
+ul.dashboard-list img {
+  display: flex;
+  align-self: center;
+  width:25%;
+  object-fit: contain;
+  background: linear-gradient(
+    0.25turn,
+    transparent,
+    rgba(255, 255, 255, 0.473),
+    transparent
+  );
 }

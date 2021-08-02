@@ -1,9 +1,17 @@
+import { assert } from "console"
+
 const GET_TOP = 'newsfeed/GET_TOP'
+const GET_RESULTS = 'newsfeed/GET_RESULTS'
 const CLEAN_UP = 'newsfeed/CLEAN_UP'
 
 const getTop = (headlines) => ({
   type: GET_TOP,
   payload: headlines
+})
+
+const getResults = (results) => ({
+  type: GET_RESULTS,
+  payload: results
 })
 
 const cleanUp = () => ({
@@ -17,6 +25,18 @@ export const getTopHeadlines = () => async(dispatch) => {
     const topHeadlines = await response.json()
     dispatch(getTop(topHeadlines))
     return null
+  } else {
+    return ['An error occurred. Please try again.']
+  }
+}
+
+export const getSearchResults = (query) => async(dispatch) => {
+  const response = await fetch('/api/search/')
+
+  if(response.ok) {
+    const searchResults = await response.json()
+    dispatch(getResults(searchResults))
+    return
   } else {
     return ['An error occurred. Please try again.']
   }

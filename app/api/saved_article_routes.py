@@ -1,6 +1,6 @@
-from flask import Blueprint
-from flask_login import login_required
-from app.models import SavedArticle
+from flask import Blueprint, request
+from flask_login import current_user
+from app.models import db, SavedArticle
 
 saved_article_routes = Blueprint('saved_article', __name__)
 
@@ -10,8 +10,11 @@ def post_user_articles():
     '''
     associate article to user in database
     '''
-    # topic = FollowedTopics()
-    return
+    article = request.json
+    newArticle = SavedArticle(userId=current_user.id)
+    db.session.add(newArticle)
+    db.session.commit()
+    return {'message': f'{article} POST successful'}, 200
 
 
 @saved_article_routes.route('/', methods=['GET'])
@@ -19,23 +22,35 @@ def get_user_articles():
     '''
     get articles to associated with user
     '''
-    # topics = FollowedTopics.query.filter_by(userId=f'{current_user.id}').all()
-    # topicsList = {topic.to_dict()['id']: topic.to_dict() for topic in topics}
+    articles = SavedArticle.query.filter_by(userId=f'{current_user.id}').all()
+    articlesList = {article.to_dict()['id']: article.to_dict() for article in articles}
+    if articlesList is None:
+        return {'errors': ['Unsuccessful']}, 404
+    return articlesList
 
-    # return topicsList
 
-
-@saved_article_routes.route('/:articleId')
+@saved_article_routes.route('/<int:articleId>')
 def get_one_user_article(articleId):
     '''
     get specific article associated with user
     '''
-    return
+    article = SavedArticle.query.filter_by(
+        id=articleId, userId=f'{current_user.id}').first()
+    if article is None:
+        return {'errors': ['Unsuccessful']}, 404
+    return article.to_dict()
 
 
-@saved_article_routes.route('/:articleId')
-def delete_user_article():
+@saved_article_routes.route('/<int:articleId>')
+def delete_user_article(articleId):
     '''
     delete specific article associated with user
     '''
-    return
+    article = SavedArticle.query.filter_by(
+        id=articleId, userId=f'{current_user.id}').first()
+    if article is None:
+        return {'errors': ['Unsuccessful']}, 404
+    else:
+        db.session.delete(article)
+        db.session.commit()
+        return {'message': 'Successfully deleted'}, 200

@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import * as followsActions from "../../store/follows";
+import * as preferenceActions from "../../store/preferences";
 import "./Dashboard.css";
 
 export const Dashboard = () => {
@@ -11,8 +12,7 @@ export const Dashboard = () => {
   const selectedFollow = useSelector((state) => state.follows.oneFollow);
   useEffect(() => {
     dispatch(followsActions.getAllFollows());
-    // dispatch(followsActions.getOneFollow());
-    dispatch(followsActions.deleteOneFollow(11));
+    dispatch(preferenceActions.updatePreferences({lang:'en',country:'us',defaultFeed:'sports', theme:'dark'}));
 
     return () => {
       dispatch(followsActions.cleanUpFollows());

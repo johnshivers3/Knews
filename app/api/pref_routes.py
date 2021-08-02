@@ -1,7 +1,6 @@
-from app.models.user import User
 from flask import Blueprint, request
 from flask_login import current_user
-from app.models import db,UserPreferences
+from app.models import db, UserPreferences
 
 pref_routes = Blueprint('pref', __name__)
 
@@ -11,12 +10,14 @@ def patch_user_prefs():
     '''
     update preferences associated with user in database
     '''
-    currentPreferences = UserPreferences.query.filter_by(userId=current_user.id)
-    updated = request.json
+    currentPreferences = UserPreferences.query.filter_by(
+        userId=current_user.id)
+    updated = request.json['preferences']
     updated['userId'] = current_user.id
     currentPreferences.update(updated)
+    db.session.commit()
 
-    return
+    return currentPreferences.to_dict()
 
 
 @pref_routes.route('/', methods=['GET'])

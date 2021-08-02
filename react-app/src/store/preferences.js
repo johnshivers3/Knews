@@ -1,4 +1,3 @@
-import { useHistory } from "react-router-dom"
 
 
 const GET_PREFS = "preferences/GET_PREFS";
@@ -9,13 +8,11 @@ const getPreferences = (preferences) => ({
   payload: preferences,
 });
 
-
 const cleanUp = () => ({
   type: CLEAN_UP,
 });
 
 export const getUserPreferences = () => async (dispatch) => {
-  const history = useHistory()
   const response = await fetch("/api/pref/");
 
   if (response.ok) {
@@ -28,7 +25,6 @@ export const getUserPreferences = () => async (dispatch) => {
 };
 
 export const updatePreferences = (preferences) => async (dispatch) => {
-  const history = useHistory()
   const response = await fetch(`/api/pref/`, {
     method: "PATCH",
     headers: { "CONTENT-TYPE": "application/json" },
@@ -44,8 +40,7 @@ export const updatePreferences = (preferences) => async (dispatch) => {
     return ["An error occurred. Please try again."];
   }
 };
-export const deletePref = (prefId) => async (dispatch) => {
-  const history = useHistory()
+export const deletePreferences = (prefId) => async (dispatch) => {
   const response = await fetch(`/api/pref/${prefId}`, {
     method: "DELETE",
   });
@@ -67,7 +62,6 @@ export const cleanUpPreferences = () => (dispatch) => {
 const initialState = { preferences: null };
 
 export default function reducer(state = initialState, action) {
-
   switch (action.type) {
     case GET_PREFS:
       return { ...state, preferences: action.payload };

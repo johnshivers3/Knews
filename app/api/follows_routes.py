@@ -10,8 +10,8 @@ def post_user_follows():
     '''
     associate topic to user in database
     '''
-    topicString = request.form.get('topicString')
-    newTopic = FollowedTopics(userId=current_user.id, topicString=topicString)
+    topicString = request.json
+    newTopic = FollowedTopics(userId=current_user.id, topicString=topicString['topicString'])
     db.session.add(newTopic)
     db.session.commit()
     return {'message': f'{topicString} POST successful'}

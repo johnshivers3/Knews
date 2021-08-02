@@ -11,7 +11,7 @@ def post_user_articles():
     associate article to user in database
     '''
     article = request.json
-    newArticle = SavedArticle(userId=current_user.id, source=article['article']['source'], description=article['article']['description'],
+    newArticle = SavedArticle(userId=current_user.id, source=article['article']['source'], title=article['article']['title'], description=article['article']['description'],
                               url=article['article']['url'], urlToImage=article['article']['urlToImage'], publishedAt=article['article']['publishedAt'])
     db.session.add(newArticle)
     db.session.commit()

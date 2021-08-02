@@ -1,5 +1,3 @@
-import { assert } from "console"
-
 const GET_TOP = 'newsfeed/GET_TOP'
 const GET_RESULTS = 'newsfeed/GET_RESULTS'
 const CLEAN_UP = 'newsfeed/CLEAN_UP'

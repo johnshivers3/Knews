@@ -19,7 +19,7 @@ export const NewsFeed = () => {
   return (
     <>
       <div id="main-newsfeed-div">
-        <div className="header-div">
+        <div className="newsfeed-header-div">
           <h1>Top Stories</h1>
         </div>
         <div>

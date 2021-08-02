@@ -9,6 +9,7 @@ class SavedArticle(db.Model):
     userId = db.Column(db.Integer, db.ForeignKey(
         'users.id'), nullable=False)
     source = db.Column(db.String(255))
+    title = db.Column(db.Text)
     description = db.Column(db.Text)
     url = db.Column(db.Text, nullable=False)
     urlToImage = db.Column(db.Text)
@@ -24,6 +25,7 @@ class SavedArticle(db.Model):
             'id': self.id,
             'userId': self.userId,
             'source': self.source,
+            'title': self.title,
             'description': self.description,
             'url': self.url,
             'urlToImage': self.urlToImage,

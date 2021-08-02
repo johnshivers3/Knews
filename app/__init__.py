@@ -14,6 +14,7 @@ from .api.saved_article_routes import saved_article_routes
 from .api.pref_routes import pref_routes
 
 from .seeds import seed_commands
+from .models import table_commands
 
 from .config import Config
 
@@ -31,6 +32,7 @@ def load_user(id):
 
 # Tell flask about our seed commands
 app.cli.add_command(seed_commands)
+app.cli.add_command(table_commands)
 
 app.config.from_object(Config)
 app.register_blueprint(user_routes, url_prefix='/api/users')

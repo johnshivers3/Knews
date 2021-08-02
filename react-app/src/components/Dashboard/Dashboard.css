@@ -3,8 +3,17 @@ div#dashboard-main-div {
   margin: 0 10%;
 }
 
-/* #header-div {
-  padding: 0 8vw;
+.dashboard-header-div {
+  padding: 0 4vw;
   width: 100%;
-  font-size: x-large;
-} */
+  font-size: xx-large;
+  height:5em;
+}
+
+ul#topic-list {
+  width: 15vw;
+}
+ul#topic-list li h3{
+  width: 15vw;
+  text-align: left;
+}

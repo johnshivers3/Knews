@@ -2,7 +2,8 @@
   padding: 0 4vw;
   width: 100%;
   font-size: xx-large;
-  height:15em;
+  height: 15em;
+  color: var(--main-purple);
 }
 
 #main-newsfeed-div {
@@ -41,7 +42,7 @@
 .highlight-section {
   width: 35vw;
   height: 80%;
-  background: linear-gradient(grey,grey, transparent);
+  background: linear-gradient(grey, grey, grey, grey, transparent);
   border-radius: 0.5rem;
   padding: 2rem;
   border-bottom: 1px solid var(--main-highlight);
@@ -53,11 +54,10 @@
   flex-direction: column;
   width: 20vw;
   height: 80%;
-  background: linear-gradient(grey,grey, transparent);
+  background: linear-gradient(grey, grey, grey, grey, transparent);
   border-radius: 0.5rem;
   padding: 2rem;
   border-bottom: 1px solid var(--main-highlight);
-
 }
 
 .lower-section img {
@@ -78,10 +78,14 @@
   justify-self: center;
   text-align: center;
   width: 20vw;
-  height: 80%;
-  background: linear-gradient(grey,grey, transparent);
+  height: 70%;
+  background: linear-gradient(grey, grey, grey, grey, transparent);
   border-radius: 0.5rem;
   padding: 2rem;
   margin: 2rem;
   border-bottom: 1px solid var(--main-highlight);
+}
+
+.author {
+  color: var(--main-purple);
 }

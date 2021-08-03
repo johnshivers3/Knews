@@ -3,25 +3,28 @@
   --main-highlight: whitesmoke;
   --main-dark: #808080;
   --main-light: lightgrey;
+  --main-purple: #241681ad;
   --active-highlight: whitesmoke;
 }
-html{
+
+html {
   width: 100vw;
 }
+
 body {
   margin: 0;
   padding: 0;
   overflow-x: hidden;
   width: 100vw;
+  min-height: 100vh;
   font-family: "Open Sans", sans-serif;
-  background-color: rgba(0, 0, 0, 0.781);
+  background: rgba(0, 0, 0, 0.35);
   color: var(--main-highlight);
 }
 
 a {
-  color:whitesmoke;
+  color: var(--main-purple);
   text-decoration: none;
-
 }
 
 a:active {
@@ -30,6 +33,6 @@ a:active {
 
 input {
   border: 1px solid var(--main-highlight);
-  border-radius: .2rem;
+  border-radius: 0.2rem;
   width: 150%;
 }

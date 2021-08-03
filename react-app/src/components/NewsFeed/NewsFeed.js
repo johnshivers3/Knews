@@ -40,6 +40,7 @@ export const NewsFeed = () => {
                   >
                     <h3>{topHeadlines[0].title}</h3>
                   </a>
+                  <hr />
                   <p>
                     {topHeadlines[0].content.substring(
                       0,
@@ -51,9 +52,9 @@ export const NewsFeed = () => {
                     target="_blank"
                     rel="noreferrer noopener"
                   >
-                    Source
+                    {topHeadlines[0].source.name}
                   </a>
-                  <p>Author:{topHeadlines[0].author}</p>
+                  <p className='author'>Author: {topHeadlines[0].author}</p>
                 </div>
               </div>
             </>
@@ -88,6 +89,7 @@ export const NewsFeed = () => {
                         >
                           <h3>{article.title}</h3>
                         </a>
+                        <hr />
                         <p>
                           {article.content.substring(
                             0,
@@ -99,9 +101,9 @@ export const NewsFeed = () => {
                           target="_blank"
                           rel="noreferrer noopener"
                         >
-                          Source
+                          {article.source.name}
                         </a>
-                        <p>Author:{article.author}</p>
+                        <p className='author'>Author: {article.author}</p>
                       </div>
                     </div>
                   </>
@@ -129,6 +131,14 @@ export const NewsFeed = () => {
                         rel="noreferrer noopener"
                       >
                         <h4>{article.title}</h4>
+                      </a>
+                      <hr />
+                      <a
+                        href={article.url}
+                        target="_blank"
+                        rel="noreferrer noopener"
+                      >
+                        {article.source.name}
                       </a>
                     </div>
                   </div>

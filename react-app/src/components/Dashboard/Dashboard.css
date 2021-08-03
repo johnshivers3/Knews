@@ -1,23 +1,47 @@
 div#dashboard-main-div {
-  width: 100%;
+  width: 50vw;
   margin: 0 10% 10% 10%;
+  background-color: var(--main-dark);
+  padding: 5vh;
+  border-top-left-radius: 2rem;
 }
 
 .dashboard-header-div {
-  padding: 0 9vw;
+  display: inline-flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 10vw;
+  width: 55%;
+  font-size: x-large;
+  height: 5em;
+}
+
+#topics-header,
+#articles-header {
+  display: inline-flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0;
   width: 100%;
-  font-size: xx-large;
-  height: 4em;
-  /* border-bottom:1px solid var(--main-highlight); */
+  font-size: large;
+  height: 4rem;
+}
+
+#topics-header img {
+  height: 50%;
 }
 
 ul.dashboard-list {
   width: 50vw;
 }
+ul.dashboard-list li {
+  margin: 5vw;
+}
 
 ul.dashboard-list li h3 {
   width: 100%;
   text-align: left;
+  font-size: x-large;
 }
 
 ul.dashboard-list li a {
@@ -29,7 +53,7 @@ ul.dashboard-list li a {
 ul.dashboard-list img {
   display: flex;
   align-self: center;
-  width:25%;
+  width: 25%;
   object-fit: contain;
   background: linear-gradient(
     0.25turn,
@@ -37,4 +61,38 @@ ul.dashboard-list img {
     rgba(255, 255, 255, 0.473),
     transparent
   );
+}
+
+.setting-button.preferences {
+  position: relative;
+  display: flex;
+  align-self: center;
+  transform: scale(0.7);
+}
+
+.setting-button.topics,
+.setting-button.articles {
+  position: relative;
+  display: flex;
+  align-self: center;
+  transform: scale(0.7);
+}
+
+.setting-button.topics:hover:after,
+.setting-button.articles:hover:after,
+.setting-button.preferences:hover:after {
+  position: absolute;
+  content: attr(title);
+  font-size: 20px;
+  display: inline-block;
+  left: 100;
+  top: 50%;
+  padding: 5px;
+  background-color: rgb(255, 255, 255);
+  color: var(--main-purple);
+  border-radius: 0.2rem;
+}
+
+.setting-button img {
+  height: 20%;
 }

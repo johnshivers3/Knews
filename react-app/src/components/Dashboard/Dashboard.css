@@ -1,26 +1,44 @@
 div#dashboard-main-div {
-  width: 50vw;
+  width: 60vw;
   margin: 0 10% 10% 10%;
   background-color: var(--main-dark);
   padding: 5vh;
   border-top-left-radius: 2rem;
 }
 
-.dashboard-header-div {
-  display: inline-flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0 10vw 0 13vw;
-  width: 50%;
-  font-size: x-large;
-  height: 5em;
+div#dashboard-main-div hr{
+  margin: 20px 0;
 }
 
-.dashboard-header-div button{
+.dashboard-header-div {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 0 0 12.5vw;
+  width: 60.3%;
+  font-size: x-large;
+  height: 5em;
+  color: var(--main-purple);
+}
+
+#preference-div {
+  display: flex;
+  justify-content: space-around;
+  width:100%;
+}
+
+#preference-div select, #preference-div option{
+  color: var(--main-purple);
+  font-size: medium;
+}
+
+.setting-button.preferences{
+  display: flex;
   width: 10rem;
   height: 10rem;
   background: url(../../source-images/gear-icon3.svg) center/30% no-repeat;
 }
+
 
 #topics-header .setting-button.topics,
 #articles-header .setting-button.articles {
@@ -28,6 +46,8 @@ div#dashboard-main-div {
   height: 10rem;
   background: url(../../source-images/edit-pencil.svg) center/30% no-repeat;
 }
+
+.save-preference-edit,
 #topics-header .save-follow-edit,
 #articles-header .save-article-edit {
   width: 5rem;
@@ -64,6 +84,7 @@ ul.dashboard-list li h3 {
   width: 100%;
   text-align: left;
   font-size: x-large;
+  color: var(--main-purple)
 }
 
 ul.dashboard-list li a {

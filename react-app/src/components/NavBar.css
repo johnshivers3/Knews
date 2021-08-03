@@ -4,7 +4,7 @@ nav {
   position: relative;
   height: 100px;
   background-color: var(--main-dark);
-  box-shadow: 0px 3px 100px var(--main-highlight);
+  box-shadow: 0px 3px 80px var(--main-highlight);
   color: var(--main-purple);
 
 }
@@ -13,12 +13,12 @@ nav a {
   font-weight: 600;
   font-size: x-large;
 }
+
 nav h1 {
-  font-weight: 600;
-  font-size: xx-large;
+  font-weight: 800;
+  font-size: 40px;
   font-style: oblique;
   margin-left: 20px;
-  font-family: Arial, Helvetica, sans-serif;
 }
 
 .fas.fa-ellipsis-h {
@@ -53,6 +53,7 @@ ul {
   margin: 0;
   padding-bottom: 0;
 }
+
 li {
   display: flex;
   justify-content: center;
@@ -81,8 +82,8 @@ button {
   margin: 0;
 }
 
+/* label for hidden check */
 label {
-  /* label for hidden check */
   display: inline-block;
 }
 

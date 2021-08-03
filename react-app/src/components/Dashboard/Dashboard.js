@@ -14,6 +14,7 @@ import * as newsFeedActions from "../../store/newsfeed.js";
 import "./Dashboard.css";
 
 export const Dashboard = () => {
+  const [language, setLanguage] = useState()
   const dispatch = useDispatch();
   const history = useHistory();
   const [edit, setEdit] = useState("");
@@ -21,7 +22,7 @@ export const Dashboard = () => {
   const userFollows = useSelector((state) => state.follows.allFollows);
   const userArticles = useSelector((state) => state.articles.allArticles);
   const selectedFollow = useSelector((state) => state.follows.oneFollow);
-  const setting = useSelector((state) => state.preferences.setting);
+
 
   // Collect users followed topics
   useEffect(() => {
@@ -45,14 +46,15 @@ export const Dashboard = () => {
     };
   }, [dispatch]);
 
-  // Send gear value of setting button to gear icon
-  useEffect(() => {
-    dispatch(preferenceActions.switchSetting(setting));
-  }, [dispatch, setting]);
-  // edit state
+  // set edit state
   const handleEdit = (e) => {
     e.preventDefault();
     setEdit(e.target.value);
+  };
+  // save and reset edit state
+  const handleSave = (e) => {
+    e.preventDefault();
+    setEdit("");
   };
 
   return (
@@ -67,11 +69,38 @@ export const Dashboard = () => {
         ></button>
       </div>
       <div id="dashboard-main-div">
+        {edit === "preferences" ? (
+          <>
+            <div id='preference-div'>
+              <select value={language} onChange={(e)=>setLanguage(e.target.value)}>
+                <option value=''>Select default language</option>
+                <option value='ar'>Arabic, العربية</option>
+                <option value='de'>German, Deutsch</option>
+                <option value='en'>English</option>
+                <option value='es'>Spanish, Castilian, Español</option>
+                <option value='he'>Hebrew, עברית</option>
+                <option value='it'>Italian, Italiano</option>
+                <option value='nl'>Dutch, Flemish</option>
+                <option value='no'>Norwegian, Norsk</option>
+                <option value='pt'>Portuguese, Português</option>
+                <option value='ru'>Russian, русский</option>
+                <option value='se'>Northern Sami, Davvisámegiella</option>
+                <option value='zh'>	Chinese, 中文 (Zhōngwén), 汉语, 漢語</option>
+              </select>
+              <button className="save-preference-edit" onClick={handleSave}>
+                Save
+              </button>
+            </div>
+            <hr />
+          </>
+        ) : null}
         <div id="topics-header">
           <h2>Followed Topics</h2>
-          <div className='heading-edit-buttons'>
+          <div className="heading-edit-buttons">
             {edit === "topics" ? (
-              <button className="save-follow-edit">Save</button>
+              <button className="save-follow-edit" onClick={handleSave}>
+                Save
+              </button>
             ) : null}
             <button
               className="setting-button topics"
@@ -95,9 +124,11 @@ export const Dashboard = () => {
         </ul>
         <div id="articles-header">
           <h2>Saved Articles</h2>
-          <div className='heading-edit-buttons'>
+          <div className="heading-edit-buttons">
             {edit === "articles" ? (
-              <button className="save-article-edit">Save</button>
+              <button className="save-article-edit" onClick={handleSave}>
+                Save
+              </button>
             ) : null}
             <button
               className="setting-button articles"

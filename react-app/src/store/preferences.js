@@ -1,11 +1,15 @@
-
-
 const GET_PREFS = "preferences/GET_PREFS";
 const CLEAN_UP = "preferences/CLEAN_UP";
+const SET_SETTING = "preferences/SET_SETTING";
 
 const getPreferences = (preferences) => ({
   type: GET_PREFS,
   payload: preferences,
+});
+
+const settingAction = (setting) => ({
+  type: SET_SETTING,
+  payload: setting,
 });
 
 const cleanUp = () => ({
@@ -55,16 +59,21 @@ export const deletePreferences = (prefId) => async (dispatch) => {
   }
 };
 
+export const switchSetting = (setting) => (dispatch) =>
+  dispatch(settingAction(setting));
+
 export const cleanUpPreferences = () => (dispatch) => {
   dispatch(cleanUp());
 };
 
-const initialState = { preferences: null };
+const initialState = { preferences: null, setting: null };
 
 export default function reducer(state = initialState, action) {
   switch (action.type) {
     case GET_PREFS:
       return { ...state, preferences: action.payload };
+    case SET_SETTING:
+      return { ...state, setting: action.payload };
     case CLEAN_UP:
       return initialState;
     default:

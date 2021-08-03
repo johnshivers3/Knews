@@ -10,10 +10,32 @@ div#dashboard-main-div {
   display: inline-flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0 10vw;
-  width: 55%;
+  padding: 0 10vw 0 13vw;
+  width: 50%;
   font-size: x-large;
   height: 5em;
+}
+
+.dashboard-header-div button{
+  width: 10rem;
+  height: 10rem;
+  background: url(../../source-images/gear-icon3.svg) center/30% no-repeat;
+}
+
+#topics-header .setting-button.topics,
+#articles-header .setting-button.articles {
+  width: 10rem;
+  height: 10rem;
+  background: url(../../source-images/edit-pencil.svg) center/30% no-repeat;
+}
+#topics-header .save-follow-edit,
+#articles-header .save-article-edit {
+  width: 5rem;
+  height: 2.5rem;
+  background: var(--main-purple);
+  color: whitesmoke;
+  padding: 0;
+  margin: 0;
 }
 
 #topics-header,
@@ -85,8 +107,8 @@ ul.dashboard-list img {
   content: attr(title);
   font-size: 20px;
   display: inline-block;
-  left: 100;
-  top: 50%;
+  left: 70%;
+  top: 70%;
   padding: 5px;
   background-color: rgb(255, 255, 255);
   color: var(--main-purple);
@@ -95,4 +117,28 @@ ul.dashboard-list img {
 
 .setting-button img {
   height: 20%;
+}
+
+.delete-follow-button {
+  display: flex;
+  align-self: center;
+  transform: scale(.5);
+  margin: 0;
+  height: 60px;
+  width: 60px;
+  background: url('../../source-images/minus-circle-icon.svg');
+}
+.delete-article-button {
+  display: flex;
+  align-self: center;
+  transform: scale(.5);
+  margin: 0;
+  height: 60px;
+  width: 60px;
+  background: url('../../source-images/minus-circle-icon.svg');
+}
+
+.heading-edit-buttons {
+  display: flex;
+  align-items: center;
 }

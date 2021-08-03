@@ -4,6 +4,7 @@ import { useHistory } from "react-router-dom";
 
 import Gear from "../images/Gear";
 import Gear2 from "../images/Gear2";
+import Gear3 from "../images/Gear3";
 
 import * as followsActions from "../../store/follows";
 import * as preferenceActions from "../../store/preferences";
@@ -15,10 +16,12 @@ import "./Dashboard.css";
 export const Dashboard = () => {
   const dispatch = useDispatch();
   const history = useHistory();
+  const [edit, setEdit] = useState("");
   const user = useSelector((state) => state.session.user);
   const userFollows = useSelector((state) => state.follows.allFollows);
   const userArticles = useSelector((state) => state.articles.allArticles);
   const selectedFollow = useSelector((state) => state.follows.oneFollow);
+  const setting = useSelector((state) => state.preferences.setting);
 
   // Collect users followed topics
   useEffect(() => {
@@ -27,11 +30,13 @@ export const Dashboard = () => {
       dispatch(followsActions.cleanUpFollows());
     };
   }, [dispatch]);
+
   // Execute search for followed topic
   const searchTopic = (e) => {
     e.preventDefault();
     dispatch(newsFeedActions.getSearchResults(e.target.innerText));
   };
+
   // Collect users followed topics
   useEffect(() => {
     dispatch(articleActions.getAllArticles());
@@ -39,19 +44,41 @@ export const Dashboard = () => {
       dispatch(articleActions.cleanUpArticles());
     };
   }, [dispatch]);
+
+  // Send gear value of setting button to gear icon
+  useEffect(() => {
+    dispatch(preferenceActions.switchSetting(setting));
+  }, [dispatch, setting]);
+  // edit state
+  const handleEdit = (e) => {
+    e.preventDefault();
+    setEdit(e.target.value);
+  };
+
   return (
     <>
       <div className="dashboard-header-div">
         <h1>{`${user.username.toUpperCase()}'s Dashboard`}</h1>
-        <div className="setting-button preferences" title="General Settings">
-          <Gear2 />
-        </div>
+        <button
+          className="setting-button preferences"
+          title="General Settings"
+          value="preferences"
+          onClick={handleEdit}
+        ></button>
       </div>
       <div id="dashboard-main-div">
         <div id="topics-header">
           <h2>Followed Topics</h2>
-          <div className="setting-button topics" title="Edit Topics">
-            <Gear2 />
+          <div className='heading-edit-buttons'>
+            {edit === "topics" ? (
+              <button className="save-follow-edit">Save</button>
+            ) : null}
+            <button
+              className="setting-button topics"
+              title="Edit Topics"
+              value="topics"
+              onClick={handleEdit}
+            ></button>
           </div>
         </div>
         <hr />
@@ -59,14 +86,25 @@ export const Dashboard = () => {
           {userFollows &&
             Object.values(userFollows).map((follow) => (
               <li key={follow.id}>
+                {edit === "topics" ? (
+                  <button className="delete-follow-button"></button>
+                ) : null}
                 <h3 onClick={searchTopic}>{follow.topicString}</h3>
               </li>
             ))}
         </ul>
         <div id="articles-header">
           <h2>Saved Articles</h2>
-          <div className="setting-button articles" title="Edit Articles">
-            <Gear2 />
+          <div className='heading-edit-buttons'>
+            {edit === "articles" ? (
+              <button className="save-article-edit">Save</button>
+            ) : null}
+            <button
+              className="setting-button articles"
+              title="Edit Articles"
+              value="articles"
+              onClick={handleEdit}
+            ></button>
           </div>
         </div>
         <hr />
@@ -74,6 +112,9 @@ export const Dashboard = () => {
           {userArticles &&
             Object.values(userArticles).map((article) => (
               <li key={article.id}>
+                {edit === "articles" ? (
+                  <button className="delete-article-button"></button>
+                ) : null}
                 <img src={article.urlToImage} alt={article.title} />
                 <a href={article.url} target="_blank" rel="noreferrer noopener">
                   <h3>{article.title}</h3>

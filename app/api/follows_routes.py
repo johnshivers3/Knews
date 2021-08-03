@@ -55,3 +55,20 @@ def delete_user_follow(followId):
         db.session.delete(topic)
         db.session.commit()
         return {'message': 'Successfully deleted'}, 200
+
+
+@follows_routes.route('/<int:followId>', methods=['PATCH'])
+def patch_follow(followId):
+    '''
+    update follow that exists in database database
+    '''
+    currentFollow = FollowedTopics.query.filter_by(
+        userId=current_user.id, id=followId).first()
+    if currentFollow is None:
+        return {'errors': ['Unsuccessful']}, 404
+    else:
+        updated = request.json['follow']
+        updated['userId'] = current_user.id
+        currentFollow.update(updated)
+        db.session.commit()
+        return {'message': 'Successful'}

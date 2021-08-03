@@ -23,6 +23,7 @@ class UserPreferences(db.Model):
             'id': self.id,
             'userId': self.userId,
             'lang': self.lang,
+            'country': self.country,
             'defaultFeed': self.defaultFeed,
             'theme': self.theme
 

@@ -59,8 +59,9 @@ export const deletePreferences = (prefId) => async (dispatch) => {
   }
 };
 
-export const switchSetting = (setting) => (dispatch) =>
+export const switchSetting = (setting) => (dispatch) => {
   dispatch(settingAction(setting));
+};
 
 export const cleanUpPreferences = () => (dispatch) => {
   dispatch(cleanUp());

@@ -6,7 +6,7 @@ div#dashboard-main-div {
   border-top-left-radius: 2rem;
 }
 
-div#dashboard-main-div hr{
+div#dashboard-main-div hr {
   margin: 20px 0;
 }
 
@@ -24,21 +24,35 @@ div#dashboard-main-div hr{
 #preference-div {
   display: flex;
   justify-content: space-around;
-  width:100%;
+  width: 100%;
+}
+#preference-div h2 {
+  padding: 0;
+  margin: 0;
 }
 
-#preference-div select, #preference-div option{
+#preference-div select,
+#preference-div option {
   color: var(--main-purple);
   font-size: medium;
+  border: none;
+  border-radius: 0.3rem;
+  padding: 10%;
 }
 
-.setting-button.preferences{
+#country-search,
+#language-search {
+  width: 15vw;
+  padding: 0 0 0 2%;
+  font-size: large;
+}
+
+.setting-button.preferences {
   display: flex;
   width: 10rem;
   height: 10rem;
   background: url(../../source-images/gear-icon3.svg) center/30% no-repeat;
 }
-
 
 #topics-header .setting-button.topics,
 #articles-header .setting-button.articles {
@@ -48,13 +62,25 @@ div#dashboard-main-div hr{
 }
 
 .save-preference-edit,
-#topics-header .save-follow-edit,
+.done-follow-edit,
 #articles-header .save-article-edit {
   width: 5rem;
   height: 2.5rem;
   background: var(--main-purple);
   color: whitesmoke;
   padding: 0;
+  margin: 0;
+}
+
+.user-topics li {
+  width: 40%;
+}
+.user-topics li .search-follow-button,
+.user-topics li .save-follow-edit {
+  height: 2.5rem;
+  background: var(--main-purple);
+  color: whitesmoke;
+  padding: 0 15px;
   margin: 0;
 }
 
@@ -77,18 +103,22 @@ ul.dashboard-list {
   width: 50vw;
 }
 ul.dashboard-list li {
+  display: flex;
+  align-items: center;
   margin: 5vw;
+  max-height: 15vh;
 }
 
 ul.dashboard-list li h3 {
+  display: flex;
   width: 100%;
   text-align: left;
-  font-size: x-large;
-  color: var(--main-purple)
+  font-size: 24px;
+  color: var(--main-purple);
+  align-self: center;
 }
 
 ul.dashboard-list li a {
-  /* width: 100%; */
   text-align: left;
   margin: 0 4vw;
 }
@@ -143,23 +173,39 @@ ul.dashboard-list img {
 .delete-follow-button {
   display: flex;
   align-self: center;
-  transform: scale(.5);
-  margin: 0;
+  transform: scale(0.5);
+  margin: 0 10px;
   height: 60px;
   width: 60px;
-  background: url('../../source-images/minus-circle-icon.svg');
+  background: url("../../source-images/minus-circle-icon.svg");
 }
 .delete-article-button {
   display: flex;
   align-self: center;
-  transform: scale(.5);
+  transform: scale(0.5);
   margin: 0;
   height: 60px;
   width: 60px;
-  background: url('../../source-images/minus-circle-icon.svg');
+  background: url("../../source-images/minus-circle-icon.svg");
 }
 
 .heading-edit-buttons {
   display: flex;
   align-items: center;
+}
+
+.topic-edit-input {
+  font-size: 23px;
+  color: var(--main-purple);
+  margin: 0 20px;
+}
+
+#dashboard-main-div > ul.user-topics.dashboard-list > li > h3 {
+  display: flex;
+  width: 100%;
+  text-align: left;
+  font-size: 34px;
+  color: var(--main-purple);
+  align-self: center;
+  margin: 7px 0;
 }

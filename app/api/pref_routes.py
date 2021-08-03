@@ -26,6 +26,7 @@ def get_user_prefs():
     '''
     preferences = UserPreferences.query.filter_by(
         userId=f'{current_user.id}').first()
+    print(preferences)
 
     return preferences.to_dict()
 

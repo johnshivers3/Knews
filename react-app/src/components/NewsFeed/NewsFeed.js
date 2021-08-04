@@ -72,16 +72,14 @@ export const NewsFeed = () => {
         </div>
         <div></div>
         {topHeadlines &&
-          topHeadlines.map((article, i = 1) => {
+          topHeadlines.slice(1).map((article, i) => {
             switch (i) {
-              // case 0:
-              //   return null;
+              case 0:
               case 1:
               case 2:
               case 3:
               case 4:
               case 5:
-              case 6:
                 return (
                   <div className="upper-section" key={`${i}-${article.url}`}>
                     <img

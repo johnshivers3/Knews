@@ -65,7 +65,10 @@ export const Dashboard = () => {
         setEdit("");
         break;
       case "save-follow-edit":
-        dispatch(followsActions.addFollow());
+        // dispatch(followsActions.addFollow());
+        break;
+      case "done-article-edit":
+        setEdit("");
         break;
       default:
         break;
@@ -273,14 +276,13 @@ export const Dashboard = () => {
                 Done
               </button>
             ) : null}
-            {userArticles?.length > 0 && (
-              <button
-                className="setting-button articles"
-                title="Edit Articles"
-                value="articles"
-                onClick={handleEdit}
-              ></button>
-            )}
+
+            <button
+              className="setting-button articles"
+              title="Edit Articles"
+              value="articles"
+              onClick={handleEdit}
+            ></button>
           </div>
         </div>
         <hr />

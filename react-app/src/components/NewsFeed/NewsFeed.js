@@ -2,18 +2,28 @@ import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 // import { useHistory } from "react-router-dom";
 import * as newsFeedActions from "../../store/newsfeed.js";
+import * as preferenceActions from "../../store/preferences";
+
 import "./NewsFeed.css";
 
 export const NewsFeed = () => {
-  // const [newsfeed, setNewsFeed] = useState();
-  // const [errors, setErrors] = useState();
   // const history = useHistory();
   const dispatch = useDispatch();
   const topHeadlines = useSelector((state) => state.newsfeed.news?.articles);
+  const userPreferences = useSelector((state) => state.preferences.preferences);
 
   useEffect(() => {
     dispatch(newsFeedActions.getTopHeadlines());
+
     return () => dispatch(newsFeedActions.cleanUpFeed());
+  }, [dispatch]);
+
+  // Collect user preferences
+  useEffect(() => {
+    dispatch(preferenceActions.getUserPreferences());
+    return () => {
+      dispatch(preferenceActions.cleanUpPreferences());
+    };
   }, [dispatch]);
 
   return (
@@ -54,7 +64,7 @@ export const NewsFeed = () => {
                   >
                     {topHeadlines[0].source.name}
                   </a>
-                  <p className='author'>Author: {topHeadlines[0].author}</p>
+                  <p className="author">Author: {topHeadlines[0].author}</p>
                 </div>
               </div>
             </>
@@ -62,10 +72,10 @@ export const NewsFeed = () => {
         </div>
         <div></div>
         {topHeadlines &&
-          topHeadlines.map((article, i) => {
+          topHeadlines.map((article, i = 1) => {
             switch (i) {
-              case 0:
-                return null;
+              // case 0:
+              //   return null;
               case 1:
               case 2:
               case 3:
@@ -73,79 +83,42 @@ export const NewsFeed = () => {
               case 5:
               case 6:
                 return (
-                  <>
-                    <div className="upper-section" key={i}>
-                      <img
-                        src={article.urlToImage}
-                        alt={article.title}
-                        height="100px"
-                        width="100px"
-                      />
-                      <div className="upper-content">
-                        <a
-                          href={article.url}
-                          target="_blank"
-                          rel="noreferrer noopener"
-                        >
-                          <h3>{article.title}</h3>
-                        </a>
-                        <hr />
-                        <p>
-                          {article.content.substring(
-                            0,
-                            article.content.indexOf("[")
-                          )}
-                        </p>
-                        <a
-                          href={article.url}
-                          target="_blank"
-                          rel="noreferrer noopener"
-                        >
-                          {article.source.name}
-                        </a>
-                        <p className='author'>Author: {article.author}</p>
-                      </div>
+                  <div className="upper-section" key={`${i}-${article.url}`}>
+                    <img
+                      src={article.urlToImage}
+                      alt={article.title}
+                      height="100px"
+                      width="100px"
+                    />
+                    <div className="upper-content">
+                      <a
+                        href={article.url}
+                        target="_blank"
+                        rel="noreferrer noopener"
+                      >
+                        <h3>{article.title}</h3>
+                      </a>
+                      <hr />
+                      <p>
+                        {article.content.substring(
+                          0,
+                          article.content.indexOf("[")
+                        )}
+                      </p>
+                      <a
+                        href={article.url}
+                        target="_blank"
+                        rel="noreferrer noopener"
+                      >
+                        {article.source.name}
+                      </a>
+                      <p className="author">Author: {article.author}</p>
                     </div>
-                  </>
+                  </div>
                 );
-
-              // case 7:
-              // case 8:
-              // case 9:
-              // case 10:
-              // case 11:
-              // case 12:
-              // case 13:
-              // case 14:
-              // case 15:
-              // case 16:
-              // case 17:
-              // case 18:
-              //   return (
-              //     <div className="lower-section" key={i}>
-              //       <div>
-              //         <img src={article.urlToImage} alt={article.title} />
-              //         <a
-              //           href={article.url}
-              //           target="_blank"
-              //           rel="noreferrer noopener"
-              //         >
-              //           <h4>{article.title}</h4>
-              //         </a>
-              //         <hr />
-              //         <a
-              //           href={article.url}
-              //           target="_blank"
-              //           rel="noreferrer noopener"
-              //         >
-              //           {article.source.name}
-              //         </a>
-              //       </div>
-              //     </div>
-              //   );
               default:
                 return (
-                  <div className="lower-section" key={i}>
+                  <div className="lower-section" key={`${i}-${article.url}`}>
                     <div>
                       <img src={article.urlToImage} alt={article.title} />
                       <a

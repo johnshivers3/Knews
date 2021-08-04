@@ -1,10 +1,6 @@
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useHistory } from "react-router-dom";
-
-import Gear from "../images/Gear";
-import Gear2 from "../images/Gear2";
-import Gear3 from "../images/Gear3";
+// import { useHistory } from "react-router-dom";
 
 import * as followsActions from "../../store/follows";
 import * as preferenceActions from "../../store/preferences";
@@ -16,12 +12,12 @@ import "./Dashboard.css";
 export const Dashboard = () => {
   const [language, setLanguage] = useState();
   const dispatch = useDispatch();
-  const history = useHistory();
+  // const history = useHistory();
   const [edit, setEdit] = useState("");
   const user = useSelector((state) => state.session.user);
   const userFollows = useSelector((state) => state.follows.allFollows);
   const userArticles = useSelector((state) => state.articles.allArticles);
-  const selectedFollow = useSelector((state) => state.follows.oneFollow);
+  // const selectedFollow = useSelector((state) => state.follows.oneFollow);
   const userPreferences = useSelector((state) => state.preferences.preferences);
 
   // Collect users followed topics
@@ -53,11 +49,13 @@ export const Dashboard = () => {
       dispatch(preferenceActions.cleanUpPreferences());
     };
   }, [dispatch]);
+
   // set edit state
   const handleEdit = (e) => {
     e.preventDefault();
     setEdit(e.target.value);
   };
+
   // save and reset edit state
   const handleSave = (e) => {
     e.preventDefault();
@@ -271,7 +269,7 @@ export const Dashboard = () => {
           <h2>Saved Articles</h2>
           <div className="heading-edit-buttons">
             {edit === "articles" ? (
-              <button className="done-follow-edit" onClick={handleSave}>
+              <button className="done-article-edit" onClick={handleSave}>
                 Done
               </button>
             ) : null}
@@ -287,7 +285,7 @@ export const Dashboard = () => {
         </div>
         <hr />
         <ul className="user-articles dashboard-list">
-          {userArticles ?
+          {userArticles ? (
             Object.values(userArticles).map((article) => (
               <li key={article.id}>
                 {edit === "articles" ? (
@@ -298,7 +296,10 @@ export const Dashboard = () => {
                   <h3>{article.title}</h3>
                 </a>
               </li>
-            )) : <li>'You have saved an article yet.'</li>}
+            ))
+          ) : (
+            <li>'You have saved an article yet.'</li>
+          )}
         </ul>
       </div>
     </>

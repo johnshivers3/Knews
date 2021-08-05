@@ -15,6 +15,7 @@ export const Dashboard = () => {
   const [feed, setFeed] = useState("");
   const [theme, setTheme] = useState("");
   const [followEdit, setFollowEdit] = useState("");
+  const [newFollowEdit, setNewFollowEdit] = useState("");
   const dispatch = useDispatch();
   // const history = useHistory();
   const [edit, setEdit] = useState("");

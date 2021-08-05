@@ -48,7 +48,7 @@ export const NewsFeed = () => {
   };
 
   return (
-    <div style={appTheme}>
+    <div className='theme-wrapper' style={appTheme}>
       <span id="splash-feed" style={splashTheme}>
         <Logo />
         <h1 id='newsfeed-heading' style={headingStyle}>KNEWS</h1>
@@ -62,6 +62,7 @@ export const NewsFeed = () => {
                     fontWeight: "bold",
                     fontSize: "larger",
                     color: `${headingStyle.color}`,
+                    marginRight:'10px'
                   }}
                   href="/signup"
                 >

@@ -117,7 +117,7 @@ export const Dashboard = () => {
   const splashTheme = { background: "var(--main-purple)" };
 
   return (
-    <div style={appTheme}>
+    <div className='theme-wrapper' style={appTheme}>
       <span id="splash-dash" style={splashTheme}>
         <div className="dashboard-header-div">
           <h1

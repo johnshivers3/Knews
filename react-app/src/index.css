@@ -39,3 +39,7 @@ input {
 #theme{
   height: 100vh;
 }
+.theme-wrapper{
+  background: lightgray;
+  height: 100vh;
+}

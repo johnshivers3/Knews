@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { BrowserRouter, Route, Switch } from "react-router-dom";
-import { useDispatch} from "react-redux";
+import { BrowserRouter, Route, Switch, Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import Logo from "./components/images/Logo";
 import LoginForm from "./components/auth/LoginForm";
 import SignUpForm from "./components/auth/SignUpForm";
 import NavBar from "./components/NavBar";
@@ -15,18 +16,64 @@ function App(store) {
   const [loaded, setLoaded] = useState(false);
   const dispatch = useDispatch();
 
-
   useEffect(() => {
     (async () => {
       await dispatch(authenticate());
       setLoaded(true);
     })();
-
   }, [dispatch]);
 
   if (!loaded) {
     return null;
   }
+
+  const banner = (
+    <span id="splash-feed" style={{ color: "rgba(36, 22, 129, 0.678)" }}>
+      <Logo />
+      <h1 id="newsfeed-heading" style={{ color: "rgba(36, 22, 129, 0.678)" }}>
+        KNEWS
+      </h1>
+      <div>
+        <h2>Curate your news experience</h2>
+        <h3>
+          <a
+            style={{
+              fontWeight: "bold",
+              fontSize: "larger",
+              marginRight: "10px",
+            }}
+            href="/signup"
+          >
+            Sign Up
+          </a>
+          to view the stories YOU want to see
+        </h3>
+        <h3>Quickly search for followed topics</h3>
+        <h3>Save articles to read later</h3>
+
+        <div id="contact-links-div">
+          <div id="git">
+            <Link
+              to={{ pathname: "https://github.com/johnshivers3/Knews" }}
+              target="_blank"
+              rel="noreferrer noopener"
+              className="contact-links"
+            ></Link>
+          </div>
+          <div id="linkedin">
+            <Link
+              to={{
+                pathname: "https://www.linkedin.com/in/john-shivers3/",
+              }}
+              target="_blank"
+              rel="noreferrer noopener"
+              className="contact-links"
+            ></Link>
+          </div>
+        </div>
+      </div>
+    </span>
+  );
 
   return (
     <BrowserRouter>
@@ -34,10 +81,16 @@ function App(store) {
 
       <Switch>
         <Route path="/login" exact={true}>
-          <LoginForm />
+          <div className="theme-wrapper">
+            <LoginForm />
+            {banner}
+          </div>
         </Route>
         <Route path="/sign-up" exact={true}>
-          <SignUpForm />
+          <div className="theme-wrapper">
+            <SignUpForm />
+            {banner}
+          </div>
         </Route>
         <ProtectedRoute path="/users" exact={true}>
           <UsersList />

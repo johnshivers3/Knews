@@ -9,8 +9,6 @@ import Logo from "../images/Logo.js";
 import "./NewsFeed.css";
 
 export const NewsFeed = () => {
-  const [theme, setTheme] = useState("light");
-  // const history = useHistory();
   const dispatch = useDispatch();
   const topHeadlines = useSelector((state) => state.newsfeed.news?.articles);
   const userPreferences = useSelector((state) => state.preferences.preferences);
@@ -23,6 +21,7 @@ export const NewsFeed = () => {
   const appTheme = { background: bgTheme };
   const headingStyle = { color: hTheme };
   const splashTheme = { background: "var(--main-purple)" };
+
   useEffect(() => {
     dispatch(newsFeedActions.getTopHeadlines());
 
@@ -48,10 +47,12 @@ export const NewsFeed = () => {
   };
 
   return (
-    <div className='theme-wrapper' style={appTheme}>
+    <div className="theme-wrapper" style={appTheme}>
       <span id="splash-feed" style={splashTheme}>
         <Logo />
-        <h1 id='newsfeed-heading' style={headingStyle}>KNEWS</h1>
+        <h1 id="newsfeed-heading" style={headingStyle}>
+          KNEWS
+        </h1>
         <div>
           {!user ? (
             <>
@@ -62,7 +63,7 @@ export const NewsFeed = () => {
                     fontWeight: "bold",
                     fontSize: "larger",
                     color: `${headingStyle.color}`,
-                    marginRight:'10px'
+                    marginRight: "10px",
                   }}
                   href="/signup"
                 >
@@ -73,9 +74,9 @@ export const NewsFeed = () => {
               <h3>Quickly search for followed topics</h3>
               <h3>Save articles to read later</h3>
             </>
-          ):
-          <h2 id='welcome-sign'>Welcome to your personal Knews app</h2>
-          }
+          ) : (
+            <h2 id="welcome-sign">Welcome to your personal Knews app</h2>
+          )}
           <div id="contact-links-div">
             <div id="git">
               <Link
@@ -93,6 +94,8 @@ export const NewsFeed = () => {
                 className="contact-links"
               ></Link>
             </div>
+            <h4>Developed by John Shivers</h4>
+
           </div>
         </div>
       </span>

@@ -52,6 +52,8 @@ function App(store) {
         <h3>Save articles to read later</h3>
 
         <div id="contact-links-div">
+          <h4>Developed by John Shivers</h4>
+
           <div id="git">
             <Link
               to={{ pathname: "https://github.com/johnshivers3/Knews" }}
@@ -81,13 +83,13 @@ function App(store) {
 
       <Switch>
         <Route path="/login" exact={true}>
-          <div className="theme-wrapper">
+          <div className="no-theme-wrapper">
             <LoginForm />
             {banner}
           </div>
         </Route>
         <Route path="/sign-up" exact={true}>
-          <div className="theme-wrapper">
+          <div className="no-theme-wrapper">
             <SignUpForm />
             {banner}
           </div>

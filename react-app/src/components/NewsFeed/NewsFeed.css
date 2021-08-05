@@ -118,7 +118,7 @@ span#splash-feed h1#newsfeed-heading {
   font-weight: 800;
   font-size: 40px;
   font-style: oblique;
-  margin-left: 200px;
+  margin-left: 220px;
   transform: scale(3);
   color: var(--main-purple);
   margin-right: 300px;
@@ -154,6 +154,9 @@ div#linkedin {
   align-items: center;
   border-bottom-left-radius: 2rem;
   border-top-right-radius: 2rem;
+}
+#contact-links-div h4{
+  color: var(--main-purple);
 }
 #welcome-sign {
   font-size: x-large;

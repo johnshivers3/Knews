@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-// import { useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
 import * as followsActions from "../../store/follows";
 import * as preferenceActions from "../../store/preferences";
@@ -17,6 +17,7 @@ export const Dashboard = () => {
   const [followEdit, setFollowEdit] = useState("");
   const [newFollowEdit, setNewFollowEdit] = useState("");
   const [addFollow, setAddFollow] = useState(false);
+  const [addFollowError, setAddFollowError] = useState("");
 
   const dispatch = useDispatch();
   const [edit, setEdit] = useState("");
@@ -28,7 +29,7 @@ export const Dashboard = () => {
 
   const [bgTheme, setBgTheme] = useState("rgba(0, 0, 0, 0.15)");
   const [hTheme, setHTheme] = useState("rgba(36, 22, 129, 0.678)");
-
+  const history = useHistory();
   const appTheme = { background: bgTheme };
   const headingStyle = { color: hTheme };
 
@@ -91,8 +92,14 @@ export const Dashboard = () => {
         dispatch(followsActions.updateFollow(followEdit, e.target.value));
         break;
       case "add-follow-edit":
-        dispatch(followsActions.addFollow(newFollowEdit));
-        setAddFollow(false);
+        if (newFollowEdit.length > 0) {
+          dispatch(followsActions.addFollow(newFollowEdit));
+          setNewFollowEdit("");
+          setAddFollowError("");
+          setAddFollow(false);
+        } else {
+          setAddFollowError("Please enter a topic");
+        }
         break;
       case "save-preference-edit":
         const newPreferences = { ...userPreferences };
@@ -114,11 +121,10 @@ export const Dashboard = () => {
   const handleDelete = (e) => {
     e.preventDefault();
     switch (e.target.className) {
-      case 'delete-follow-button':
+      case "delete-follow-button":
         dispatch(followsActions.deleteOneFollow(e.target.value));
         break;
-      case 'delete-article-button':
-        console.log(e.target.value);
+      case "delete-article-button":
         dispatch(articleActions.deleteOneArticle(e.target.value));
         break;
       default:
@@ -354,12 +360,15 @@ export const Dashboard = () => {
         </div>
         <hr />
         <ul className="user-topics dashboard-list">
-          {addFollow && (
+          {addFollowError.length > 0 ? (
+            <h4 id="topic-error">{addFollowError}</h4>
+          ) : null}
+          {addFollow && edit === "topics" && (
             <div id="add-follow-div">
               <input
                 id="add-follow-input"
                 onChange={(e) => setNewFollowEdit(e.target.value)}
-                type="text"
+                required
               ></input>
               <button
                 // value={follow.id}
@@ -385,6 +394,7 @@ export const Dashboard = () => {
                       <input
                         placeholder={follow.topicString}
                         className="topic-edit-input"
+                        defaultValue={follow.topicString}
                         onChange={(e) => setFollowEdit(e.target.value)}
                       />
                       <button
@@ -398,7 +408,6 @@ export const Dashboard = () => {
                   ) : (
                     <>
                       <h3>{follow.topicString}</h3>
-                      <button className="search-follow-button">Search</button>
                     </>
                   )}
                 </li>
@@ -424,7 +433,7 @@ export const Dashboard = () => {
         </div>
         <hr />
         <ul className="user-articles dashboard-list">
-          {userArticles ? (
+          {userArticles?.length > 0 ? (
             Object.values(userArticles).map((article) => (
               <li key={article.id}>
                 {edit === "articles" ? (
@@ -441,7 +450,7 @@ export const Dashboard = () => {
               </li>
             ))
           ) : (
-            <li>'You have saved an article yet.'</li>
+            <h3>You have saved an article yet.</h3>
           )}
         </ul>
       </div>

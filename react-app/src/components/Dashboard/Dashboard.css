@@ -1,9 +1,10 @@
 div#dashboard-main-div {
   width: 60vw;
-  margin: 0 10% 10% 10%;
+  margin: 0 10% 0 10%;
   background-color: var(--main-dark);
   padding: 5vh;
   border-top-left-radius: 2rem;
+  min-height: 62vh;
 }
 
 div#dashboard-main-div hr {
@@ -77,6 +78,7 @@ div#dashboard-main-div hr {
   background: url(../../source-images/edit-pencil.svg) center/30% no-repeat;
 }
 
+div#add-follow-div button,
 .save-preference-edit,
 .done-follow-edit,
 .done-article-edit,
@@ -117,7 +119,7 @@ div#dashboard-main-div hr {
 }
 
 ul.dashboard-list {
-  width: 50vw;
+  width: 70vw;
 }
 ul.dashboard-list li {
   display: flex;
@@ -158,7 +160,7 @@ ul.dashboard-list img {
   position: relative;
   display: flex;
   align-self: center;
-  transform: scale(0.7);
+  transform: scale(0.9);
   margin-right: 58px;
 }
 
@@ -167,7 +169,7 @@ ul.dashboard-list img {
   position: relative;
   display: flex;
   align-self: center;
-  transform: scale(0.7);
+  transform: scale(0.8);
 }
 
 .setting-button.topics:hover:after,
@@ -255,10 +257,22 @@ span#splash-dash h1#dashboard-heading {
 }
 
 div#add-follow-div {
-  width: 100px;
+  width: 30vw;
+  display: flex;
+  align-items: center;
+  margin-left: 6.1vw;
+}
+div#add-follow-div button{
+  width: 14%;
 }
 
 input#add-follow-input {
   color:black;
   height: 3vh;
+  width: 54%;
+  margin: 10px 11px 10px 0;
+}
+
+#topic-error {
+  margin-left:10vw;
 }

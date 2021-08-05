@@ -16,8 +16,9 @@ export const Dashboard = () => {
   const [theme, setTheme] = useState("");
   const [followEdit, setFollowEdit] = useState("");
   const [newFollowEdit, setNewFollowEdit] = useState("");
+  const [addFollow, setAddFollow] = useState(false);
+
   const dispatch = useDispatch();
-  // const history = useHistory();
   const [edit, setEdit] = useState("");
   const user = useSelector((state) => state.session.user);
   const userFollows = useSelector((state) => state.follows.allFollows);
@@ -89,6 +90,10 @@ export const Dashboard = () => {
       case "save-follow-edit":
         dispatch(followsActions.updateFollow(followEdit, e.target.value));
         break;
+      case "add-follow-edit":
+        dispatch(followsActions.addFollow(newFollowEdit));
+        setAddFollow(false);
+        break;
       case "save-preference-edit":
         const newPreferences = { ...userPreferences };
         newPreferences["country"] = country;
@@ -108,21 +113,31 @@ export const Dashboard = () => {
   // save and reset edit state
   const handleDelete = (e) => {
     e.preventDefault();
-    dispatch(followsActions.deleteOneFollow(e.target.value));
+    switch (e.target.className) {
+      case 'delete-follow-button':
+        dispatch(followsActions.deleteOneFollow(e.target.value));
+        break;
+      case 'delete-article-button':
+        console.log(e.target.value);
+        dispatch(articleActions.deleteOneArticle(e.target.value));
+        break;
+      default:
+        break;
+    }
   };
   // add topic to database
   const handleAddFollow = (e) => {
     e.preventDefault();
-    dispatch(followsActions.addFollow());
+    setAddFollow(true);
   };
   const splashTheme = { background: "var(--main-purple)" };
 
   return (
-    <div className='theme-wrapper' style={appTheme}>
+    <div className="theme-wrapper" style={appTheme}>
       <span id="splash-dash" style={splashTheme}>
         <div className="dashboard-header-div">
           <h1
-          id='dashboard-heading'
+            id="dashboard-heading"
             style={headingStyle}
           >{`${user.username.toUpperCase()}'s Dashboard`}</h1>
           <button
@@ -339,37 +354,55 @@ export const Dashboard = () => {
         </div>
         <hr />
         <ul className="user-topics dashboard-list">
+          {addFollow && (
+            <div id="add-follow-div">
+              <input
+                id="add-follow-input"
+                onChange={(e) => setNewFollowEdit(e.target.value)}
+                type="text"
+              ></input>
+              <button
+                // value={follow.id}
+                className="add-follow-edit"
+                onClick={handleSave}
+              >
+                Save
+              </button>
+            </div>
+          )}
           {userFollows &&
-            Object.values(userFollows).map((follow) => (
-              <li key={follow.id}>
-                {edit === "topics" ? (
-                  <>
-                    <button
-                      value={follow.id}
-                      className="delete-follow-button"
-                      onClick={handleDelete}
-                    ></button>
-                    <input
-                      placeholder={follow.topicString}
-                      className="topic-edit-input"
-                      onChange={(e) => setFollowEdit(e.target.value)}
-                    />
-                    <button
-                      value={follow.id}
-                      className="save-follow-edit"
-                      onClick={handleSave}
-                    >
-                      Save
-                    </button>
-                  </>
-                ) : (
-                  <>
-                    <h3>{follow.topicString}</h3>
-                    <button className="search-follow-button">Search</button>
-                  </>
-                )}
-              </li>
-            ))}
+            Object.values(userFollows)
+              .reverse()
+              .map((follow) => (
+                <li key={follow.id}>
+                  {edit === "topics" ? (
+                    <>
+                      <button
+                        value={follow.id}
+                        className="delete-follow-button"
+                        onClick={handleDelete}
+                      ></button>
+                      <input
+                        placeholder={follow.topicString}
+                        className="topic-edit-input"
+                        onChange={(e) => setFollowEdit(e.target.value)}
+                      />
+                      <button
+                        value={follow.id}
+                        className="save-follow-edit"
+                        onClick={handleSave}
+                      >
+                        Save
+                      </button>
+                    </>
+                  ) : (
+                    <>
+                      <h3>{follow.topicString}</h3>
+                      <button className="search-follow-button">Search</button>
+                    </>
+                  )}
+                </li>
+              ))}
         </ul>
         {/* SAVED ARTICLES */}
         <div id="articles-header">
@@ -395,7 +428,11 @@ export const Dashboard = () => {
             Object.values(userArticles).map((article) => (
               <li key={article.id}>
                 {edit === "articles" ? (
-                  <button className="delete-article-button"></button>
+                  <button
+                    className="delete-article-button"
+                    value={article.id}
+                    onClick={handleDelete}
+                  ></button>
                 ) : null}
                 <img src={article.urlToImage} alt={article.title} />
                 <a href={article.url} target="_blank" rel="noreferrer noopener">

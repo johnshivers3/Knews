@@ -55,7 +55,7 @@ export const addArticle = (article) => async (dispatch) => {
   }
 };
 export const deleteOneArticle = (articleId) => async (dispatch) => {
-  const response = await fetch(`/api/articles/${articleId}`, {
+  const response = await fetch(`/api/saved/${articleId}`, {
     method: "DELETE",
   });
 

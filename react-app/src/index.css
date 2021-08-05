@@ -9,6 +9,7 @@
 
 html {
   width: 100vw;
+  height:100%;
 }
 
 body {
@@ -16,7 +17,7 @@ body {
   padding: 0;
   overflow-x: hidden;
   width: 100vw;
-  min-height: 100vh;
+  min-height: 100%;
   font-family: "Open Sans", sans-serif;
   color: var(--main-highlight);
 }
@@ -41,5 +42,5 @@ input {
 }
 .theme-wrapper{
   background: lightgray;
-  height: 100vh;
+  height: 100%;
 }

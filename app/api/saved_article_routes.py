@@ -43,7 +43,7 @@ def get_one_user_article(articleId):
     return article.to_dict()
 
 
-@saved_article_routes.route('/<int:articleId>')
+@saved_article_routes.route('/<int:articleId>',methods=['DELETE'])
 def delete_user_article(articleId):
     '''
     delete specific article associated with user

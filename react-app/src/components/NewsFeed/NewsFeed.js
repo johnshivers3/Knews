@@ -1,16 +1,20 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-// import { useHistory } from "react-router-dom";
+import { useHistory, Link } from "react-router-dom";
 import * as newsFeedActions from "../../store/newsfeed.js";
 import * as preferenceActions from "../../store/preferences";
+import * as articleActions from "../../store/articles";
+import Logo from "../images/Logo.js";
 
 import "./NewsFeed.css";
 
 export const NewsFeed = () => {
+  const [theme, setTheme] = useState("light");
   // const history = useHistory();
   const dispatch = useDispatch();
   const topHeadlines = useSelector((state) => state.newsfeed.news?.articles);
   const userPreferences = useSelector((state) => state.preferences.preferences);
+  const user = useSelector((state) => state.session.user);
 
   useEffect(() => {
     dispatch(newsFeedActions.getTopHeadlines());
@@ -21,13 +25,51 @@ export const NewsFeed = () => {
   // Collect user preferences
   useEffect(() => {
     dispatch(preferenceActions.getUserPreferences());
+    // setTheme(userPreferences.theme)
     return () => {
       dispatch(preferenceActions.cleanUpPreferences());
     };
   }, [dispatch]);
 
+  // Save article to database
+
+  const addArticle = (article) => {
+    dispatch(articleActions.addArticle(article));
+  };
+
   return (
     <>
+      <span id="splash">
+        <Logo />
+        <text>KNEWS</text>
+        <div>
+          {/* <h1>Welcome to Knews</h1> */}
+          <h2>Curate your news experience</h2>
+          <h3>
+            <a href="/signup">Sign Up</a> to view the stories YOU want to see
+          </h3>
+          <h3>Quickly search for followed topics</h3>
+          <h3>Save articles to read later</h3>
+<div id='contact-links-div'>
+<div id="git">
+            <Link
+              to={{ pathname: "https://github.com/johnshivers3/Knews" }}
+              target="_blank"
+              rel="noreferrer noopener"
+              className="contact-links"
+            ></Link>
+          </div>
+          <div id="linkedin">
+            <Link
+              to={{ pathname: "https://www.linkedin.com/in/john-shivers3/" }}
+              target="_blank"
+              rel="noreferrer noopener"
+              className="contact-links"
+            ></Link>
+          </div>
+</div>
+        </div>
+      </span>
       <div id="main-newsfeed-div">
         <div className="newsfeed-header-div">
           <h1>Top Stories</h1>
@@ -57,13 +99,20 @@ export const NewsFeed = () => {
                       topHeadlines[0].content.indexOf("[")
                     )}
                   </p>
-                  <a
-                    href={topHeadlines[0].url}
-                    target="_blank"
-                    rel="noreferrer noopener"
-                  >
-                    {topHeadlines[0].source.name}
-                  </a>
+                  <div className="top link-div">
+                    <a
+                      href={topHeadlines[0].url}
+                      target="_blank"
+                      rel="noreferrer noopener"
+                    >
+                      {topHeadlines[0].source.name}
+                    </a>
+
+                    <button
+                      className="save top"
+                      onClick={() => addArticle(topHeadlines[0])}
+                    ></button>
+                  </div>
                   <p className="author">Author: {topHeadlines[0].author}</p>
                 </div>
               </div>
@@ -103,13 +152,19 @@ export const NewsFeed = () => {
                           article.content.indexOf("[")
                         )}
                       </p>
-                      <a
-                        href={article.url}
-                        target="_blank"
-                        rel="noreferrer noopener"
-                      >
-                        {article.source.name}
-                      </a>
+                      <div className="upper link-div">
+                        <a
+                          href={article.url}
+                          target="_blank"
+                          rel="noreferrer noopener"
+                        >
+                          {article.source.name}
+                        </a>
+                        <button
+                          className="save upper"
+                          onClick={() => addArticle(article)}
+                        ></button>
+                      </div>
                       <p className="author">Author: {article.author}</p>
                     </div>
                   </div>
@@ -127,13 +182,19 @@ export const NewsFeed = () => {
                         <h4>{article.title}</h4>
                       </a>
                       <hr />
-                      <a
-                        href={article.url}
-                        target="_blank"
-                        rel="noreferrer noopener"
-                      >
-                        {article.source.name}
-                      </a>
+                      <div className="lower link-div">
+                        <a
+                          href={article.url}
+                          target="_blank"
+                          rel="noreferrer noopener"
+                        >
+                          {article.source.name}
+                        </a>
+                        <button
+                          className="save lower"
+                          onClick={() => addArticle(article)}
+                        ></button>
+                      </div>
                     </div>
                   </div>
                 );

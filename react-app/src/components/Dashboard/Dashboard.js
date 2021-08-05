@@ -10,7 +10,11 @@ import * as newsFeedActions from "../../store/newsfeed.js";
 import "./Dashboard.css";
 
 export const Dashboard = () => {
-  const [language, setLanguage] = useState();
+  const [language, setLanguage] = useState("");
+  const [country, setCountry] = useState("");
+  const [feed, setFeed] = useState("");
+  const [theme, setTheme] = useState("");
+  const [followEdit, setFollowEdit] = useState("");
   const dispatch = useDispatch();
   // const history = useHistory();
   const [edit, setEdit] = useState("");
@@ -65,7 +69,16 @@ export const Dashboard = () => {
         setEdit("");
         break;
       case "save-follow-edit":
-        // dispatch(followsActions.addFollow());
+        dispatch(followsActions.updateFollow(followEdit, e.target.value));
+        break;
+      case "save-preference-edit":
+        const newPreferences = { ...userPreferences };
+        newPreferences["country"] = country;
+        newPreferences["defaultFeed"] = feed;
+        newPreferences["lang"] = language;
+        newPreferences["theme"] = theme;
+        dispatch(preferenceActions.updatePreferences(newPreferences));
+        setEdit("");
         break;
       case "done-article-edit":
         setEdit("");
@@ -73,6 +86,16 @@ export const Dashboard = () => {
       default:
         break;
     }
+  };
+  // save and reset edit state
+  const handleDelete = (e) => {
+    e.preventDefault();
+    dispatch(followsActions.deleteOneFollow(e.target.value));
+  };
+  // add topic to database
+  const handleAddFollow = (e) => {
+    e.preventDefault();
+    dispatch(followsActions.addFollow())
   };
 
   return (
@@ -87,10 +110,55 @@ export const Dashboard = () => {
         ></button>
       </div>
       <div id="dashboard-main-div">
+        {/* PREFERENCES */}
         {edit === "preferences" && userPreferences ? (
-          <>
-            <div id="preference-div">
+          <div id="main-preference-div">
+            <div id="preferences-header-div">
               <h2>Preferences</h2>
+              <button className="save-preference-edit" onClick={handleSave}>
+                Save
+              </button>
+            </div>
+            <hr />
+            <div className="preference-div">
+              <input
+                id="default-theme-search"
+                type="search"
+                list="theme-list"
+                placeholder={
+                  userPreferences.theme === ""
+                    ? "Set default theme for your feed"
+                    : userPreferences.theme
+                }
+                onChange={(e) => setTheme(e.target.value)}
+              ></input>
+              <datalist id="theme-list">
+                <option>Light</option>
+                <option>Dark</option>
+              </datalist>
+              <input
+                id="default-category-search"
+                type="search"
+                list="category-list"
+                placeholder={
+                  userPreferences.defaultFeed === ""
+                    ? "Set default category for your feed"
+                    : userPreferences.defaultFeed
+                }
+                onChange={(e) => setFeed(e.target.value)}
+              ></input>
+              <datalist id="category-list">
+                <option>Business</option>
+                <option>Entertainment</option>
+                <option>General</option>
+                <option>Health</option>
+                <option>Science</option>
+                <option>Sports</option>
+                <option>Technology</option>
+              </datalist>
+            </div>
+
+            <div className="preference-div">
               <input
                 id="language-search"
                 type="search"
@@ -157,6 +225,7 @@ export const Dashboard = () => {
                     ? "Set preferred country"
                     : userPreferences.country
                 }
+                onChange={(e) => setCountry(e.target.value)}
               ></input>
               <datalist
                 id="country-list"
@@ -218,21 +287,23 @@ export const Dashboard = () => {
                 <option value="Venezuela">ve</option>
                 <option value="South Africa"> za</option>
               </datalist>
-              <button className="save-preference-edit" onClick={handleSave}>
-                Save
-              </button>
             </div>
             <hr />
-          </>
+          </div>
         ) : null}
         {/* FOLLOWED TOPICS */}
         <div id="topics-header">
           <h2>Followed Topics</h2>
           <div className="heading-edit-buttons">
             {edit === "topics" ? (
-              <button className="done-follow-edit" onClick={handleSave}>
-                Done
-              </button>
+              <>
+                <button className="done-follow-edit" onClick={handleAddFollow}>
+                  Add
+                </button>
+                <button className="done-follow-edit" onClick={handleSave}>
+                  Done
+                </button>
+              </>
             ) : null}
             <button
               className="setting-button topics"
@@ -249,12 +320,21 @@ export const Dashboard = () => {
               <li key={follow.id}>
                 {edit === "topics" ? (
                   <>
-                    <button className="delete-follow-button"></button>
+                    <button
+                      value={follow.id}
+                      className="delete-follow-button"
+                      onClick={handleDelete}
+                    ></button>
                     <input
                       placeholder={follow.topicString}
                       className="topic-edit-input"
+                      onChange={(e) => setFollowEdit(e.target.value)}
                     />
-                    <button className="save-follow-edit" onClick={handleSave}>
+                    <button
+                      value={follow.id}
+                      className="save-follow-edit"
+                      onClick={handleSave}
+                    >
                       Save
                     </button>
                   </>

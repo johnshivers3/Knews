@@ -89,3 +89,63 @@
 .author {
   color: var(--main-purple);
 }
+
+.link-div {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+button.save {
+  width: 60px;
+  height: 60px;
+  background: url(../../source-images/check-circle-purple.svg) center/50% no-repeat;
+}
+
+span#splash{
+  display: flex;
+  height: 40vh;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 0 10vw;
+}
+span#splash img{
+  transform: scale(3);
+}
+
+span#splash text{
+  font-weight: 800;
+  font-size: 40px;
+  font-style: oblique;
+  margin-left: 200px;
+  transform: scale(3);
+  color: var(--main-purple);
+  margin-right: 300px;
+}
+
+div#git {
+  background: url(../../source-images/github-logo.svg) center/100% no-repeat;
+  height: 40px;
+  width: 40px;
+  margin:0;
+  box-sizing: border-box;
+  display:flex;
+}
+div#linkedin {
+  background: url(../../source-images/linkedin.svg) center/100% no-repeat;
+  height: 40px;
+  width: 40px;
+  margin:0;
+  box-sizing: border-box;
+  display:flex;
+}
+
+.contact-links {
+  width: 50px;
+}
+
+#contact-links-div {
+  display: flex;
+  justify-content: space-around;
+  width: 50%;
+}

@@ -60,15 +60,17 @@ def delete_user_follow(followId):
 @follows_routes.route('/<int:followId>', methods=['PATCH'])
 def patch_follow(followId):
     '''
-    update follow that exists in database database
+    update follow that exists in database
     '''
-    currentFollow = FollowedTopics.query.filter_by(
-        userId=current_user.id, id=followId).first()
-    if currentFollow is None:
+    current_follow = FollowedTopics.query.filter_by(
+        id=followId)
+    if current_follow is None:
         return {'errors': ['Unsuccessful']}, 404
     else:
-        updated = request.json['follow']
-        updated['userId'] = current_user.id
-        currentFollow.update(updated)
+        updated_follow = {'userId': current_user.id,
+                          'topicString': request.json['topicString']}
+        current_follow.update(updated_follow)
         db.session.commit()
         return {'message': 'Successful'}
+
+    # request.json === topicString

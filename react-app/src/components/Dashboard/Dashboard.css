@@ -7,7 +7,7 @@ div#dashboard-main-div {
 }
 
 div#dashboard-main-div hr {
-  margin: 20px 0;
+  margin: 10px 0;
 }
 
 .dashboard-header-div {
@@ -21,18 +21,31 @@ div#dashboard-main-div hr {
   color: var(--main-purple);
 }
 
-#preference-div {
+#main-preference-div {
+  display: flex;
+  flex-direction: column;
+}
+.preference-div {
   display: flex;
   justify-content: space-around;
   width: 100%;
 }
-#preference-div h2 {
+.preference-div h2 {
   padding: 0;
   margin: 0;
+
 }
 
-#preference-div select,
-#preference-div option {
+#preferences-header-div {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+}
+
+
+
+.preference-div option {
   color: var(--main-purple);
   font-size: medium;
   border: none;
@@ -40,10 +53,13 @@ div#dashboard-main-div hr {
   padding: 10%;
 }
 
+#default-theme-search,
+#default-category-search,
 #country-search,
 #language-search {
-  width: 15vw;
-  padding: 0 0 0 2%;
+  width: 20vw;
+  /* padding: 0 0 0 2%; */
+  margin: 10px 20px;
   font-size: large;
 }
 
@@ -70,7 +86,7 @@ div#dashboard-main-div hr {
   background: var(--main-purple);
   color: whitesmoke;
   padding: 0;
-  margin: 0;
+  margin: 0 .5vw;
 }
 
 .user-topics li {
@@ -92,7 +108,7 @@ div#dashboard-main-div hr {
   align-items: center;
   padding: 0;
   width: 100%;
-  font-size: large;
+  /* font-size: large; */
   height: 4rem;
 }
 
@@ -209,4 +225,10 @@ ul.dashboard-list img {
   color: var(--main-purple);
   align-self: center;
   margin: 7px 0;
+}
+
+div > h2 {
+  font-size: 36px;
+  font-weight: 500;
+  /* margin-top: 20px; */
 }

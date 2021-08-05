@@ -10,11 +10,11 @@ def patch_user_prefs():
     '''
     update preferences associated with user in database
     '''
-    currentPreferences = UserPreferences.query.filter_by(
+    current_preferences = UserPreferences.query.filter_by(
         userId=current_user.id)
     updated = request.json['preferences']
     updated['userId'] = current_user.id
-    currentPreferences.update(updated)
+    current_preferences.update(updated)
     db.session.commit()
     return {'message': 'Successful'}
 

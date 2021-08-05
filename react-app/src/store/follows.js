@@ -54,6 +54,22 @@ export const addFollow = (topicString) => async (dispatch) => {
     return ["An error occurred. Please try again."];
   }
 };
+export const updateFollow = (topicString, followId) => async (dispatch) => {
+  const response = await fetch(`/api/follows/${followId}`, {
+    method: "PATCH",
+    headers: { "CONTENT-TYPE": "application/json" },
+    body: JSON.stringify({ topicString }),
+  });
+
+  if (response.ok) {
+    const json = await response.json();
+    dispatch(cleanUpFollows());
+    dispatch(getAllFollows());
+    return json;
+  } else {
+    return ["An error occurred. Please try again."];
+  }
+};
 export const deleteOneFollow = (followId) => async (dispatch) => {
   const response = await fetch(`/api/follows/${followId}`, {
     method: "DELETE",

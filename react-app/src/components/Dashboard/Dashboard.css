@@ -15,9 +15,9 @@ div#dashboard-main-div hr {
   justify-content: space-between;
   align-items: center;
   padding: 0 0 0 12.5vw;
-  width: 60.3%;
+  width: 100%;
   font-size: x-large;
-  height: 5em;
+  /* height: 5em; */
   color: var(--main-purple);
 }
 
@@ -231,4 +231,22 @@ div > h2 {
   font-size: 36px;
   font-weight: 500;
   /* margin-top: 20px; */
+}
+
+span#splash-dash {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  width: 75.8vw;
+  margin: 0 10% 0 0;
+}
+
+span#splash-dash h1#dashboard-heading {
+  font-weight: 800;
+  font-size: 20px;
+  font-style: oblique;
+  /* margin-left: 200px; */
+  transform: scale(3);
+  color: var(--main-purple);
+  margin-right: 300px;
 }

@@ -24,6 +24,23 @@ export const Dashboard = () => {
   // const selectedFollow = useSelector((state) => state.follows.oneFollow);
   const userPreferences = useSelector((state) => state.preferences.preferences);
 
+  const [bgTheme, setBgTheme] = useState("rgba(0, 0, 0, 0.15)");
+  const [hTheme, setHTheme] = useState("rgba(36, 22, 129, 0.678)");
+
+  const appTheme = { background: bgTheme };
+  const headingStyle = { color: hTheme };
+
+  useEffect(() => {
+    dispatch(preferenceActions.getUserPreferences());
+    if (userPreferences?.theme === "Dark") {
+      setBgTheme("rgba(0, 0, 0, 0.75)");
+      setHTheme("whitesmoke");
+    }
+    return () => {
+      dispatch(preferenceActions.cleanUpPreferences());
+    };
+  }, [dispatch]);
+
   // Collect users followed topics
   useEffect(() => {
     dispatch(followsActions.getAllFollows());
@@ -95,20 +112,26 @@ export const Dashboard = () => {
   // add topic to database
   const handleAddFollow = (e) => {
     e.preventDefault();
-    dispatch(followsActions.addFollow())
+    dispatch(followsActions.addFollow());
   };
+  const splashTheme = { background: "var(--main-purple)" };
 
   return (
-    <>
-      <div className="dashboard-header-div">
-        <h1>{`${user.username.toUpperCase()}'s Dashboard`}</h1>
-        <button
-          className="setting-button preferences"
-          title="General Settings"
-          value="preferences"
-          onClick={handleEdit}
-        ></button>
-      </div>
+    <div style={appTheme}>
+      <span id="splash-dash" style={splashTheme}>
+        <div className="dashboard-header-div">
+          <h1
+          id='dashboard-heading'
+            style={headingStyle}
+          >{`${user.username.toUpperCase()}'s Dashboard`}</h1>
+          <button
+            className="setting-button preferences"
+            title="General Settings"
+            value="preferences"
+            onClick={handleEdit}
+          ></button>
+        </div>
+      </span>
       <div id="dashboard-main-div">
         {/* PREFERENCES */}
         {edit === "preferences" && userPreferences ? (
@@ -384,7 +407,7 @@ export const Dashboard = () => {
           )}
         </ul>
       </div>
-    </>
+    </div>
   );
 };
 

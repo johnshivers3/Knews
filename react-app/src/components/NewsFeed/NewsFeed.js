@@ -16,6 +16,13 @@ export const NewsFeed = () => {
   const userPreferences = useSelector((state) => state.preferences.preferences);
   const user = useSelector((state) => state.session.user);
 
+  const [hTheme, setHTheme] = useState("rgba(36, 22, 129, 0.678)");
+
+  const [bgTheme, setBgTheme] = useState("rgba(0, 0, 0, 0.15)");
+
+  const appTheme = { background: bgTheme };
+  const headingStyle = { color: hTheme };
+  const splashTheme = { background: "var(--main-purple)" };
   useEffect(() => {
     dispatch(newsFeedActions.getTopHeadlines());
 
@@ -25,7 +32,10 @@ export const NewsFeed = () => {
   // Collect user preferences
   useEffect(() => {
     dispatch(preferenceActions.getUserPreferences());
-    // setTheme(userPreferences.theme)
+    if (userPreferences?.theme === "Dark") {
+      setBgTheme("rgba(0, 0, 0, 0.75)");
+      setHTheme("whitesmoke");
+    }
     return () => {
       dispatch(preferenceActions.cleanUpPreferences());
     };
@@ -38,41 +48,56 @@ export const NewsFeed = () => {
   };
 
   return (
-    <>
-      <span id="splash">
+    <div style={appTheme}>
+      <span id="splash-feed" style={splashTheme}>
         <Logo />
-        <text>KNEWS</text>
+        <h1 id='newsfeed-heading' style={headingStyle}>KNEWS</h1>
         <div>
-          {/* <h1>Welcome to Knews</h1> */}
-          <h2>Curate your news experience</h2>
-          <h3>
-            <a href="/signup">Sign Up</a> to view the stories YOU want to see
-          </h3>
-          <h3>Quickly search for followed topics</h3>
-          <h3>Save articles to read later</h3>
-<div id='contact-links-div'>
-<div id="git">
-            <Link
-              to={{ pathname: "https://github.com/johnshivers3/Knews" }}
-              target="_blank"
-              rel="noreferrer noopener"
-              className="contact-links"
-            ></Link>
+          {!user ? (
+            <>
+              <h2>Curate your news experience</h2>
+              <h3>
+                <a
+                  style={{
+                    fontWeight: "bold",
+                    fontSize: "larger",
+                    color: `${headingStyle.color}`,
+                  }}
+                  href="/signup"
+                >
+                  Sign Up
+                </a>
+                to view the stories YOU want to see
+              </h3>
+              <h3>Quickly search for followed topics</h3>
+              <h3>Save articles to read later</h3>
+            </>
+          ):
+          <h2 id='welcome-sign'>Welcome to your personal Knews app</h2>
+          }
+          <div id="contact-links-div">
+            <div id="git">
+              <Link
+                to={{ pathname: "https://github.com/johnshivers3/Knews" }}
+                target="_blank"
+                rel="noreferrer noopener"
+                className="contact-links"
+              ></Link>
+            </div>
+            <div id="linkedin">
+              <Link
+                to={{ pathname: "https://www.linkedin.com/in/john-shivers3/" }}
+                target="_blank"
+                rel="noreferrer noopener"
+                className="contact-links"
+              ></Link>
+            </div>
           </div>
-          <div id="linkedin">
-            <Link
-              to={{ pathname: "https://www.linkedin.com/in/john-shivers3/" }}
-              target="_blank"
-              rel="noreferrer noopener"
-              className="contact-links"
-            ></Link>
-          </div>
-</div>
         </div>
       </span>
       <div id="main-newsfeed-div">
         <div className="newsfeed-header-div">
-          <h1>Top Stories</h1>
+          <h1 style={headingStyle}>Top Stories</h1>
         </div>
         <div>
           {topHeadlines && (
@@ -201,7 +226,7 @@ export const NewsFeed = () => {
             }
           })}
       </div>
-    </>
+    </div>
   );
 };
 

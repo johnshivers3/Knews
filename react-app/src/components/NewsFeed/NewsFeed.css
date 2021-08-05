@@ -99,21 +99,22 @@
 button.save {
   width: 60px;
   height: 60px;
-  background: url(../../source-images/check-circle-purple.svg) center/50% no-repeat;
+  background: url(../../source-images/check-circle-purple.svg) center/50%
+    no-repeat;
 }
 
-span#splash{
+span#splash-feed {
   display: flex;
   height: 40vh;
   justify-content: flex-start;
   align-items: center;
   padding: 0 10vw;
 }
-span#splash img{
+span#splash-feed img {
   transform: scale(3);
 }
 
-span#splash text{
+span#splash-feed h1#newsfeed-heading {
   font-weight: 800;
   font-size: 40px;
   font-style: oblique;
@@ -127,17 +128,17 @@ div#git {
   background: url(../../source-images/github-logo.svg) center/100% no-repeat;
   height: 40px;
   width: 40px;
-  margin:0;
+  margin: 0;
   box-sizing: border-box;
-  display:flex;
+  display: flex;
 }
 div#linkedin {
   background: url(../../source-images/linkedin.svg) center/100% no-repeat;
   height: 40px;
   width: 40px;
-  margin:0;
+  margin: 0;
   box-sizing: border-box;
-  display:flex;
+  display: flex;
 }
 
 .contact-links {
@@ -147,5 +148,14 @@ div#linkedin {
 #contact-links-div {
   display: flex;
   justify-content: space-around;
-  width: 50%;
+  width: 30vw;
+  background-color: whitesmoke;
+  height: 5vh;
+  align-items: center;
+  border-bottom-left-radius: 2rem;
+  border-top-right-radius: 2rem;
+}
+#welcome-sign {
+  font-size: x-large;
+  width: 30vw;
 }

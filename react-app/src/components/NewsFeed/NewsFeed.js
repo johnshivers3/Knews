@@ -14,7 +14,7 @@ export const NewsFeed = () => {
   const userPreferences = useSelector((state) => state.preferences.preferences);
   const user = useSelector((state) => state.session.user);
 
-  const [hTheme, setHTheme] = useState("rgba(36, 22, 129, 0.678)");
+  const [hTheme, setHTheme] = useState("rgba(36, 22, 129, 0.978)");
 
   const [bgTheme, setBgTheme] = useState("rgba(0, 0, 0, 0.15)");
 
@@ -42,8 +42,12 @@ export const NewsFeed = () => {
 
   // Save article to database
 
-  const addArticle = (article) => {
-    dispatch(articleActions.addArticle(article));
+  const addArticle = async(article) => {
+    const response = await dispatch(articleActions.addArticle(article));
+    if(response.message) {
+      console.log(response.message);
+      window.alert(`Article from ${response.message.article.author} saved`)
+    }
   };
 
   return (

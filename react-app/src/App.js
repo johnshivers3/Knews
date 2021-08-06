@@ -30,7 +30,7 @@ function App(store) {
   const banner = (
     <span id="splash-feed" style={{ color: "rgba(36, 22, 129, 0.678)" }}>
       <Logo />
-      <h1 id="newsfeed-heading" style={{ color: "rgba(36, 22, 129, 0.678)" }}>
+      <h1 id="newsfeed-heading" style={{ color: "rgba(36, 22, 129, 0.978)" }}>
         KNEWS
       </h1>
       <div>

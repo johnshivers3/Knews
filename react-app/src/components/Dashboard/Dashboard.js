@@ -28,7 +28,7 @@ export const Dashboard = () => {
   const userPreferences = useSelector((state) => state.preferences.preferences);
 
   const [bgTheme, setBgTheme] = useState("rgba(0, 0, 0, 0.15)");
-  const [hTheme, setHTheme] = useState("rgba(36, 22, 129, 0.678)");
+  const [hTheme, setHTheme] = useState("rgba(36, 22, 129, 0.978)");
   const history = useHistory();
   const appTheme = { background: bgTheme };
   const headingStyle = { color: hTheme };
@@ -360,7 +360,7 @@ export const Dashboard = () => {
         </div>
         <hr />
         <ul className="user-topics dashboard-list">
-          {addFollowError.length > 0 && edit === 'topics'? (
+          {addFollowError.length > 0 && edit === "topics" ? (
             <h4 id="topic-error">{addFollowError}</h4>
           ) : null}
           {addFollow && edit === "topics" && (
@@ -434,21 +434,27 @@ export const Dashboard = () => {
         <hr />
         <ul className="user-articles dashboard-list">
           {userArticles ? (
-            Object.values(userArticles).reverse().map((article) => (
-              <li key={article.id}>
-                {edit === "articles" ? (
-                  <button
-                    className="delete-article-button"
-                    value={article.id}
-                    onClick={handleDelete}
-                  ></button>
-                ) : null}
-                <img src={article.urlToImage} alt={article.title} />
-                <a href={article.url} target="_blank" rel="noreferrer noopener">
-                  <h3>{article.title}</h3>
-                </a>
-              </li>
-            ))
+            Object.values(userArticles)
+              .reverse()
+              .map((article) => (
+                <li key={article.id}>
+                  {edit === "articles" ? (
+                    <button
+                      className="delete-article-button"
+                      value={article.id}
+                      onClick={handleDelete}
+                    ></button>
+                  ) : null}
+                  <img src={article.urlToImage} alt={article.title} />
+                  <a
+                    href={article.url}
+                    target="_blank"
+                    rel="noreferrer noopener"
+                  >
+                    <h3>{article.title}</h3>
+                  </a>
+                </li>
+              ))
           ) : (
             <h3>You have saved an article yet.</h3>
           )}

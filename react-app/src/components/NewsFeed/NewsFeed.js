@@ -11,8 +11,10 @@ import "./NewsFeed.css";
 
 export const NewsFeed = () => {
   const dispatch = useDispatch();
-  const feedArticles = useSelector((state) => state.newsfeed.news?.articles);
-
+  const feedHeadlines = useSelector((state) => state.newsfeed.news?.articles);
+  const categoryFeed = useSelector(
+    (state) => state.newsfeed.searchResults?.articles
+  );
   const allFollows = useSelector((state) => state.follows?.allFollows);
   const userPreferences = useSelector((state) => state.preferences.preferences);
   const user = useSelector((state) => state.session.user);
@@ -20,13 +22,15 @@ export const NewsFeed = () => {
   const [hTheme, setHTheme] = useState("rgba(36, 22, 129, 0.978)");
   const [bgTheme, setBgTheme] = useState("");
 
+  const [feedArticles, setFeedArticles] = useState();
+
   const appTheme = { background: bgTheme };
   const headingStyle = { color: hTheme };
   const splashTheme = { background: "var(--main-purple)" };
 
   // Collect user preferences
   useEffect(() => {
-    dispatch(preferenceActions.getUserPreferences());
+    (async () => await dispatch(preferenceActions.getUserPreferences()))();
     if (userPreferences?.theme === "Dark") {
       setBgTheme("rgba(0, 0, 0, 0.75)");
       setHTheme("whitesmoke");
@@ -38,25 +42,32 @@ export const NewsFeed = () => {
     // eslint-disable-next-line
   }, [dispatch]);
 
+  // useEffect(()=>{},[setFeedArticles])
   useEffect(() => {
     if (user) dispatch(followActions.getAllFollows());
-
+    // dispatch(newsFeedActions.getTopHeadlines());
     return () => {
       dispatch(followActions.cleanUpFollows());
     };
-  }, [dispatch]);
+  }, []);
 
   useEffect(() => {
-    dispatch(newsFeedActions.getTopHeadlines());
-
-    return () => {
-      dispatch(newsFeedActions.cleanUpFeed());
-    };
-  }, [dispatch]);
+    (async () => await dispatch(preferenceActions.getUserPreferences()))();
+    if (user) {
+      dispatch(newsFeedActions.getSearchResults(userPreferences?.defaultFeed));
+      setFeedArticles(categoryFeed);
+    } else {
+      dispatch(newsFeedActions.getTopHeadlines());
+      setFeedArticles(feedHeadlines);
+    }
+    return;
+  }, [dispatch,feedArticles,categoryFeed]);
 
   // Save article to database
 
   const addArticle = async (article) => {
+    if (!user) window.alert(`Sign Up or Log In \n to save articles.`);
+
     const response = await dispatch(articleActions.addArticle(article));
     if (response.message) {
       window.alert(
@@ -122,7 +133,7 @@ export const NewsFeed = () => {
           <h1 style={headingStyle}>Top Stories</h1>
         </div>
         <div>
-          {feedArticles && (
+          {feedArticles?.length > 0 && (
             <>
               <div className="highlight-section">
                 <img
@@ -154,7 +165,12 @@ export const NewsFeed = () => {
                     >
                       {feedArticles[0].source.name}
                     </a>
-
+                    {!user && (
+                      <>
+                        <p>Sign Up or Login</p>
+                        <p>to save articles</p>
+                      </>
+                    )}
                     <button
                       title="Add Article"
                       className="save top"

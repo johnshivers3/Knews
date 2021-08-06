@@ -7,7 +7,7 @@ import * as articleActions from "../../store/articles";
 import * as followActions from "../../store/follows";
 import Logo from "../images/Logo.js";
 
-import "./Results.css";
+// import "./Results.css";
 
 export const Results = () => {
   const dispatch = useDispatch();

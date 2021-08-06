@@ -9,8 +9,9 @@
 #main-newsfeed-div {
   display: inline-grid;
   grid-template-columns: repeat(3, auto);
-  row-gap: 2rem;
-  padding: 2rem;
+  row-gap: 3.5rem;
+  padding: 3.5rem 0;
+  width: 100%;
 }
 
 .highlight-section img {
@@ -49,7 +50,6 @@
   border-radius: 0.5rem;
   padding: 2rem;
   border-bottom: 1px solid var(--main-highlight);
-
 }
 
 .upper-section {
@@ -203,6 +203,6 @@ div#linkedin {
 }
 
 #newsfeed-follows {
-  font-size: large;
-  padding: 10% 15%;
+  /* font-size: large; */
+  /* padding: 10% 15% 10% 5%; */
 }

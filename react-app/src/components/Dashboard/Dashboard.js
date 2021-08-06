@@ -41,7 +41,7 @@ export const Dashboard = () => {
     } else {
       setBgTheme("rgba(0, 0, 0, 0.15)");
     }
-    return
+    return;
     // eslint-disable-next-line
   }, [dispatch, userPreferences?.theme]);
 
@@ -171,12 +171,13 @@ export const Dashboard = () => {
                 id="default-theme-search"
                 type="search"
                 list="theme-list"
-                placeholder={
-                  userPreferences.theme === ""
-                    ? "Set default theme for your feed"
-                    : userPreferences.theme
+                placeholder="Set default theme for your feed"
+                defaultValue={
+                  userPreferences.theme === "" ? null : userPreferences.theme
                 }
-                onChange={(e) => setTheme(e.target.value)}
+                onChange={(e) => {
+                  if (e.target.value !== "") setTheme(e.target.value);
+                }}
               ></input>
               <datalist id="theme-list">
                 <option>Light</option>
@@ -186,12 +187,15 @@ export const Dashboard = () => {
                 id="default-category-search"
                 type="search"
                 list="category-list"
-                placeholder={
+                placeholder="Set default category for your feed"
+                defaultValue={
                   userPreferences.defaultFeed === ""
-                    ? "Set default category for your feed"
+                    ? null
                     : userPreferences.defaultFeed
                 }
-                onChange={(e) => setFeed(e.target.value)}
+                onChange={(e) => {
+                  if (e.target.value !== "") setFeed(e.target.value);
+                }}
               ></input>
               <datalist id="category-list">
                 <option>Business</option>
@@ -209,12 +213,13 @@ export const Dashboard = () => {
                 id="language-search"
                 type="search"
                 list="language-list"
-                placeholder={
-                  userPreferences.lang === ""
-                    ? "Set preferred news language"
-                    : userPreferences.lang
+                placeholder="Set your preferred language"
+                defaultValue={
+                  userPreferences.lang === "" ? null : userPreferences.lang
                 }
-                onChange={(e) => setLanguage(e.target.value)}
+                onChange={(e) => {
+                  if (e.target.value !== "") setLanguage(e.target.value);
+                }}
               ></input>
               <datalist
                 id="language-list"
@@ -266,12 +271,15 @@ export const Dashboard = () => {
                 type="search"
                 list="country-list"
                 autoComplete="on"
-                placeholder={
+                placeholder="Set preferred country"
+                defaultValue={
                   userPreferences.country === ""
-                    ? "Set preferred country"
+                    ? null
                     : userPreferences.country
                 }
-                onChange={(e) => setCountry(e.target.value)}
+                onChange={(e) => {
+                  if (e.target.value !== "") setCountry(e.target.value);
+                }}
               ></input>
               <datalist
                 id="country-list"

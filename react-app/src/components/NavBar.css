@@ -4,7 +4,7 @@ nav {
   position: relative;
   height: 100px;
   background-color: var(--main-dark);
-  box-shadow: 0px 3px 80px var(--main-highlight);
+  box-shadow: 0px 3px 60px var(--main-highlight);
   color: var(--main-purple);
 
 }

@@ -96,11 +96,11 @@ function App(store) {
             {banner}
           </div>
         </Route>
+        <Route path="/results" exact={true}>
+          <Results />
+        </Route>
         <ProtectedRoute path="/users" exact={true}>
           <UsersList />
-        </ProtectedRoute>
-        <ProtectedRoute path="/results" exact={true}>
-          <Results />
         </ProtectedRoute>
         <ProtectedRoute path="/dashboard/:userId" exact={true}>
           <Dashboard />

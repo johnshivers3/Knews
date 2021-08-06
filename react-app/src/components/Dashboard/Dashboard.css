@@ -146,8 +146,10 @@ ul.dashboard-list li a {
 ul.dashboard-list img {
   display: flex;
   align-self: center;
-  width: 25%;
+  max-width: 25%;
   object-fit: contain;
+  justify-self: left;
+
   background: linear-gradient(
     0.25turn,
     transparent,

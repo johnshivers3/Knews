@@ -38,6 +38,7 @@ export const NewsFeed = () => {
     return () => {
       dispatch(preferenceActions.cleanUpPreferences());
     };
+     // eslint-disable-next-line
   }, [dispatch]);
 
   // Save article to database

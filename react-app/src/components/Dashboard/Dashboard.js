@@ -42,6 +42,7 @@ export const Dashboard = () => {
     return () => {
       dispatch(preferenceActions.cleanUpPreferences());
     };
+     // eslint-disable-next-line
   }, [dispatch]);
 
   // Collect users followed topics

@@ -26,6 +26,7 @@
     transparent
   );
 }
+
 .upper-section img {
   display: flex;
   align-self: center;
@@ -102,6 +103,12 @@ button.save {
   background: url(../../source-images/check-circle-purple.svg) center/50%
     no-repeat;
 }
+button.save-green {
+  width: 60px;
+  height: 60px;
+  background: url(../../source-images/check-circle-purple.svg) center/50%
+    no-repeat;
+}
 
 span#splash-feed {
   display: flex;
@@ -120,7 +127,7 @@ span#splash-feed h1#newsfeed-heading {
   font-style: oblique;
   margin-left: 220px;
   transform: scale(3);
-  color: var(--main-purple);
+  color: whitesmoke;
   margin-right: 300px;
 }
 

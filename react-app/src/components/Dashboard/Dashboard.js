@@ -433,8 +433,8 @@ export const Dashboard = () => {
         </div>
         <hr />
         <ul className="user-articles dashboard-list">
-          {userArticles?.length > 0 ? (
-            Object.values(userArticles).map((article) => (
+          {userArticles ? (
+            Object.values(userArticles).reverse().map((article) => (
               <li key={article.id}>
                 {edit === "articles" ? (
                   <button

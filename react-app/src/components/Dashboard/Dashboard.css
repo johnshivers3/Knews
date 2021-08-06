@@ -119,7 +119,7 @@ div#add-follow-div button,
 }
 
 ul.dashboard-list {
-  width: 70vw;
+  width: 50vw;
 }
 ul.dashboard-list li {
   display: flex;
@@ -161,7 +161,7 @@ ul.dashboard-list img {
   display: flex;
   align-self: center;
   transform: scale(0.9);
-  margin-right: 58px;
+  margin-right: 28vw;
 }
 
 .setting-button.topics,
@@ -241,9 +241,7 @@ span#splash-dash {
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  width: 75.8vw;
-  /* margin: 0 10% 0 0; */
-  /* padding: 0 10vw; */
+  width: 100vw;
 }
 
 span#splash-dash h1#dashboard-heading {
@@ -252,8 +250,8 @@ span#splash-dash h1#dashboard-heading {
   font-style: oblique;
   /* margin-left: 200px; */
   transform: scale(3);
-  color: var(--main-purple);
-  margin-left: 200px;
+  color: whitesmoke;
+  margin-left: 13vw;
 }
 
 div#add-follow-div {

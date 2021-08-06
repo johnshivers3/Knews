@@ -262,14 +262,15 @@ div#add-follow-div {
   margin-left: 6.1vw;
 }
 div#add-follow-div button{
-  width: 14%;
+  width: 13%;
 }
 
 input#add-follow-input {
-  color:black;
+  color:var(--main-purple);
   height: 3vh;
-  width: 54%;
-  margin: 10px 11px 10px 0;
+  width: 9.5vw;
+  margin: 10px 10px 10px -15px;
+  font-size: larger;
 }
 
 #topic-error {

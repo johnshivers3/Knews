@@ -4,6 +4,7 @@ import { useHistory, Link } from "react-router-dom";
 import * as newsFeedActions from "../../store/newsfeed.js";
 import * as preferenceActions from "../../store/preferences";
 import * as articleActions from "../../store/articles";
+import * as followActions from "../../store/follows";
 import Logo from "../images/Logo.js";
 
 import "./NewsFeed.css";
@@ -11,43 +12,58 @@ import "./NewsFeed.css";
 export const NewsFeed = () => {
   const dispatch = useDispatch();
   const topHeadlines = useSelector((state) => state.newsfeed.news?.articles);
+  const allFollows = useSelector((state) => state.follows?.allFollows);
   const userPreferences = useSelector((state) => state.preferences.preferences);
   const user = useSelector((state) => state.session.user);
 
   const [hTheme, setHTheme] = useState("rgba(36, 22, 129, 0.978)");
 
-  const [bgTheme, setBgTheme] = useState("rgba(0, 0, 0, 0.15)");
+  const [bgTheme, setBgTheme] = useState("");
 
   const appTheme = { background: bgTheme };
   const headingStyle = { color: hTheme };
   const splashTheme = { background: "var(--main-purple)" };
 
   useEffect(() => {
-    dispatch(newsFeedActions.getTopHeadlines());
 
-    return () => dispatch(newsFeedActions.cleanUpFeed());
+      dispatch(preferenceActions.getUserPreferences());
+      if (userPreferences?.theme === "Dark") {
+        setBgTheme("rgba(0, 0, 0, 0.75)");
+        setHTheme("whitesmoke");
+      } else {
+        setBgTheme("rgba(0, 0, 0, 0.15)");
+      }
+
+    return () => {
+      // dispatch(preferenceActions.cleanUpPreferences());
+    };
+    // eslint-disable-next-line
+  }, [dispatch]);
+
+  useEffect(() => {
+    if (user) dispatch(followActions.getAllFollows());
+
+    return () => {
+      dispatch(followActions.cleanUpFollows());
+    };
+  }, [dispatch]);
+
+  useEffect(() => {
+    setTimeout(dispatch(newsFeedActions.getTopHeadlines()), 300);
+
+    return () => {
+      dispatch(newsFeedActions.cleanUpFeed());
+    };
   }, [dispatch]);
 
   // Collect user preferences
-  useEffect(() => {
-    // dispatch(preferenceActions.getUserPreferences());
-    if (userPreferences?.theme === "Dark") {
-      setBgTheme("rgba(0, 0, 0, 0.75)");
-      setHTheme("whitesmoke");
-    }
-    return () => {
-      dispatch(preferenceActions.cleanUpPreferences());
-    };
-     // eslint-disable-next-line
-  }, [dispatch]);
 
   // Save article to database
 
-  const addArticle = async(article) => {
+  const addArticle = async (article) => {
     const response = await dispatch(articleActions.addArticle(article));
-    if(response.message) {
-      console.log(response.message);
-      window.alert(`Article from ${response.message.article.author} saved`)
+    if (response.message) {
+      window.alert(`Article from ${response.message.article.author} saved`);
     }
   };
 
@@ -100,7 +116,6 @@ export const NewsFeed = () => {
               ></Link>
             </div>
             <h4>Developed by John Shivers</h4>
-
           </div>
         </div>
       </span>
@@ -153,7 +168,17 @@ export const NewsFeed = () => {
             </>
           )}
         </div>
-        <div></div>
+        <div id="newsfeed-follows">
+          {user && (
+            <>
+              <h4>Followed Topics</h4>
+              {allFollows &&
+                Object.values(allFollows).map((topic) => (
+                  <p>{topic.topicString}</p>
+                ))}
+            </>
+          )}
+        </div>
         {topHeadlines &&
           topHeadlines.slice(1).map((article, i) => {
             switch (i) {

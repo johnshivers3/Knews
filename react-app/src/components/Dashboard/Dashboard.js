@@ -27,7 +27,7 @@ export const Dashboard = () => {
   // const selectedFollow = useSelector((state) => state.follows.oneFollow);
   const userPreferences = useSelector((state) => state.preferences.preferences);
 
-  const [bgTheme, setBgTheme] = useState("rgba(0, 0, 0, 0.15)");
+  const [bgTheme, setBgTheme] = useState("");
   const [hTheme, setHTheme] = useState("rgba(36, 22, 129, 0.978)");
   const history = useHistory();
   const appTheme = { background: bgTheme };
@@ -38,12 +38,14 @@ export const Dashboard = () => {
     if (userPreferences?.theme === "Dark") {
       setBgTheme("rgba(0, 0, 0, 0.75)");
       setHTheme("whitesmoke");
+    } else {
+      setBgTheme("rgba(0, 0, 0, 0.15)");
     }
     return () => {
-      dispatch(preferenceActions.cleanUpPreferences());
+      // dispatch(preferenceActions.cleanUpPreferences());
     };
-     // eslint-disable-next-line
-  }, [dispatch]);
+    // eslint-disable-next-line
+  }, [dispatch, userPreferences]);
 
   // Collect users followed topics
   useEffect(() => {
@@ -368,6 +370,7 @@ export const Dashboard = () => {
             <div id="add-follow-div">
               <input
                 id="add-follow-input"
+                placeholder="Add a new topic here"
                 onChange={(e) => setNewFollowEdit(e.target.value)}
                 required
               ></input>

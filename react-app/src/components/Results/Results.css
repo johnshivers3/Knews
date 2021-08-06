@@ -44,12 +44,11 @@
 
 .highlight-section {
   width: 35vw;
-  height: 90%;
+  height: 80%;
   background: linear-gradient(grey, grey, grey, grey, transparent);
   border-radius: 0.5rem;
   padding: 2rem;
   border-bottom: 1px solid var(--main-highlight);
-
 }
 
 .upper-section {
@@ -91,7 +90,6 @@
 }
 
 .author {
-  /* color: whitesmoke; */
   color: var(--main-purple);
 }
 
@@ -99,34 +97,6 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  position: relative;
-}
-
-.link-div.lower button:hover:after,
-.link-div.upper button:hover:after {
-  position: absolute;
-  content: attr(title);
-  font-size: 20px;
-  display: inline-block;
-  right: -20%;
-  top: 70%;
-  padding: 5px;
-  background-color: rgb(255, 255, 255);
-  color: var(--main-purple);
-  border-radius: 0.2rem;
-}
-
-.link-div.top button:hover:after {
-  position: absolute;
-  content: attr(title);
-  font-size: 20px;
-  display: inline-block;
-  right: -13%;
-  top: 70%;
-  padding: 5px;
-  background-color: rgb(255, 255, 255);
-  color: var(--main-purple);
-  border-radius: 0.2rem;
 }
 
 button.save {

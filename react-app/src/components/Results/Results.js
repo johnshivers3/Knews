@@ -7,11 +7,11 @@ import * as articleActions from "../../store/articles";
 import * as followActions from "../../store/follows";
 import Logo from "../images/Logo.js";
 
-import "./NewsFeed.css";
+import "./Results.css";
 
-export const NewsFeed = () => {
+export const Results = () => {
   const dispatch = useDispatch();
-  const feedArticles = useSelector((state) => state.newsfeed.news?.articles);
+  const feedArticles = useSelector((state) => state.newsfeed.searchResults?.articles);
 
   const allFollows = useSelector((state) => state.follows?.allFollows);
   const userPreferences = useSelector((state) => state.preferences.preferences);
@@ -47,10 +47,10 @@ export const NewsFeed = () => {
   }, [dispatch]);
 
   useEffect(() => {
-    dispatch(newsFeedActions.getTopHeadlines());
+    dispatch(newsFeedActions.getSearchResults());
 
     return () => {
-      dispatch(newsFeedActions.cleanUpFeed());
+      // dispatch(newsFeedActions.cleanUpFeed());
     };
   }, [dispatch]);
 
@@ -59,9 +59,7 @@ export const NewsFeed = () => {
   const addArticle = async (article) => {
     const response = await dispatch(articleActions.addArticle(article));
     if (response.message) {
-      window.alert(
-        `Article from ${response.message.article.source.name} saved`
-      );
+      window.alert(`Article from ${response.message.article.author} saved`);
     }
   };
 
@@ -70,7 +68,7 @@ export const NewsFeed = () => {
       <span id="splash-feed" style={splashTheme}>
         <Logo />
         <h1 id="newsfeed-heading" style={headingStyle}>
-          KNEWS
+          Results
         </h1>
         <div>
           {!user ? (
@@ -156,7 +154,6 @@ export const NewsFeed = () => {
                     </a>
 
                     <button
-                      title="Add Article"
                       className="save top"
                       onClick={() => addArticle(feedArticles[0])}
                     ></button>
@@ -173,13 +170,11 @@ export const NewsFeed = () => {
               <h1 style={headingStyle}>Followed Topics</h1>
               <hr />
               {allFollows &&
-                Object.values(allFollows)
-                  .reverse()
-                  .map((topic, i) => (
-                    <p key={i} style={headingStyle}>
-                      {topic.topicString}
-                    </p>
-                  ))}
+                Object.values(allFollows).reverse().map((topic, i) => (
+                  <p key={i} style={headingStyle}>
+                    {topic.topicString}
+                  </p>
+                ))}
             </>
           )}
         </div>
@@ -224,7 +219,6 @@ export const NewsFeed = () => {
                           {article.source.name}
                         </a>
                         <button
-                          title="Add Article"
                           className="save upper"
                           onClick={() => addArticle(article)}
                         ></button>
@@ -255,7 +249,6 @@ export const NewsFeed = () => {
                           {article.source.name}
                         </a>
                         <button
-                          title="Add Article"
                           className="save lower"
                           onClick={() => addArticle(article)}
                         ></button>
@@ -270,4 +263,4 @@ export const NewsFeed = () => {
   );
 };
 
-export default NewsFeed;
+export default Results;

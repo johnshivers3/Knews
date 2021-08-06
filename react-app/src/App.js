@@ -10,6 +10,8 @@ import NewsFeed from "./components/NewsFeed/NewsFeed";
 import ProtectedRoute from "./components/auth/ProtectedRoute";
 import UsersList from "./components/UsersList";
 import Dashboard from "./components/Dashboard/Dashboard";
+import Results from "./components/Results/Results";
+import Error  from "./components/Error";
 import { authenticate } from "./store/session";
 
 function App(store) {
@@ -97,11 +99,17 @@ function App(store) {
         <ProtectedRoute path="/users" exact={true}>
           <UsersList />
         </ProtectedRoute>
+        <ProtectedRoute path="/results" exact={true}>
+          <Results />
+        </ProtectedRoute>
         <ProtectedRoute path="/dashboard/:userId" exact={true}>
           <Dashboard />
         </ProtectedRoute>
         <Route path="/" exact={true}>
           <NewsFeed />
+        </Route>
+        <Route path="/">
+          <Error/>
         </Route>
       </Switch>
       <Footer />

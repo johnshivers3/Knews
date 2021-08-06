@@ -44,3 +44,22 @@ input {
   background: lightgray;
   min-height: 90vh;
 }
+
+#div-404{
+  background-color: lightgrey;
+  min-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+#div-404 h1{
+  margin: 0;
+}
+
+#alien{
+  height: 100px;
+  width: 100px;
+  background: url(./source-images/blueAlien.svg) center/100% no-repeat;
+}

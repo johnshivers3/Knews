@@ -29,7 +29,7 @@ export const getTopHeadlines = () => async (dispatch) => {
 };
 
 export const getSearchResults = (query) => async (dispatch) => {
-  const response = await fetch("/api/search/");
+  const response = await fetch(`/api/search/title/${query}`);
 
   if (response.ok) {
     const searchResults = await response.json();

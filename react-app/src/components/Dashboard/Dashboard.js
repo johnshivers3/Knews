@@ -41,11 +41,9 @@ export const Dashboard = () => {
     } else {
       setBgTheme("rgba(0, 0, 0, 0.15)");
     }
-    return () => {
-      // dispatch(preferenceActions.cleanUpPreferences());
-    };
+    return
     // eslint-disable-next-line
-  }, [dispatch, userPreferences]);
+  }, [dispatch, userPreferences?.theme]);
 
   // Collect users followed topics
   useEffect(() => {

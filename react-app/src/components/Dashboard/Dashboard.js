@@ -360,7 +360,7 @@ export const Dashboard = () => {
         </div>
         <hr />
         <ul className="user-topics dashboard-list">
-          {addFollowError.length > 0 ? (
+          {addFollowError.length > 0 && edit === 'topics'? (
             <h4 id="topic-error">{addFollowError}</h4>
           ) : null}
           {addFollow && edit === "topics" && (

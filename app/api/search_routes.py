@@ -14,7 +14,7 @@ def get_search_result(query):
     encoded_query = urllib.parse.quote_plus(query)
     payload = {'q':encoded_query, 'apiKey': Config.NEWS_KEY}
     response = requests.get(
-        f'https://newsapi.org/v2/everything?',params=payload)
+        f'https://newsapi.org/v2/everything?pageSize=100',params=payload)
 
     data = response.json()
 

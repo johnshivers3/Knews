@@ -1,27 +1,30 @@
 /* TODO Add site wide styles */
 :root {
-  --main-highlight: rgb(255, 227, 71);
-  --main-dark: grey;
+  --main-highlight: whitesmoke;
+  --main-dark: #808080;
   --main-light: lightgrey;
-  --active-highlight: rgb(255, 227, 71);
+  --main-purple: rgba(36, 22, 129, 0.678);
+  --active-highlight: whitesmoke;
 }
-html{
+
+html {
   width: 100vw;
+  min-height: 100vh;
 }
+
 body {
   margin: 0;
   padding: 0;
   overflow-x: hidden;
   width: 100vw;
+  min-height: 100%;
   font-family: "Open Sans", sans-serif;
-  background-color: rgba(0, 0, 0, 0.781);
   color: var(--main-highlight);
 }
 
 a {
-  color: whitesmoke;
+  color: var(--main-purple);
   text-decoration: none;
-
 }
 
 a:active {
@@ -30,6 +33,14 @@ a:active {
 
 input {
   border: 1px solid var(--main-highlight);
-  border-radius: .2rem;
+  border-radius: 0.2rem;
   width: 150%;
+}
+
+#theme {
+  height: 100vh;
+}
+.no-theme-wrapper {
+  background: lightgray;
+  min-height: 90vh;
 }

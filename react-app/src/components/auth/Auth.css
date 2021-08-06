@@ -5,29 +5,50 @@ form {
   border-radius: 0 0 2rem 0;
   justify-content: space-around;
   align-items: center;
-  width: 10%;
-  padding: 5rem;
+  width: 25%;
+  padding: 6rem;
   height: 240px;
   background: linear-gradient(grey,grey, transparent);
 }
-
+form h2 {
+  color: var(--main-purple);
+}
 form label {
-  margin: .2rem;
+  margin: .3rem;
+  font-size: 1rem;
   color: var(--main-highlight);
 }
 
+form input {
+  font-size: 1rem;
+  margin: .3rem;
+
+}
 form div {
   display: flex;
   justify-content: center;
-  width: 100%;
+  width: 50%;
   margin: .1rem;
 }
 
 form a {
-  font-size: small;
+  font-size: normal;
+  color: whitesmoke;
 }
+
 .auth-errors-div {
-  display: block;
+  display: flex;
+  flex-direction: column;
   color: var(--main-highlight);
   font-weight: 600;
+  width:100%
+}
+
+.auth-errors-div div{
+  margin: 0 0 5px 0;
+  width:100%
+
+}
+button {
+  cursor:pointer;
 }

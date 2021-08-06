@@ -3,11 +3,15 @@ import thunk from 'redux-thunk';
 import session from './session'
 import newsfeed from './newsfeed'
 import follows from './follows'
+import preferences from './preferences'
+import articles from './articles'
 
 const rootReducer = combineReducers({
   session,
   newsfeed,
-  follows
+  follows,
+  preferences,
+  articles
 });
 
 

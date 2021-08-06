@@ -1,18 +1,22 @@
-from app.models.user import User
-from flask import Blueprint
+from flask import Blueprint, request
 from flask_login import current_user
-from app.models import db,UserPreferences
+from app.models import db, UserPreferences
 
 pref_routes = Blueprint('pref', __name__)
 
 
-@pref_routes.route('/', methods=['POST'])
-def post_user_prefs():
+@pref_routes.route('/', methods=['PATCH'])
+def patch_user_prefs():
     '''
-    associate preferences to user in database
+    update preferences associated with user in database
     '''
-    # topic = UserPreferences()
-    return
+    current_preferences = UserPreferences.query.filter_by(
+        userId=current_user.id)
+    updated = request.json['preferences']
+    updated['userId'] = current_user.id
+    current_preferences.update(updated)
+    db.session.commit()
+    return {'message': 'Successful'}
 
 
 @pref_routes.route('/', methods=['GET'])
@@ -22,7 +26,11 @@ def get_user_prefs():
     '''
     preferences = UserPreferences.query.filter_by(
         userId=f'{current_user.id}').first()
-
+    if preferences is None:
+        new_user = UserPreferences(userId=f'{current_user.id}')
+        db.session.add(new_user)
+        db.session.commit()
+        return new_user.to_dict()
     return preferences.to_dict()
 
 

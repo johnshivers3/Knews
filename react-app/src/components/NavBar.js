@@ -28,7 +28,7 @@ const NavBar = () => {
         <Link to="/">
           <Logo />
         </Link>
-        <h1>KNEWS</h1>
+        {/* <h1>KNEWS</h1> */}
       </div>
       <div id="middle-nav"></div>
       <div id="links-nav">

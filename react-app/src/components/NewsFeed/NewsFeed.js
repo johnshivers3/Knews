@@ -30,7 +30,7 @@ export const NewsFeed = () => {
 
   // Collect user preferences
   useEffect(() => {
-    dispatch(preferenceActions.getUserPreferences());
+    // dispatch(preferenceActions.getUserPreferences());
     if (userPreferences?.theme === "Dark") {
       setBgTheme("rgba(0, 0, 0, 0.75)");
       setHTheme("whitesmoke");

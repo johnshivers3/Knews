@@ -242,13 +242,14 @@ span#splash-dash {
   justify-content: flex-start;
   align-items: center;
   width: 100vw;
+  margin-bottom: 3vh;
+
 }
 
 span#splash-dash h1#dashboard-heading {
   font-weight: 800;
   font-size: 20px;
   font-style: oblique;
-  /* margin-left: 200px; */
   transform: scale(3);
   color: whitesmoke;
   margin-left: 13vw;

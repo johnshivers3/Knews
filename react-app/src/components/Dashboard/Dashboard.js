@@ -220,43 +220,43 @@ export const Dashboard = () => {
                 style={{ display: "none" }}
                 value={language}
               >
-                <option selected={userPreferences.lang === ""} value="">
+                <option defaultValue={userPreferences.lang === ""} value="">
                   Select default language
                 </option>
-                <option selected={userPreferences.lang === "ar"} value="ar">
+                <option defaultValue={userPreferences.lang === "ar"} value="ar">
                   Arabic, العربية
                 </option>
-                <option selected={userPreferences.lang === "de"} value="de">
+                <option defaultValue={userPreferences.lang === "de"} value="de">
                   German, Deutsch
                 </option>
-                <option selected={userPreferences.lang === "en"} value="en">
+                <option defaultValue={userPreferences.lang === "en"} value="en">
                   English
                 </option>
-                <option selected={userPreferences.lang === "es"} value="es">
+                <option defaultValue={userPreferences.lang === "es"} value="es">
                   Spanish, Castilian, Español
                 </option>
-                <option selected={userPreferences.lang === "he"} value="he">
+                <option defaultValue={userPreferences.lang === "he"} value="he">
                   Hebrew, עברית
                 </option>
-                <option selected={userPreferences.lang === "it"} value="it">
+                <option defaultValue={userPreferences.lang === "it"} value="it">
                   Italian, Italiano
                 </option>
-                <option selected={userPreferences.lang === "nl"} value="nl">
+                <option defaultValue={userPreferences.lang === "nl"} value="nl">
                   Dutch, Flemish
                 </option>
-                <option selected={userPreferences.lang === "no"} value="no">
+                <option defaultValue={userPreferences.lang === "no"} value="no">
                   Norwegian, Norsk
                 </option>
-                <option selected={userPreferences.lang === "pt"} value="pt">
+                <option defaultValue={userPreferences.lang === "pt"} value="pt">
                   Portuguese, Português
                 </option>
-                <option selected={userPreferences.lang === "ru"} value="ru">
+                <option defaultValue={userPreferences.lang === "ru"} value="ru">
                   Russian, русский
                 </option>
-                <option selected={userPreferences.lang === "se"} value="se">
+                <option defaultValue={userPreferences.lang === "se"} value="se">
                   Northern Sami, Davvisámegiella
                 </option>
-                <option selected={userPreferences.lang === "zh"} value="zh">
+                <option defaultValue={userPreferences.lang === "zh"} value="zh">
                   Chinese, 中文 (Zhōngwén), 汉语, 漢語
                 </option>
               </datalist>

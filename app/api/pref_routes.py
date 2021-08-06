@@ -26,8 +26,11 @@ def get_user_prefs():
     '''
     preferences = UserPreferences.query.filter_by(
         userId=f'{current_user.id}').first()
-    print(preferences)
-
+    if preferences is None:
+        new_user = UserPreferences(userId=f'{current_user.id}')
+        db.session.add(new_user)
+        db.session.commit()
+        return new_user.to_dict()
     return preferences.to_dict()
 
 

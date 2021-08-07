@@ -47,7 +47,7 @@ export const Results = () => {
   }, [dispatch]);
 
   useEffect(() => {
-    dispatch(newsFeedActions.getSearchResults());
+    // dispatch(newsFeedActions.getSearchResults());
 
     return () => {
       // dispatch(newsFeedActions.cleanUpFeed());

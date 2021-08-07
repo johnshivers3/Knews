@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { BrowserRouter, Route, Switch, Link } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Logo from "./components/images/Logo";
 import LoginForm from "./components/auth/LoginForm";
 import SignUpForm from "./components/auth/SignUpForm";
@@ -13,17 +13,30 @@ import Dashboard from "./components/Dashboard/Dashboard";
 import Results from "./components/Results/Results";
 import Error  from "./components/Error";
 import { authenticate } from "./store/session";
+import * as newsFeedActions from "./store/newsfeed.js";
+import * as preferenceActions from "./store/preferences";
+import * as articleActions from "./store/articles";
+import * as followActions from "./store/follows";
 
 function App(store) {
   const [loaded, setLoaded] = useState(false);
   const dispatch = useDispatch();
 
+
   useEffect(() => {
     (async () => {
       await dispatch(authenticate());
+      await dispatch(newsFeedActions.getTopHeadlines())
+      await dispatch(preferenceActions.getUserPreferences())
       setLoaded(true);
     })();
+
+
   }, [dispatch]);
+  useEffect(()=>{
+
+
+  },[])
 
   if (!loaded) {
     return null;

@@ -11,9 +11,9 @@ import "./NewsFeed.css";
 
 export const NewsFeed = () => {
   const dispatch = useDispatch();
-  const feedHeadlines = useSelector((state) => state.newsfeed.news?.articles);
+  const feedHeadlines = useSelector((state) => state.newsfeed.news);
   const categoryFeed = useSelector(
-    (state) => state.newsfeed.searchResults?.articles
+    (state) => state.newsfeed.searchResults
   );
   const allFollows = useSelector((state) => state.follows?.allFollows);
   const userPreferences = useSelector((state) => state.preferences.preferences);
@@ -30,7 +30,7 @@ export const NewsFeed = () => {
 
   // Collect user preferences
   useEffect(() => {
-    (async () => await dispatch(preferenceActions.getUserPreferences()))();
+
     if (userPreferences?.theme === "Dark") {
       setBgTheme("rgba(0, 0, 0, 0.75)");
       setHTheme("whitesmoke");
@@ -45,23 +45,24 @@ export const NewsFeed = () => {
   // useEffect(()=>{},[setFeedArticles])
   useEffect(() => {
     if (user) dispatch(followActions.getAllFollows());
+
+    const query =  userPreferences?.defaultFeed || "General"
+    dispatch(newsFeedActions.getSearchResults(query));
     // dispatch(newsFeedActions.getTopHeadlines());
     return () => {
       dispatch(followActions.cleanUpFollows());
     };
-  }, []);
+  }, [dispatch,user]);
 
   useEffect(() => {
-    (async () => await dispatch(preferenceActions.getUserPreferences()))();
+
     if (user) {
-      dispatch(newsFeedActions.getSearchResults(userPreferences?.defaultFeed));
-      setFeedArticles(categoryFeed);
+      setFeedArticles(categoryFeed?.articles);
     } else {
-      dispatch(newsFeedActions.getTopHeadlines());
-      setFeedArticles(feedHeadlines);
+      setFeedArticles(feedHeadlines?.articles);
     }
-    return;
-  }, [dispatch,feedArticles,categoryFeed]);
+    return
+  }, [dispatch,categoryFeed]);
 
   // Save article to database
 
@@ -80,7 +81,7 @@ export const NewsFeed = () => {
     <div className="theme-wrapper" style={appTheme}>
       <span id="splash-feed" style={splashTheme}>
         <Logo />
-        <h1 id="newsfeed-heading" style={headingStyle}>
+        <h1 id="newsfeed-heading" style={headingStyle} onClick={()=>window.location.reload(false)}>
           KNEWS
         </h1>
         <div>
@@ -137,7 +138,7 @@ export const NewsFeed = () => {
             <>
               <div className="highlight-section">
                 <img
-                  src={feedArticles[0].urlToImage}
+                  src={feedArticles[0].urlToImage === null ? '../../source-images/blueALien.svg' : feedArticles[0].urlToImage}
                   alt={feedArticles[0].title}
                   height="100px"
                   width="100px"

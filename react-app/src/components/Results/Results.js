@@ -1,18 +1,19 @@
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { useHistory, Link } from "react-router-dom";
+import { useHistory, Link, useParams } from "react-router-dom";
 import * as newsFeedActions from "../../store/newsfeed.js";
 import * as preferenceActions from "../../store/preferences";
 import * as articleActions from "../../store/articles";
 import * as followActions from "../../store/follows";
 import Logo from "../images/Logo.js";
 
-// import "./Results.css";
+import "./../NewsFeed/NewsFeed.css";
 
 export const Results = () => {
   const dispatch = useDispatch();
-  const feedArticles = useSelector((state) => state.newsfeed.searchResults?.articles);
-
+  const { query } = useParams();
+  const feedHeadlines = useSelector((state) => state.newsfeed.news);
+  const categoryFeed = useSelector((state) => state.newsfeed.searchResults);
   const allFollows = useSelector((state) => state.follows?.allFollows);
   const userPreferences = useSelector((state) => state.preferences.preferences);
   const user = useSelector((state) => state.session.user);
@@ -20,13 +21,17 @@ export const Results = () => {
   const [hTheme, setHTheme] = useState("rgba(36, 22, 129, 0.978)");
   const [bgTheme, setBgTheme] = useState("");
 
+  const [feedArticles, setFeedArticles] = useState();
+
   const appTheme = { background: bgTheme };
   const headingStyle = { color: hTheme };
   const splashTheme = { background: "var(--main-purple)" };
 
+  const placeHolder =
+    "http://placehold.jp/24/d3d3d3/241681/150x150.png?text=Image%20Not%20Found&css=%7B%22border-radius%22%3A%2215px%22%2C%22background%22%3A%22%20-webkit-gradient(linear%2C%20left%20top%2C%20left%20bottom%2C%20from(%23666666)%2C%20to(%23cccccc))%22%7D";
+
   // Collect user preferences
   useEffect(() => {
-    dispatch(preferenceActions.getUserPreferences());
     if (userPreferences?.theme === "Dark") {
       setBgTheme("rgba(0, 0, 0, 0.75)");
       setHTheme("whitesmoke");
@@ -38,28 +43,36 @@ export const Results = () => {
     // eslint-disable-next-line
   }, [dispatch]);
 
+  // useEffect(()=>{},[setFeedArticles])
   useEffect(() => {
     if (user) dispatch(followActions.getAllFollows());
 
+    dispatch(newsFeedActions.getSearchResults(query));
+    // dispatch(newsFeedActions.getTopHeadlines());
     return () => {
       dispatch(followActions.cleanUpFollows());
     };
-  }, [dispatch]);
+  }, [dispatch, user, query]);
 
   useEffect(() => {
-    // dispatch(newsFeedActions.getSearchResults());
-
-    return () => {
-      // dispatch(newsFeedActions.cleanUpFeed());
-    };
-  }, [dispatch]);
+    if (user) {
+      setFeedArticles(categoryFeed?.articles);
+    } else {
+      setFeedArticles(feedHeadlines?.articles);
+    }
+    return;
+  }, [dispatch, categoryFeed]);
 
   // Save article to database
 
   const addArticle = async (article) => {
+    if (!user) window.alert(`Sign Up or Log In \n to save articles.`);
+
     const response = await dispatch(articleActions.addArticle(article));
     if (response.message) {
-      window.alert(`Article from ${response.message.article.author} saved`);
+      window.alert(
+        `Article from ${response.message.article.source.name} saved`
+      );
     }
   };
 
@@ -67,8 +80,12 @@ export const Results = () => {
     <div className="theme-wrapper" style={appTheme}>
       <span id="splash-feed" style={splashTheme}>
         <Logo />
-        <h1 id="newsfeed-heading" style={headingStyle}>
-          Results
+        <h1
+          id="newsfeed-heading"
+          style={headingStyle}
+          onClick={() => window.location.reload(false)}
+        >
+          KNEWS
         </h1>
         <div>
           {!user ? (
@@ -120,11 +137,15 @@ export const Results = () => {
           <h1 style={headingStyle}>Top Stories</h1>
         </div>
         <div>
-          {feedArticles && (
+          {feedArticles?.length > 0 && (
             <>
               <div className="highlight-section">
                 <img
-                  src={feedArticles[0].urlToImage}
+                  src={
+                    feedArticles[0].urlToImage === null
+                      ? placeHolder
+                      : feedArticles[0].urlToImage
+                  }
                   alt={feedArticles[0].title}
                   height="100px"
                   width="100px"
@@ -152,8 +173,14 @@ export const Results = () => {
                     >
                       {feedArticles[0].source.name}
                     </a>
-
+                    {!user && (
+                      <>
+                        <p>Sign Up or Login</p>
+                        <p>to save articles</p>
+                      </>
+                    )}
                     <button
+                      title="Add Article"
                       className="save top"
                       onClick={() => addArticle(feedArticles[0])}
                     ></button>
@@ -170,11 +197,17 @@ export const Results = () => {
               <h1 style={headingStyle}>Followed Topics</h1>
               <hr />
               {allFollows &&
-                Object.values(allFollows).reverse().map((topic, i) => (
-                  <p key={i} style={headingStyle}>
-                    {topic.topicString}
-                  </p>
-                ))}
+                Object.values(allFollows)
+                  .reverse()
+                  .map((topic, i) => (
+                    <Link
+                      to={`/results/${topic.topicString}`}
+                      key={i}
+                      style={headingStyle}
+                    >
+                      <h2>{topic.topicString}</h2>
+                    </Link>
+                  ))}
             </>
           )}
         </div>
@@ -190,7 +223,11 @@ export const Results = () => {
                 return (
                   <div className="upper-section" key={`${i}-${article.url}`}>
                     <img
-                      src={article.urlToImage}
+                      src={
+                        article.urlToImage === null
+                          ? placeHolder
+                          : article.urlToImage
+                      }
                       alt={article.title}
                       height="100px"
                       width="100px"
@@ -219,6 +256,7 @@ export const Results = () => {
                           {article.source.name}
                         </a>
                         <button
+                          title="Add Article"
                           className="save upper"
                           onClick={() => addArticle(article)}
                         ></button>
@@ -231,7 +269,14 @@ export const Results = () => {
                 return (
                   <div className="lower-section" key={`${i}-${article.url}`}>
                     <div>
-                      <img src={article.urlToImage} alt={article.title} />
+                      <img
+                        src={
+                          article.urlToImage === null
+                            ? placeHolder
+                            : article.urlToImage
+                        }
+                        alt={article.title}
+                      />
                       <a
                         href={article.url}
                         target="_blank"
@@ -249,6 +294,7 @@ export const Results = () => {
                           {article.source.name}
                         </a>
                         <button
+                          title="Add Article"
                           className="save lower"
                           onClick={() => addArticle(article)}
                         ></button>

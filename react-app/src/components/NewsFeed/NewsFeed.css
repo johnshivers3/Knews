@@ -70,7 +70,7 @@
   justify-self: center;
   width: 90%;
   height: 200px;
-
+  margin: auto;
   object-fit: contain;
   background: linear-gradient(
     0.25turn,
@@ -78,7 +78,7 @@
     rgba(255, 255, 255, 0.473),
     transparent
   );
-  background: url('../../source-images/blueAlien.svg') center/30% no-repeat;
+  background: url("../../source-images/blueAlien.svg") center/30% no-repeat;
 }
 .lower-section {
   display: flex;

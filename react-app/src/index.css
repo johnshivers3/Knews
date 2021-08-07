@@ -2,8 +2,8 @@
 :root {
   --main-highlight: whitesmoke;
   --main-dark: #808080;
-  --main-light: lightgrey;
-  --main-purple: rgba(36, 22, 129, 0.678);
+  --main-light: #d3d3d3;
+  --main-purple: #241681ad;
   --active-highlight: whitesmoke;
 }
 

@@ -12,9 +12,7 @@ import "./NewsFeed.css";
 export const NewsFeed = () => {
   const dispatch = useDispatch();
   const feedHeadlines = useSelector((state) => state.newsfeed.news);
-  const categoryFeed = useSelector(
-    (state) => state.newsfeed.searchResults
-  );
+  const categoryFeed = useSelector((state) => state.newsfeed.searchResults);
   const allFollows = useSelector((state) => state.follows?.allFollows);
   const userPreferences = useSelector((state) => state.preferences.preferences);
   const user = useSelector((state) => state.session.user);
@@ -24,13 +22,14 @@ export const NewsFeed = () => {
 
   const [feedArticles, setFeedArticles] = useState();
 
+  const placeHolder =
+    "http://placehold.jp/24/d3d3d3/241681/150x150.png?text=Image%20Not%20Found&css=%7B%22border-radius%22%3A%2215px%22%2C%22background%22%3A%22%20-webkit-gradient(linear%2C%20left%20top%2C%20left%20bottom%2C%20from(%23666666)%2C%20to(%23cccccc))%22%7D";
   const appTheme = { background: bgTheme };
   const headingStyle = { color: hTheme };
   const splashTheme = { background: "var(--main-purple)" };
 
   // Collect user preferences
   useEffect(() => {
-
     if (userPreferences?.theme === "Dark") {
       setBgTheme("rgba(0, 0, 0, 0.75)");
       setHTheme("whitesmoke");
@@ -46,23 +45,22 @@ export const NewsFeed = () => {
   useEffect(() => {
     if (user) dispatch(followActions.getAllFollows());
 
-    const query =  userPreferences?.defaultFeed || "General"
+    const query = userPreferences?.defaultFeed || "General";
     dispatch(newsFeedActions.getSearchResults(query));
     // dispatch(newsFeedActions.getTopHeadlines());
     return () => {
       dispatch(followActions.cleanUpFollows());
     };
-  }, [dispatch,user]);
+  }, [dispatch, user]);
 
   useEffect(() => {
-
     if (user) {
       setFeedArticles(categoryFeed?.articles);
     } else {
       setFeedArticles(feedHeadlines?.articles);
     }
-    return
-  }, [dispatch,categoryFeed]);
+    return;
+  }, [dispatch, categoryFeed]);
 
   // Save article to database
 
@@ -81,7 +79,11 @@ export const NewsFeed = () => {
     <div className="theme-wrapper" style={appTheme}>
       <span id="splash-feed" style={splashTheme}>
         <Logo />
-        <h1 id="newsfeed-heading" style={headingStyle} onClick={()=>window.location.reload(false)}>
+        <h1
+          id="newsfeed-heading"
+          style={headingStyle}
+          onClick={() => window.location.reload(false)}
+        >
           KNEWS
         </h1>
         <div>
@@ -138,7 +140,12 @@ export const NewsFeed = () => {
             <>
               <div className="highlight-section">
                 <img
-                  src={feedArticles[0].urlToImage === null ? '../../source-images/blueALien.svg' : feedArticles[0].urlToImage}
+                  src={
+                    feedArticles[0].urlToImage === null ||
+                    feedArticles[0].urlToImage === "null"
+                      ? placeHolder
+                      : feedArticles[0].urlToImage
+                  }
                   alt={feedArticles[0].title}
                   height="100px"
                   width="100px"
@@ -193,15 +200,20 @@ export const NewsFeed = () => {
                 Object.values(allFollows)
                   .reverse()
                   .map((topic, i) => (
-                    <p key={i} style={headingStyle}>
-                      {topic.topicString}
-                    </p>
+                    <Link
+                      to={`/results/${topic.topicString}`}
+                      key={i}
+                      style={headingStyle}
+                    >
+                      <h2>{topic.topicString}</h2>
+                    </Link>
                   ))}
             </>
           )}
         </div>
         {feedArticles &&
           feedArticles.slice(1).map((article, i) => {
+            if(article.urlToImage === null) return null;
             switch (i) {
               case 0:
               case 1:
@@ -212,7 +224,12 @@ export const NewsFeed = () => {
                 return (
                   <div className="upper-section" key={`${i}-${article.url}`}>
                     <img
-                      src={article.urlToImage}
+                      src={
+                        article.urlToImage === null ||
+                        article.urlToImage === "null"
+                          ? placeHolder
+                          : article.urlToImage
+                      }
                       alt={article.title}
                       height="100px"
                       width="100px"
@@ -254,7 +271,15 @@ export const NewsFeed = () => {
                 return (
                   <div className="lower-section" key={`${i}-${article.url}`}>
                     <div>
-                      <img src={article.urlToImage} alt={article.title} />
+                      <img
+                        src={
+                          article.urlToImage === null ||
+                          article.urlToImage === "null"
+                            ? placeHolder
+                            : article.urlToImage
+                        }
+                        alt={article.title}
+                      />
                       <a
                         href={article.url}
                         target="_blank"

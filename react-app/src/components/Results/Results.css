@@ -1,5 +1,5 @@
 .newsfeed-header-div {
-  padding: 0 4vw;
+  padding: 2vh 5vw;
   width: 100%;
   font-size: xx-large;
   height: 15em;
@@ -9,8 +9,9 @@
 #main-newsfeed-div {
   display: inline-grid;
   grid-template-columns: repeat(3, auto);
-  row-gap: 2rem;
-  padding: 2rem;
+  row-gap: 3.5rem;
+  padding: 3.5rem 0;
+  width: 100%;
 }
 
 .highlight-section img {
@@ -33,7 +34,7 @@
   align-self: center;
   width: 100%;
   object-fit: contain;
-  min-height: 180px;
+  min-height: 200px;
   background: linear-gradient(
     0.25turn,
     transparent,
@@ -44,7 +45,7 @@
 
 .highlight-section {
   width: 35vw;
-  height: 80%;
+  height: 90%;
   background: linear-gradient(grey, grey, grey, grey, transparent);
   border-radius: 0.5rem;
   padding: 2rem;
@@ -55,7 +56,7 @@
   display: flex;
   justify-self: center;
   flex-direction: column;
-  width: 20vw;
+  width: 23vw;
   height: 90%;
   background: linear-gradient(grey, grey, grey, grey, transparent);
   border-radius: 0.5rem;
@@ -66,8 +67,10 @@
 .lower-section img {
   display: flex;
   align-self: center;
-  width: 100%;
-  max-height: 180px;
+  justify-self: center;
+  width: 90%;
+  height: 200px;
+  margin: auto;
   object-fit: contain;
   background: linear-gradient(
     0.25turn,
@@ -75,12 +78,13 @@
     rgba(255, 255, 255, 0.473),
     transparent
   );
+  background: url("../../source-images/blueAlien.svg") center/30% no-repeat;
 }
 .lower-section {
   display: flex;
   justify-self: center;
   text-align: center;
-  width: 20vw;
+  width: 23vw;
   height: 70%;
   background: linear-gradient(grey, grey, grey, grey, transparent);
   border-radius: 0.5rem;
@@ -90,6 +94,7 @@
 }
 
 .author {
+  /* color: whitesmoke; */
   color: var(--main-purple);
 }
 
@@ -97,6 +102,34 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  position: relative;
+}
+
+.link-div.lower button:hover:after,
+.link-div.upper button:hover:after {
+  position: absolute;
+  content: attr(title);
+  font-size: 20px;
+  display: inline-block;
+  right: -20%;
+  top: 70%;
+  padding: 5px;
+  background-color: rgb(255, 255, 255);
+  color: var(--main-purple);
+  border-radius: 0.2rem;
+}
+
+.link-div.top button:hover:after {
+  position: absolute;
+  content: attr(title);
+  font-size: 20px;
+  display: inline-block;
+  right: -13%;
+  top: 70%;
+  padding: 5px;
+  background-color: rgb(255, 255, 255);
+  color: var(--main-purple);
+  border-radius: 0.2rem;
 }
 
 button.save {
@@ -173,6 +206,6 @@ div#linkedin {
 }
 
 #newsfeed-follows {
-  font-size: large;
-  padding: 10% 15%;
+  /* font-size: large; */
+  /* padding: 10% 15% 10% 5%; */
 }

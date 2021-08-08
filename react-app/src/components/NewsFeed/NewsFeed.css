@@ -10,6 +10,7 @@
   margin: 0;
   padding: 0 80px;
 }
+
 .newsfeed-header-div h4 {
   margin: 0;
   padding: 40px 80px 40px 100px;
@@ -166,6 +167,7 @@ span#splash-feed {
   justify-content: flex-start;
   align-items: center;
   padding: 0 10vw;
+
 }
 span#splash-feed img {
   transform: scale(3);
@@ -176,6 +178,15 @@ span#splash-feed h1#newsfeed-heading {
   font-size: 40px;
   font-style: oblique;
   margin-left: 220px;
+  transform: scale(3);
+  color: whitesmoke;
+  margin-right: 300px;
+}
+span#splash-feed h2#tag-line {
+  font-weight: 600;
+  font-size: 10px;
+  font-style: oblique;
+  margin-left: 230px;
   transform: scale(3);
   color: whitesmoke;
   margin-right: 300px;

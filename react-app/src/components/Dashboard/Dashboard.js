@@ -1,17 +1,17 @@
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useHistory } from "react-router-dom";
+// import { useHistory } from "react-router-dom";
 
 import * as followsActions from "../../store/follows";
 import * as preferenceActions from "../../store/preferences";
 import * as articleActions from "../../store/articles";
-import * as newsFeedActions from "../../store/newsfeed.js";
+// import * as newsFeedActions from "../../store/newsfeed.js";
 
 import "./Dashboard.css";
 
 export const Dashboard = () => {
-  const [language, setLanguage] = useState("");
-  const [country, setCountry] = useState("");
+  // const [language, setLanguage] = useState("");
+  // const [country, setCountry] = useState("");
   const [feed, setFeed] = useState("");
   const [theme, setTheme] = useState("");
   const [followEdit, setFollowEdit] = useState("");
@@ -29,7 +29,7 @@ export const Dashboard = () => {
 
   const [bgTheme, setBgTheme] = useState("");
   const [hTheme, setHTheme] = useState("rgba(36, 22, 129, 0.978)");
-  const history = useHistory();
+  // const history = useHistory();
   const appTheme = { background: bgTheme };
   const headingStyle = { color: hTheme };
 
@@ -54,10 +54,10 @@ export const Dashboard = () => {
   }, [dispatch]);
 
   // Execute search for followed topic
-  const searchTopic = (e) => {
-    e.preventDefault();
-    dispatch(newsFeedActions.getSearchResults(e.target.innerText));
-  };
+  // const searchTopic = (e) => {
+  //   e.preventDefault();
+  //   dispatch(newsFeedActions.getSearchResults(e.target.innerText));
+  // };
 
   // Collect users followed topics
   useEffect(() => {
@@ -82,7 +82,7 @@ export const Dashboard = () => {
   };
 
   // save and reset edit state
-  const handleSave = (e) => {
+  const handleSave = async (e) => {
     e.preventDefault();
 
     switch (e.target.className) {
@@ -93,8 +93,10 @@ export const Dashboard = () => {
         dispatch(followsActions.updateFollow(followEdit, e.target.value));
         break;
       case "add-follow-edit":
-        if (newFollowEdit.length > 0) {
-          dispatch(followsActions.addFollow(newFollowEdit));
+        if (newFollowEdit.length > 0 && newFollowEdit.includes(!'')) {
+          await dispatch(followsActions.addFollow(newFollowEdit));
+          window.alert(`Topic: ${newFollowEdit} added`);
+
           setNewFollowEdit("");
           setAddFollowError("");
           setAddFollow(false);
@@ -104,9 +106,9 @@ export const Dashboard = () => {
         break;
       case "save-preference-edit":
         const newPreferences = { ...userPreferences };
-        newPreferences["country"] = country;
+        // newPreferences["country"] = country;
         newPreferences["defaultFeed"] = feed;
-        newPreferences["lang"] = language;
+        // newPreferences["lang"] = language;
         newPreferences["theme"] = theme;
         dispatch(preferenceActions.updatePreferences(newPreferences));
         setEdit("");
@@ -119,19 +121,27 @@ export const Dashboard = () => {
     }
   };
   // save and reset edit state
-  const handleDelete = (e) => {
+  const handleDelete = async (e) => {
     e.preventDefault();
+
     switch (e.target.className) {
       case "delete-follow-button":
-        dispatch(followsActions.deleteOneFollow(e.target.value));
+        await dispatch(followsActions.deleteOneFollow(e.target.value));
+
+        window.alert(`Topic: ${e.target.id} deleted`);
+
         break;
       case "delete-article-button":
-        dispatch(articleActions.deleteOneArticle(e.target.value));
+        await dispatch(articleActions.deleteOneArticle(e.target.value));
+
+        window.alert(`Article from ${e.target.id.slice(0, 10)} deleted`);
+
         break;
       default:
         break;
     }
   };
+
   // add topic to database
   const handleAddFollow = (e) => {
     e.preventDefault();
@@ -167,9 +177,11 @@ export const Dashboard = () => {
             </div>
             <hr />
             <div className="preference-div">
-              <input
+              <label htmlFor="theme-input">Default Theme</label>
+              <select
                 id="default-theme-search"
-                type="search"
+                name="theme-input"
+                // type="search"
                 list="theme-list"
                 placeholder="Set default theme for your feed"
                 defaultValue={
@@ -178,14 +190,17 @@ export const Dashboard = () => {
                 onChange={(e) => {
                   if (e.target.value !== "") setTheme(e.target.value);
                 }}
-              ></input>
-              <datalist id="theme-list">
+              >
+                {/* <datalist id="theme-list"> */}
                 <option>Light</option>
                 <option>Dark</option>
-              </datalist>
-              <input
+                {/* </datalist> */}
+              </select>
+              <label htmlFor="category-input">Default Category</label>
+              <select
                 id="default-category-search"
-                type="search"
+                name="category-input"
+                // type="search"
                 list="category-list"
                 placeholder="Set default category for your feed"
                 defaultValue={
@@ -196,8 +211,8 @@ export const Dashboard = () => {
                 onChange={(e) => {
                   if (e.target.value !== "") setFeed(e.target.value);
                 }}
-              ></input>
-              <datalist id="category-list">
+              >
+                {/* <datalist id="category-list"> */}
                 <option>Business</option>
                 <option>Entertainment</option>
                 <option>General</option>
@@ -205,7 +220,8 @@ export const Dashboard = () => {
                 <option>Science</option>
                 <option>Sports</option>
                 <option>Technology</option>
-              </datalist>
+                {/* </datalist> */}
+              </select>
             </div>
 
             {/* <div className="preference-div">
@@ -381,11 +397,7 @@ export const Dashboard = () => {
                 onChange={(e) => setNewFollowEdit(e.target.value)}
                 required
               ></input>
-              <button
-                // value={follow.id}
-                className="add-follow-edit"
-                onClick={handleSave}
-              >
+              <button className="add-follow-edit" onClick={handleSave}>
                 Save
               </button>
             </div>
@@ -399,6 +411,7 @@ export const Dashboard = () => {
                     <>
                       <button
                         value={follow.id}
+                        id={follow.topicString}
                         className="delete-follow-button"
                         onClick={handleDelete}
                       ></button>
@@ -453,6 +466,7 @@ export const Dashboard = () => {
                     <button
                       className="delete-article-button"
                       value={article.id}
+                      id={article.source}
                       onClick={handleDelete}
                     ></button>
                   ) : null}

@@ -1,8 +1,7 @@
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { useHistory, Link, useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import * as newsFeedActions from "../../store/newsfeed.js";
-import * as preferenceActions from "../../store/preferences";
 import * as articleActions from "../../store/articles";
 import * as followActions from "../../store/follows";
 import Logo from "../images/Logo.js";
@@ -43,12 +42,10 @@ export const Results = () => {
     // eslint-disable-next-line
   }, [dispatch]);
 
-  // useEffect(()=>{},[setFeedArticles])
   useEffect(() => {
     if (user) dispatch(followActions.getAllFollows());
 
     dispatch(newsFeedActions.getSearchResults(query));
-    // dispatch(newsFeedActions.getTopHeadlines());
     return () => {
       dispatch(followActions.cleanUpFollows());
     };
@@ -61,6 +58,7 @@ export const Results = () => {
       setFeedArticles(feedHeadlines?.articles);
     }
     return;
+    // eslint-disable-next-line
   }, [dispatch, categoryFeed]);
 
   // Save article to database
@@ -143,7 +141,9 @@ export const Results = () => {
               <div className="highlight-section">
                 <img
                   src={
-                    feedArticles[0].urlToImage ? feedArticles[0].urlToImage : placeHolder
+                    feedArticles[0].urlToImage
+                      ? feedArticles[0].urlToImage
+                      : placeHolder
                   }
                   onError={(e) => {
                     e.target.onerror = null;

@@ -17,27 +17,27 @@ const cleanUp = () => ({
 });
 
 export const getTopHeadlines = () => async (dispatch) => {
-  const response = await fetch("/api/search/top-headlines");
+  // const response = await fetch("/api/search/top-headlines");
 
-  if (response.ok) {
-    const topHeadlines = await response.json();
-    dispatch(getTop(topHeadlines));
-    return topHeadlines;
-  } else {
+  // if (response.ok) {
+  //   const topHeadlines = await response.json();
+  //   dispatch(getTop(topHeadlines));
+  //   return topHeadlines;
+  // } else {
     return ["An error occurred. Please try again."];
-  }
+  // }
 };
 
 export const getSearchResults = (query) => async (dispatch) => {
-  const response = await fetch(`/api/search/title/${query}`);
+  // const response = await fetch(`/api/search/title/${query}`);
 
-  if (response.ok) {
-    const searchResults = await response.json();
-    dispatch(getResults(searchResults));
-    return searchResults;
-  } else {
+  // if (response.ok) {
+  //   const searchResults = await response.json();
+  //   dispatch(getResults(searchResults));
+  //   return searchResults;
+  // } else {
     return ["An error occurred. Please try again."];
-  }
+  // }
 };
 
 export const cleanUpFeed = () => (dispatch) => {

@@ -96,7 +96,7 @@ label.transition-wrapper {
   margin-top: 180px;
   background: linear-gradient(grey,grey, transparent);
   position: absolute;
-  bottom: 0px;
+  bottom: -380px;
   right: 0;
   padding: 20px 60px 0 0;
   transition: bottom 1s ease-in-out 0.1s;
@@ -105,5 +105,5 @@ label.transition-wrapper {
 }
 
 #hidden-check:checked + label.transition-wrapper {
-  bottom: -380px;
+  bottom: 0;
 }

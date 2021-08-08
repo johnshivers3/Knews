@@ -1,8 +1,7 @@
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { useHistory, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import * as newsFeedActions from "../../store/newsfeed.js";
-import * as preferenceActions from "../../store/preferences";
 import * as articleActions from "../../store/articles";
 import * as followActions from "../../store/follows";
 import Logo from "../images/Logo.js";
@@ -47,10 +46,11 @@ export const NewsFeed = () => {
 
     const query = userPreferences?.defaultFeed || "General";
     dispatch(newsFeedActions.getSearchResults(query));
-    // dispatch(newsFeedActions.getTopHeadlines());
+
     return () => {
       dispatch(followActions.cleanUpFollows());
     };
+    // eslint-disable-next-line
   }, [dispatch, user]);
 
   useEffect(() => {
@@ -60,6 +60,7 @@ export const NewsFeed = () => {
       setFeedArticles(feedHeadlines?.articles);
     }
     return;
+    // eslint-disable-next-line
   }, [dispatch, categoryFeed]);
 
   // Save article to database
@@ -79,13 +80,16 @@ export const NewsFeed = () => {
     <div className="theme-wrapper" style={appTheme}>
       <span id="splash-feed" style={splashTheme}>
         <Logo />
-        <h1
-          id="newsfeed-heading"
-          style={headingStyle}
-          onClick={() => window.location.reload(false)}
-        >
-          KNEWS
-        </h1>
+        <div>
+          <h1
+            id="newsfeed-heading"
+            style={headingStyle}
+            onClick={() => window.location.reload(false)}
+          >
+            KNEWS
+          </h1>
+          <h2 id="tag-line">Your personal news app</h2>
+        </div>
         <div>
           {!user ? (
             <>
@@ -98,17 +102,21 @@ export const NewsFeed = () => {
                     color: `${headingStyle.color}`,
                     marginRight: "10px",
                   }}
-                  href="/signup"
+                  href="/sign-up"
                 >
                   Sign Up
                 </a>
                 to view the stories YOU want to see
               </h3>
-              <h3>Quickly search for followed topics</h3>
+              <h3>Follow your favorite topics</h3>
               <h3>Save articles to read later</h3>
             </>
           ) : (
-            <h2 id="welcome-sign">Welcome to your personal Knews app</h2>
+            <>
+              <h2>Curate your news experience</h2>
+              <h3>Quickly search for followed topics</h3>
+              <h3>Save articles to read later</h3>
+            </>
           )}
           <div id="contact-links-div">
             <div id="git">
@@ -136,63 +144,63 @@ export const NewsFeed = () => {
           <h1 style={headingStyle}>Top Stories</h1>
         </div>
 
-          {feedArticles?.length > 0 && (
-            <>
-              <div className="highlight-section">
-                <img
-                  src={
-                    feedArticles[0].urlToImage
-                      ? feedArticles[0].urlToImage
-                      : placeHolder
-                  }
-                  onError={(e) => {
-                    e.target.onerror = null;
-                    e.target.src = placeHolder;
-                  }}
-                  alt={feedArticles[0].title}
-                  height="100px"
-                  width="100px"
-                />
-                <div className="highlight-content">
+        {feedArticles?.length > 0 && (
+          <>
+            <div className="highlight-section">
+              <img
+                src={
+                  feedArticles[0].urlToImage
+                    ? feedArticles[0].urlToImage
+                    : placeHolder
+                }
+                onError={(e) => {
+                  e.target.onerror = null;
+                  e.target.src = placeHolder;
+                }}
+                alt={feedArticles[0].title}
+                height="100px"
+                width="100px"
+              />
+              <div className="highlight-content">
+                <a
+                  href={feedArticles[0].url}
+                  target="_blank"
+                  rel="noreferrer noopener"
+                >
+                  <h3>{feedArticles[0].title}</h3>
+                </a>
+                <hr />
+                <p>
+                  {feedArticles[0].content.substring(
+                    0,
+                    feedArticles[0].content.indexOf("[")
+                  )}
+                </p>
+                <div className="top link-div">
                   <a
                     href={feedArticles[0].url}
                     target="_blank"
                     rel="noreferrer noopener"
                   >
-                    <h3>{feedArticles[0].title}</h3>
+                    {feedArticles[0].source.name}
                   </a>
-                  <hr />
-                  <p>
-                    {feedArticles[0].content.substring(
-                      0,
-                      feedArticles[0].content.indexOf("[")
-                    )}
-                  </p>
-                  <div className="top link-div">
-                    <a
-                      href={feedArticles[0].url}
-                      target="_blank"
-                      rel="noreferrer noopener"
-                    >
-                      {feedArticles[0].source.name}
-                    </a>
-                    {!user && (
-                      <>
-                        <p>Sign Up or Login</p>
-                        <p>to save articles</p>
-                      </>
-                    )}
-                    <button
-                      title="Add Article"
-                      className="save top"
-                      onClick={() => addArticle(feedArticles[0])}
-                    ></button>
-                  </div>
-                  <p className="author">Author: {feedArticles[0].author}</p>
+                  {!user && (
+                    <>
+                      <p>Sign Up or Login</p>
+                      <p>to save articles</p>
+                    </>
+                  )}
+                  <button
+                    title="Add Article"
+                    className="save top"
+                    onClick={() => addArticle(feedArticles[0])}
+                  ></button>
                 </div>
+                <p className="author">Author: {feedArticles[0].author}</p>
               </div>
-            </>
-          )}
+            </div>
+          </>
+        )}
 
         <div id="newsfeed-follows">
           {user && (

@@ -1,12 +1,10 @@
-
 import { useEffect, useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import Logo from "./images/Logo";
 
-
 export const Error = () => {
-  const [countdown, setCountdown] = useState(5)
-  const history = useHistory()
+  const [countdown, setCountdown] = useState(5);
+  const history = useHistory();
   const banner = (
     <span id="splash-feed" style={{ color: "rgba(36, 22, 129, 0.678)" }}>
       <Logo />
@@ -57,21 +55,23 @@ export const Error = () => {
     </span>
   );
 
-  useEffect(()=>{
-    if(countdown === 0) history.push('/')
-    const interval = setInterval(()=>setCountdown(prev => prev - 1),1000)
+  useEffect(() => {
+    if (countdown === 0) history.push("/");
+    const interval = setInterval(() => setCountdown((prev) => prev - 1), 1000);
 
     return () => {
-
-      clearInterval(interval)
-    }
-  },[countdown])
-  return <div id='div-404'>
-    <div id='alien'></div>
-    <h2>Something went wrong...</h2>
-    <p>Redirecting to the main page... {countdown}</p>
-    {banner}
-    </div>;
+      clearInterval(interval);
+    };
+    // eslint-disable-next-line
+  }, [countdown]);
+  return (
+    <div id="div-404">
+      <div id="alien"></div>
+      <h2>Something went wrong...</h2>
+      <p>Redirecting to the main page... {countdown}</p>
+      {banner}
+    </div>
+  );
 };
 
 export default Error;

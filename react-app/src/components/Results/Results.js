@@ -78,13 +78,16 @@ export const Results = () => {
     <div className="theme-wrapper" style={appTheme}>
       <span id="splash-feed" style={splashTheme}>
         <Logo />
-        <h1
-          id="newsfeed-heading"
-          style={headingStyle}
-          onClick={() => window.location.reload(false)}
-        >
-          KNEWS
-        </h1>
+        <div>
+          <h1
+            id="newsfeed-heading"
+            style={headingStyle}
+            onClick={() => window.location.reload(false)}
+          >
+            KNEWS
+          </h1>
+          <h2 id="tag-line">Your personal news app</h2>
+        </div>
         <div>
           {!user ? (
             <>
@@ -103,11 +106,15 @@ export const Results = () => {
                 </a>
                 to view the stories YOU want to see
               </h3>
-              <h3>Quickly search for followed topics</h3>
+              <h3>Follow your favorite topics</h3>
               <h3>Save articles to read later</h3>
             </>
           ) : (
-            <h2 id="welcome-sign">Welcome to your personal Knews app</h2>
+            <>
+              <h2>Curate your news experience</h2>
+              <h3>Follow your favorite topics</h3>
+              <h3>Save articles to read later</h3>
+            </>
           )}
           <div id="contact-links-div">
             <div id="git">

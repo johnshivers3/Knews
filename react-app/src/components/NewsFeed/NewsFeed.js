@@ -5,7 +5,7 @@ import * as newsFeedActions from "../../store/newsfeed.js";
 import * as articleActions from "../../store/articles";
 import * as followActions from "../../store/follows";
 import Logo from "../images/Logo.js";
-
+import ScrollToTop from "../ScrollToTop/ScrollToTop.js";
 import "./NewsFeed.css";
 
 export const NewsFeed = () => {
@@ -114,7 +114,7 @@ export const NewsFeed = () => {
           ) : (
             <>
               <h2>Curate your news experience</h2>
-              <h3>Quickly search for followed topics</h3>
+              <h3>Follow your favorite topics</h3>
               <h3>Save articles to read later</h3>
             </>
           )}
@@ -184,12 +184,12 @@ export const NewsFeed = () => {
                   >
                     {feedArticles[0].source.name}
                   </a>
-                  {!user && (
+                  {/* {!user && (
                     <>
                       <p>Sign Up or Login</p>
                       <p>to save articles</p>
                     </>
-                  )}
+                  )} */}
                   <button
                     title="Add Article"
                     className="save top"
@@ -318,6 +318,7 @@ export const NewsFeed = () => {
             }
           })}
       </div>
+      <ScrollToTop/>
     </div>
   );
 };

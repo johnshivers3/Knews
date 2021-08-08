@@ -11,7 +11,7 @@ import ProtectedRoute from "./components/auth/ProtectedRoute";
 import UsersList from "./components/UsersList";
 import Dashboard from "./components/Dashboard/Dashboard";
 import Results from "./components/Results/Results";
-import Error  from "./components/Error";
+import Error from "./components/Error";
 import { authenticate } from "./store/session";
 import * as newsFeedActions from "./store/newsfeed.js";
 import * as preferenceActions from "./store/preferences";
@@ -20,20 +20,15 @@ function App(store) {
   const [loaded, setLoaded] = useState(false);
   const dispatch = useDispatch();
 
-
   useEffect(() => {
     (async () => {
       await dispatch(authenticate());
-      await dispatch(newsFeedActions.getTopHeadlines())
-      await dispatch(preferenceActions.getUserPreferences())
+      await dispatch(newsFeedActions.getTopHeadlines());
+      await dispatch(preferenceActions.getUserPreferences());
       setLoaded(true);
     })();
-
   }, [dispatch]);
-  useEffect(()=>{
-
-
-  },[])
+  useEffect(() => {}, []);
 
   if (!loaded) {
     return null;
@@ -42,26 +37,36 @@ function App(store) {
   const banner = (
     <span id="splash-feed" style={{ color: "rgba(36, 22, 129, 0.678)" }}>
       <Logo />
-      <h1 id="newsfeed-heading" style={{ color: "rgba(36, 22, 129, 0.978)" }}>
-        KNEWS
-      </h1>
       <div>
-        <h2>Curate your news experience</h2>
-        <h3>
-          <a
-            style={{
-              fontWeight: "bold",
-              fontSize: "larger",
-              marginRight: "10px",
-            }}
-            href="/sign-up"
-          >
-            Sign Up
-          </a>
-          to view the stories YOU want to see
-        </h3>
-        <h3>Quickly search for followed topics</h3>
-        <h3>Save articles to read later</h3>
+        <h1
+          id="newsfeed-heading"
+          style={{color:'var(--main-purple)'}}
+          onClick={() => window.location.reload(false)}
+        >
+          KNEWS
+        </h1>
+        <h2 id="tag-line">Your personal news app</h2>
+      </div>
+      <div>
+      <>
+              <h2>Curate your news experience</h2>
+              <h3>
+                <a
+                  style={{
+                    fontWeight: "bold",
+                    fontSize: "larger",
+                    color: `var(--main-purple`,
+                    marginRight: "10px",
+                  }}
+                  href="/sign-up"
+                >
+                  Sign Up
+                </a>
+                to view the stories YOU want to see
+              </h3>
+              <h3>Follow your favorite topics</h3>
+              <h3>Save articles to read later</h3>
+            </>
 
         <div id="contact-links-div">
           <h4>Developed by John Shivers</h4>
@@ -119,7 +124,7 @@ function App(store) {
           <NewsFeed />
         </Route>
         <Route path="/">
-          <Error/>
+          <Error />
         </Route>
       </Switch>
       <Footer />

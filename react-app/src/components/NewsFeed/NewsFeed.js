@@ -23,7 +23,7 @@ export const NewsFeed = () => {
   const [feedArticles, setFeedArticles] = useState();
 
   const placeHolder =
-    "http://placehold.jp/24/d3d3d3/241681/150x150.png?text=Image%20Not%20Found&css=%7B%22border-radius%22%3A%2215px%22%2C%22background%22%3A%22%20-webkit-gradient(linear%2C%20left%20top%2C%20left%20bottom%2C%20from(%23666666)%2C%20to(%23cccccc))%22%7D";
+    "http://placehold.jp/32/d3d3d3/241681/150x150.png?text=Image%20Not%20Found";
   const appTheme = { background: bgTheme };
   const headingStyle = { color: hTheme };
   const splashTheme = { background: "var(--main-purple)" };
@@ -135,17 +135,20 @@ export const NewsFeed = () => {
         <div className="newsfeed-header-div">
           <h1 style={headingStyle}>Top Stories</h1>
         </div>
-        <div>
+
           {feedArticles?.length > 0 && (
             <>
               <div className="highlight-section">
                 <img
                   src={
-                    feedArticles[0].urlToImage === null ||
-                    feedArticles[0].urlToImage === "null"
-                      ? placeHolder
-                      : feedArticles[0].urlToImage
+                    feedArticles[0].urlToImage
+                      ? feedArticles[0].urlToImage
+                      : placeHolder
                   }
+                  onError={(e) => {
+                    e.target.onerror = null;
+                    e.target.src = placeHolder;
+                  }}
                   alt={feedArticles[0].title}
                   height="100px"
                   width="100px"
@@ -190,7 +193,7 @@ export const NewsFeed = () => {
               </div>
             </>
           )}
-        </div>
+
         <div id="newsfeed-follows">
           {user && (
             <>
@@ -213,7 +216,6 @@ export const NewsFeed = () => {
         </div>
         {feedArticles &&
           feedArticles.slice(1).map((article, i) => {
-            if(article.urlToImage === null) return null;
             switch (i) {
               case 0:
               case 1:
@@ -225,11 +227,12 @@ export const NewsFeed = () => {
                   <div className="upper-section" key={`${i}-${article.url}`}>
                     <img
                       src={
-                        article.urlToImage === null ||
-                        article.urlToImage === "null"
-                          ? placeHolder
-                          : article.urlToImage
+                        article.urlToImage ? article.urlToImage : placeHolder
                       }
+                      onError={(e) => {
+                        e.target.onerror = null;
+                        e.target.src = placeHolder;
+                      }}
                       alt={article.title}
                       height="100px"
                       width="100px"
@@ -270,14 +273,13 @@ export const NewsFeed = () => {
               default:
                 return (
                   <div className="lower-section" key={`${i}-${article.url}`}>
-                    <div>
+                    <div className="lower-section-div">
                       <img
-                        src={
-                          article.urlToImage === null ||
-                          article.urlToImage === "null"
-                            ? placeHolder
-                            : article.urlToImage
-                        }
+                        src={article.urlToImage}
+                        onError={(e) => {
+                          e.target.onerror = null;
+                          e.target.src = placeHolder;
+                        }}
                         alt={article.title}
                       />
                       <a

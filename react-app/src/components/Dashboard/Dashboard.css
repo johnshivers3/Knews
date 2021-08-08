@@ -59,9 +59,10 @@ div#dashboard-main-div hr {
 #country-search,
 #language-search {
   width: 20vw;
-  /* padding: 0 0 0 2%; */
+  padding: .5%;
   margin: 10px 20px;
   font-size: large;
+  color: var(--main-purple);
 }
 
 .setting-button.preferences {

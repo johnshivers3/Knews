@@ -208,7 +208,8 @@ export const Dashboard = () => {
               </datalist>
             </div>
 
-            <div className="preference-div">
+            {/* <div className="preference-div">
+
               <input
                 id="language-search"
                 type="search"
@@ -341,7 +342,7 @@ export const Dashboard = () => {
                 <option value="Venezuela">ve</option>
                 <option value="South Africa"> za</option>
               </datalist>
-            </div>
+            </div> */}
             <hr />
           </div>
         ) : null}

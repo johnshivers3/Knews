@@ -34,7 +34,7 @@ export const Dashboard = () => {
   const headingStyle = { color: hTheme };
 
   useEffect(() => {
-    dispatch(preferenceActions.getUserPreferences());
+    // dispatch(preferenceActions.getUserPreferences());
     if (userPreferences?.theme === "Dark") {
       setBgTheme("rgba(0, 0, 0, 0.75)");
       setHTheme("whitesmoke");
@@ -43,7 +43,7 @@ export const Dashboard = () => {
     }
     return;
     // eslint-disable-next-line
-  }, [dispatch, userPreferences?.theme]);
+  }, [dispatch]);
 
   // Collect users followed topics
   useEffect(() => {
@@ -63,7 +63,7 @@ export const Dashboard = () => {
   useEffect(() => {
     dispatch(articleActions.getAllArticles());
     return () => {
-      dispatch(articleActions.cleanUpArticles());
+      // dispatch(articleActions.cleanUpArticles());
     };
   }, [dispatch]);
 
@@ -71,7 +71,7 @@ export const Dashboard = () => {
   useEffect(() => {
     dispatch(preferenceActions.getUserPreferences());
     return () => {
-      dispatch(preferenceActions.cleanUpPreferences());
+      // dispatch(preferenceActions.cleanUpPreferences());
     };
   }, [dispatch]);
 
@@ -90,10 +90,10 @@ export const Dashboard = () => {
         setEdit("");
         setAddFollow(false);
 
-        break;
+        return;
       case "save-follow-edit":
         dispatch(followsActions.updateFollow(followEdit, e.target.value));
-        break;
+        return;
       case "add-follow-edit":
         if (newFollowEdit.length > 0 ) {
           await dispatch(followsActions.addFollow(newFollowEdit));
@@ -105,21 +105,21 @@ export const Dashboard = () => {
         } else {
           setAddFollowError("Please enter a topic");
         }
-        break;
+        return;
       case "save-preference-edit":
-        const newPreferences = { ...userPreferences };
         // newPreferences["country"] = country;
-        newPreferences["defaultFeed"] = feed;
         // newPreferences["lang"] = language;
+        const newPreferences = { ...userPreferences };
+        newPreferences["defaultFeed"] = feed;
         newPreferences["theme"] = theme;
         dispatch(preferenceActions.updatePreferences(newPreferences));
         setEdit("");
-        break;
+        return;
       case "done-article-edit":
         setEdit("");
-        break;
+        return;
       default:
-        break;
+        return;
     }
   };
   // save and reset edit state

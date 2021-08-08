@@ -235,6 +235,7 @@ div#linkedin {
   /* font-size: large; */
   padding: 10% 15% 10% 15%;
   max-width: 23vw;
+  overflow-y: scroll;
 }
 #newsfeed-follows h2 {
   margin-left: 20px;

@@ -4,11 +4,12 @@ import { Link, useParams } from "react-router-dom";
 import * as newsFeedActions from "../../store/newsfeed.js";
 import * as articleActions from "../../store/articles";
 import * as followActions from "../../store/follows";
+import * as preferenceActions from "../../store/preferences";
 import Logo from "../images/Logo.js";
 
-import "./../NewsFeed/NewsFeed.css";
+import "./Results.css";
 
-export const Results = () => {
+export const Results = ( ) => {
   const dispatch = useDispatch();
   const { query } = useParams();
   const feedHeadlines = useSelector((state) => state.newsfeed.news);
@@ -25,14 +26,14 @@ export const Results = () => {
   const placeHolder =
     "http://placehold.jp/32/d3d3d3/241681/150x150.png?text=Image%20Not%20Found";
 
-  const appTheme = { background: bgTheme };
-  const headingStyle = { color: hTheme };
-  const splashTheme = { background: "var(--main-purple)" };
-
   // Collect user preferences
   useEffect(() => {
+     dispatch(preferenceActions.getUserPreferences());
+
     if (userPreferences?.theme === "Dark") {
       setBgTheme("rgba(0, 0, 0, 0.75)");
+      // setBgTheme("rgba(0, 0, 0, 0.15)");
+
       setHTheme("whitesmoke");
     } else {
       setBgTheme("rgba(0, 0, 0, 0.15)");
@@ -42,13 +43,15 @@ export const Results = () => {
     // eslint-disable-next-line
   }, [dispatch]);
 
+  const appTheme = { background: bgTheme };
+  const headingStyle = { color: hTheme };
+  const splashTheme = { background: "var(--main-purple)" };
+
   useEffect(() => {
     if (user) dispatch(followActions.getAllFollows());
 
     dispatch(newsFeedActions.getSearchResults(query));
-    return () => {
-      dispatch(followActions.cleanUpFollows());
-    };
+    return
   }, [dispatch, user, query]);
 
   useEffect(() => {
@@ -148,7 +151,8 @@ export const Results = () => {
               <div className="highlight-section">
                 <img
                   src={
-                    feedArticles[0].urlToImage
+                    feedArticles[0].urlToImage &&
+                    feedArticles[0].urlToImage !== null
                       ? feedArticles[0].urlToImage
                       : placeHolder
                   }
@@ -234,7 +238,9 @@ export const Results = () => {
                   <div className="upper-section" key={`${i}-${article.url}`}>
                     <img
                       src={
-                        article.urlToImage ? article.urlToImage : placeHolder
+                        article.urlToImage && article.urlToImage !== null
+                          ? article.urlToImage
+                          : placeHolder
                       }
                       onError={(e) => {
                         e.target.onerror = null;
@@ -283,7 +289,9 @@ export const Results = () => {
                     <div>
                       <img
                         src={
-                          article.urlToImage ? article.urlToImage : placeHolder
+                          article.urlToImage && article.urlToImage !== null
+                            ? article.urlToImage
+                            : placeHolder
                         }
                         onError={(e) => {
                           e.target.onerror = null;

@@ -47,9 +47,7 @@ export const NewsFeed = () => {
     const query = userPreferences?.defaultFeed || "General";
     dispatch(newsFeedActions.getSearchResults(query));
 
-    return () => {
-      dispatch(followActions.cleanUpFollows());
-    };
+    return
     // eslint-disable-next-line
   }, [dispatch, user]);
 
@@ -235,7 +233,9 @@ export const NewsFeed = () => {
                   <div className="upper-section" key={`${i}-${article.url}`}>
                     <img
                       src={
-                        article.urlToImage ? article.urlToImage : placeHolder
+                        article.urlToImage && article.urlToImage !== null
+                          ? article.urlToImage
+                          : placeHolder
                       }
                       onError={(e) => {
                         e.target.onerror = null;
@@ -283,7 +283,11 @@ export const NewsFeed = () => {
                   <div className="lower-section" key={`${i}-${article.url}`}>
                     <div className="lower-section-div">
                       <img
-                        src={article.urlToImage}
+                        src={
+                          article.urlToImage && article.urlToImage !== null
+                            ? article.urlToImage
+                            : placeHolder
+                        }
                         onError={(e) => {
                           e.target.onerror = null;
                           e.target.src = placeHolder;
@@ -318,7 +322,7 @@ export const NewsFeed = () => {
             }
           })}
       </div>
-      <ScrollToTop/>
+      <ScrollToTop />
     </div>
   );
 };

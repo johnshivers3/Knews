@@ -1,17 +1,27 @@
 .newsfeed-header-div {
-  padding: 2vh 5vw;
   width: 100%;
+  margin: auto;
+  width: 33vw;
   font-size: xx-large;
   height: 15em;
   color: var(--main-purple);
 }
+.newsfeed-header-div h1 {
+  margin: 0;
+  padding: 0 80px;
+}
+
+.newsfeed-header-div h4 {
+  margin: 0;
+  padding: 40px 80px 40px 100px;
+}
 
 #main-newsfeed-div {
   display: inline-grid;
-  grid-template-columns: repeat(3, auto);
+  grid-template-columns: repeat(3, 1fr);
   row-gap: 3.5rem;
   padding: 3.5rem 0;
-  width: 100%;
+  width: 100vw;
 }
 
 .highlight-section img {
@@ -44,7 +54,10 @@
 }
 
 .highlight-section {
-  width: 35vw;
+  display: flex;
+  flex-direction: column;
+  align-self: center;
+  width: 33vw;
   height: 90%;
   background: linear-gradient(grey, grey, grey, grey, transparent);
   border-radius: 0.5rem;
@@ -56,7 +69,7 @@
   display: flex;
   justify-self: center;
   flex-direction: column;
-  width: 23vw;
+  max-width: 20vw;
   height: 90%;
   background: linear-gradient(grey, grey, grey, grey, transparent);
   border-radius: 0.5rem;
@@ -78,19 +91,22 @@
     rgba(255, 255, 255, 0.473),
     transparent
   );
-  background: url("../../source-images/blueAlien.svg") center/30% no-repeat;
+  /* background: url("../../source-images/blueAlien.svg") center/30% no-repeat; */
 }
 .lower-section {
   display: flex;
   justify-self: center;
   text-align: center;
-  width: 23vw;
+  max-width: 20vw;
   height: 70%;
   background: linear-gradient(grey, grey, grey, grey, transparent);
   border-radius: 0.5rem;
   padding: 2rem;
   margin: 2rem;
   border-bottom: 1px solid var(--main-highlight);
+}
+.lower-section div {
+  width: 100%;
 }
 
 .author {
@@ -151,6 +167,7 @@ span#splash-feed {
   justify-content: flex-start;
   align-items: center;
   padding: 0 10vw;
+
 }
 span#splash-feed img {
   transform: scale(3);
@@ -161,6 +178,15 @@ span#splash-feed h1#newsfeed-heading {
   font-size: 40px;
   font-style: oblique;
   margin-left: 220px;
+  transform: scale(3);
+  color: whitesmoke;
+  margin-right: 300px;
+}
+span#splash-feed h2#tag-line {
+  font-weight: 600;
+  font-size: 10px;
+  font-style: oblique;
+  margin-left: 230px;
   transform: scale(3);
   color: whitesmoke;
   margin-right: 300px;
@@ -207,5 +233,10 @@ div#linkedin {
 
 #newsfeed-follows {
   /* font-size: large; */
-  /* padding: 10% 15% 10% 5%; */
+  padding: 10% 15% 10% 15%;
+  max-width: 23vw;
+  overflow-y: scroll;
+}
+#newsfeed-follows h2 {
+  margin-left: 20px;
 }

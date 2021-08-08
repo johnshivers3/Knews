@@ -37,7 +37,7 @@ export const updatePreferences = (preferences) => async (dispatch) => {
 
   if (response.ok) {
     const update = await response.json();
-    dispatch(cleanUpPreferences());
+
     dispatch(getUserPreferences());
     return update;
   } else {

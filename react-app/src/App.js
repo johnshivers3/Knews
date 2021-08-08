@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { BrowserRouter, Route, Switch, Link } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Logo from "./components/images/Logo";
 import LoginForm from "./components/auth/LoginForm";
 import SignUpForm from "./components/auth/SignUpForm";
@@ -16,10 +16,12 @@ import { authenticate } from "./store/session";
 import * as newsFeedActions from "./store/newsfeed.js";
 import * as preferenceActions from "./store/preferences";
 
-function App(store) {
+function App({store}) {
   const [loaded, setLoaded] = useState(false);
   const dispatch = useDispatch();
-
+  const userTheme = useSelector(
+    (state) => state.preferences.preferences?.theme
+  );
   useEffect(() => {
     (async () => {
       await dispatch(authenticate());
@@ -40,7 +42,7 @@ function App(store) {
       <div>
         <h1
           id="newsfeed-heading"
-          style={{color:'var(--main-purple)'}}
+          style={{ color: "var(--main-purple)" }}
           onClick={() => window.location.reload(false)}
         >
           KNEWS
@@ -48,25 +50,25 @@ function App(store) {
         <h2 id="tag-line">Your personal news app</h2>
       </div>
       <div>
-      <>
-              <h2>Curate your news experience</h2>
-              <h3>
-                <a
-                  style={{
-                    fontWeight: "bold",
-                    fontSize: "larger",
-                    color: `var(--main-purple`,
-                    marginRight: "10px",
-                  }}
-                  href="/sign-up"
-                >
-                  Sign Up
-                </a>
-                to view the stories YOU want to see
-              </h3>
-              <h3>Follow your favorite topics</h3>
-              <h3>Save articles to read later</h3>
-            </>
+        <>
+          <h2>Curate your news experience</h2>
+          <h3>
+            <a
+              style={{
+                fontWeight: "bold",
+                fontSize: "larger",
+                color: `var(--main-purple`,
+                marginRight: "10px",
+              }}
+              href="/sign-up"
+            >
+              Sign Up
+            </a>
+            to view the stories YOU want to see
+          </h3>
+          <h3>Follow your favorite topics</h3>
+          <h3>Save articles to read later</h3>
+        </>
 
         <div id="contact-links-div">
           <h4>Developed by John Shivers</h4>
@@ -112,7 +114,7 @@ function App(store) {
           </div>
         </Route>
         <Route path="/results/:query" exact={true}>
-          <Results />
+          <Results userTheme={userTheme}/>
         </Route>
         <ProtectedRoute path="/users" exact={true}>
           <UsersList />

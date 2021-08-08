@@ -12,20 +12,20 @@ import "./Dashboard.css";
 export const Dashboard = () => {
   // const [language, setLanguage] = useState("");
   // const [country, setCountry] = useState("");
-  const [feed, setFeed] = useState("");
-  const [theme, setTheme] = useState("");
-  const [followEdit, setFollowEdit] = useState("");
-  const [newFollowEdit, setNewFollowEdit] = useState("");
-  const [addFollow, setAddFollow] = useState(false);
-  const [addFollowError, setAddFollowError] = useState("");
-
   const dispatch = useDispatch();
   const [edit, setEdit] = useState("");
   const user = useSelector((state) => state.session.user);
   const userFollows = useSelector((state) => state.follows.allFollows);
   const userArticles = useSelector((state) => state.articles.allArticles);
-  // const selectedFollow = useSelector((state) => state.follows.oneFollow);
   const userPreferences = useSelector((state) => state.preferences.preferences);
+
+  const [feed, setFeed] = useState(userPreferences?.defaultFeed);
+  const [theme, setTheme] = useState(userPreferences?.theme);
+  const [followEdit, setFollowEdit] = useState("");
+  const [newFollowEdit, setNewFollowEdit] = useState("");
+  const [addFollow, setAddFollow] = useState(false);
+  const [addFollowError, setAddFollowError] = useState("");
+
 
   const [bgTheme, setBgTheme] = useState("");
   const [hTheme, setHTheme] = useState("rgba(36, 22, 129, 0.978)");
@@ -88,12 +88,14 @@ export const Dashboard = () => {
     switch (e.target.className) {
       case "done-follow-edit":
         setEdit("");
+        setAddFollow(false);
+
         break;
       case "save-follow-edit":
         dispatch(followsActions.updateFollow(followEdit, e.target.value));
         break;
       case "add-follow-edit":
-        if (newFollowEdit.length > 0 && newFollowEdit.includes(!'')) {
+        if (newFollowEdit.length > 0 ) {
           await dispatch(followsActions.addFollow(newFollowEdit));
           window.alert(`Topic: ${newFollowEdit} added`);
 
@@ -188,7 +190,7 @@ export const Dashboard = () => {
                   userPreferences.theme === "" ? null : userPreferences.theme
                 }
                 onChange={(e) => {
-                  if (e.target.value !== "") setTheme(e.target.value);
+                  if (e.target.value !== userPreferences.theme) setTheme(e.target.value);
                 }}
               >
                 {/* <datalist id="theme-list"> */}
@@ -209,7 +211,7 @@ export const Dashboard = () => {
                     : userPreferences.defaultFeed
                 }
                 onChange={(e) => {
-                  if (e.target.value !== "") setFeed(e.target.value);
+                  if (e.target.value !== userPreferences.defaultFeed) setFeed(e.target.value);
                 }}
               >
                 {/* <datalist id="category-list"> */}

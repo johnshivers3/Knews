@@ -76,7 +76,6 @@ div#dashboard-main-div hr {
   background: url(../../source-images/edit-pencil.svg) center/30% no-repeat;
 }
 
-div#add-follow-div button,
 .save-preference-edit,
 .done-follow-edit,
 .done-article-edit,
@@ -85,20 +84,19 @@ div#add-follow-div button,
   height: 2.5rem;
   background: var(--main-purple);
   color: whitesmoke;
-  padding: 0;
-  margin: 0 0.5vw;
+  padding: 5px;
+  margin: 0 5w;
 }
 
-.user-topics li {
-  width: 60%;
-}
+
+
 .user-topics li .search-follow-button,
 div#add-follow-div button,
 .user-topics li .save-follow-edit {
   height: 2.5rem;
   background: var(--main-purple);
   color: whitesmoke;
-  padding: 0 15px;
+  padding: 0 20px;
   margin: 0;
 }
 
@@ -109,7 +107,7 @@ div#add-follow-div button,
   align-items: center;
   padding: 0;
   width: 100%;
-  /* font-size: large; */
+  font-size: large;
   height: 4rem;
 }
 
@@ -125,6 +123,8 @@ ul.dashboard-list li {
   align-items: center;
   margin: 10vw;
   max-height: 15vh;
+  width:100%;
+  justify-content: flex-start;
 }
 
 ul.dashboard-list li h3 {
@@ -219,6 +219,7 @@ ul.dashboard-list img {
   font-size: 23px;
   color: var(--main-purple);
   margin: 0 20px;
+  width: 50%;
 }
 
 #dashboard-main-div > ul.user-topics.dashboard-list > li > h3 {
@@ -255,21 +256,26 @@ span#splash-dash h1#dashboard-heading {
 }
 
 div#add-follow-div {
-  width: 30vw;
+  width: 100%;
   display: flex;
   align-items: center;
-  margin-left: 6.1vw;
+  margin-left: 105px;
 }
-div#add-follow-div button {
-  width: 13%;
+button.add-follow-edit {
+  width: 5rem;
+  height: 2.5rem;
+  background: var(--main-purple);
+  color: whitesmoke;
+  padding: 5px;
+  margin: 0 0.5vw;
 }
 
 input#add-follow-input {
   color: var(--main-purple);
   height: 3vh;
-  width: 60%;
-  /* margin: 10px 10px 10px -15px; */
-  margin-right: 20px;
+  width: 50%;
+  margin: 10px 20px 10px 0px;
+
   font-size: larger;
 }
 

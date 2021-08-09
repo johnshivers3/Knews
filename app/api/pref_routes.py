@@ -24,6 +24,8 @@ def get_user_prefs():
     '''
     get preferences to associated with user
     '''
+    if(current_user.is_anonymous):
+        return {'message':'No preferences'}, 300
     preferences = UserPreferences.query.filter_by(
         userId=f'{current_user.id}').first()
     if preferences is None:

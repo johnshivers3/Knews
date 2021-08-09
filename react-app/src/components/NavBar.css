@@ -4,7 +4,7 @@ nav {
   position: relative;
   height: 100px;
   background-color: var(--main-dark);
-  box-shadow: 0px 3px 80px var(--main-highlight);
+  box-shadow: 0px 3px 60px var(--main-highlight);
   color: var(--main-purple);
 
 }
@@ -42,7 +42,7 @@ nav h1 {
   width: 33.33vw;
 }
 
-ul {
+nav ul {
   display: flex;
   flex-direction: column;
   list-style: none;
@@ -96,7 +96,7 @@ label.transition-wrapper {
   margin-top: 180px;
   background: linear-gradient(grey,grey, transparent);
   position: absolute;
-  bottom: 0px;
+  bottom: -380px;
   right: 0;
   padding: 20px 60px 0 0;
   transition: bottom 1s ease-in-out 0.1s;
@@ -105,5 +105,5 @@ label.transition-wrapper {
 }
 
 #hidden-check:checked + label.transition-wrapper {
-  bottom: -380px;
+  bottom: 0;
 }

@@ -1,17 +1,17 @@
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import * as newsFeedActions from "../../store/newsfeed.js";
 import * as articleActions from "../../store/articles";
 import * as followActions from "../../store/follows";
 import * as preferenceActions from "../../store/preferences";
-
 import Logo from "../images/Logo.js";
-import ScrollToTop from "../ScrollToTop/ScrollToTop.js";
-import "./NewsFeed.css";
 
-export const NewsFeed = () => {
+import "./Results.css";
+
+export const Results = ( ) => {
   const dispatch = useDispatch();
+  const { query } = useParams();
   const feedHeadlines = useSelector((state) => state.newsfeed.news);
   const categoryFeed = useSelector((state) => state.newsfeed.searchResults);
   const allFollows = useSelector((state) => state.follows?.allFollows);
@@ -25,33 +25,34 @@ export const NewsFeed = () => {
 
   const placeHolder =
     "http://placehold.jp/32/d3d3d3/241681/150x150.png?text=Image%20Not%20Found";
-  const appTheme = { background: bgTheme };
-  const headingStyle = { color: hTheme };
-  const splashTheme = { background: "var(--main-purple)" };
 
   // Collect user preferences
   useEffect(() => {
-    dispatch(preferenceActions.getUserPreferences())
+     dispatch(preferenceActions.getUserPreferences());
+
     if (userPreferences?.theme === "Dark") {
       setBgTheme("rgba(0, 0, 0, 0.75)");
+      // setBgTheme("rgba(0, 0, 0, 0.15)");
+
       setHTheme("whitesmoke");
     } else {
       setBgTheme("rgba(0, 0, 0, 0.15)");
     }
 
+    return;
     // eslint-disable-next-line
   }, [dispatch, categoryFeed, feedHeadlines, user]);
 
-  // useEffect(()=>{},[setFeedArticles])
+  const appTheme = { background: bgTheme };
+  const headingStyle = { color: hTheme };
+  const splashTheme = { background: "var(--main-purple)" };
+
   useEffect(() => {
     if (user) dispatch(followActions.getAllFollows());
 
-    const query = userPreferences?.defaultFeed || "General";
     dispatch(newsFeedActions.getSearchResults(query));
-
-    return;
-    // eslint-disable-next-line
-  }, [dispatch, user]);
+    return
+  }, [dispatch, user, query]);
 
   useEffect(() => {
     if (user) {
@@ -102,7 +103,7 @@ export const NewsFeed = () => {
                     color: `${headingStyle.color}`,
                     marginRight: "10px",
                   }}
-                  href="/sign-up"
+                  href="/signup"
                 >
                   Sign Up
                 </a>
@@ -142,66 +143,68 @@ export const NewsFeed = () => {
       <div id="main-newsfeed-div">
         <div className="newsfeed-header-div">
           <h1 style={headingStyle}>Top Stories</h1>
+          <h4 style={headingStyle}>{query.toUpperCase()}</h4>
         </div>
-
-        {feedArticles?.length > 0 && (
-          <>
-            <div className="highlight-section">
-              <img
-                src={
-                  feedArticles[0].urlToImage
-                    ? feedArticles[0].urlToImage
-                    : placeHolder
-                }
-                onError={(e) => {
-                  e.target.onerror = null;
-                  e.target.src = placeHolder;
-                }}
-                alt={feedArticles[0].title}
-                height="100px"
-                width="100px"
-              />
-              <div className="highlight-content">
-                <a
-                  href={feedArticles[0].url}
-                  target="_blank"
-                  rel="noreferrer noopener"
-                >
-                  <h3>{feedArticles[0].title}</h3>
-                </a>
-                <hr />
-                <p>
-                  {feedArticles[0].content.substring(
-                    0,
-                    feedArticles[0].content.indexOf("[")
-                  )}
-                </p>
-                <div className="top link-div">
+        <div>
+          {feedArticles?.length > 0 && (
+            <>
+              <div className="highlight-section">
+                <img
+                  src={
+                    feedArticles[0].urlToImage &&
+                    feedArticles[0].urlToImage !== null
+                      ? feedArticles[0].urlToImage
+                      : placeHolder
+                  }
+                  onError={(e) => {
+                    e.target.onerror = null;
+                    e.target.src = placeHolder;
+                  }}
+                  alt={feedArticles[0].title}
+                  height="100px"
+                  width="100px"
+                />
+                <div className="highlight-content">
                   <a
                     href={feedArticles[0].url}
                     target="_blank"
                     rel="noreferrer noopener"
                   >
-                    {feedArticles[0].source.name}
+                    <h3>{feedArticles[0].title}</h3>
                   </a>
-                  {/* {!user && (
-                    <>
-                      <p>Sign Up or Login</p>
-                      <p>to save articles</p>
-                    </>
-                  )} */}
-                  <button
-                    title="Add Article"
-                    className="save top"
-                    onClick={() => addArticle(feedArticles[0])}
-                  ></button>
+                  <hr />
+                  <p>
+                    {feedArticles[0].content.substring(
+                      0,
+                      feedArticles[0].content.indexOf("[")
+                    )}
+                  </p>
+                  <div className="top link-div">
+                    <a
+                      href={feedArticles[0].url}
+                      target="_blank"
+                      rel="noreferrer noopener"
+                    >
+                      {feedArticles[0].source.name}
+                    </a>
+                    {!user && (
+                      <>
+                        <p>Sign Up or Login</p>
+                        <p>to save articles</p>
+                      </>
+                    )}
+                    <button
+                      title="Add Article"
+                      className="save top"
+                      onClick={() => addArticle(feedArticles[0])}
+                    ></button>
+                  </div>
+                  <p className="author">Author: {feedArticles[0].author}</p>
                 </div>
-                <p className="author">Author: {feedArticles[0].author}</p>
               </div>
-            </div>
-          </>
-        )}
-
+            </>
+          )}
+        </div>
         <div id="newsfeed-follows">
           {user && (
             <>
@@ -283,7 +286,7 @@ export const NewsFeed = () => {
               default:
                 return (
                   <div className="lower-section" key={`${i}-${article.url}`}>
-                    <div className="lower-section-div">
+                    <div>
                       <img
                         src={
                           article.urlToImage && article.urlToImage !== null
@@ -324,9 +327,8 @@ export const NewsFeed = () => {
             }
           })}
       </div>
-      <ScrollToTop />
     </div>
   );
 };
 
-export default NewsFeed;
+export default Results;

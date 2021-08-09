@@ -1,47 +1,48 @@
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useHistory } from "react-router-dom";
+// import { useHistory } from "react-router-dom";
 
 import * as followsActions from "../../store/follows";
 import * as preferenceActions from "../../store/preferences";
 import * as articleActions from "../../store/articles";
-import * as newsFeedActions from "../../store/newsfeed.js";
+// import * as newsFeedActions from "../../store/newsfeed.js";
 
 import "./Dashboard.css";
 
 export const Dashboard = () => {
-  const [language, setLanguage] = useState("");
-  const [country, setCountry] = useState("");
-  const [feed, setFeed] = useState("");
-  const [theme, setTheme] = useState("");
-  const [followEdit, setFollowEdit] = useState("");
-  const [newFollowEdit, setNewFollowEdit] = useState("");
-  const [addFollow, setAddFollow] = useState(false);
-  const [addFollowError, setAddFollowError] = useState("");
-
+  // const [language, setLanguage] = useState("");
+  // const [country, setCountry] = useState("");
   const dispatch = useDispatch();
   const [edit, setEdit] = useState("");
   const user = useSelector((state) => state.session.user);
   const userFollows = useSelector((state) => state.follows.allFollows);
   const userArticles = useSelector((state) => state.articles.allArticles);
-  // const selectedFollow = useSelector((state) => state.follows.oneFollow);
   const userPreferences = useSelector((state) => state.preferences.preferences);
 
-  const [bgTheme, setBgTheme] = useState("rgba(0, 0, 0, 0.15)");
-  const [hTheme, setHTheme] = useState("rgba(36, 22, 129, 0.678)");
-  const history = useHistory();
+  const [feed, setFeed] = useState(userPreferences?.defaultFeed);
+  const [theme, setTheme] = useState(userPreferences?.theme);
+  const [followEdit, setFollowEdit] = useState("");
+  const [newFollowEdit, setNewFollowEdit] = useState("");
+  const [addFollow, setAddFollow] = useState(false);
+  const [addFollowError, setAddFollowError] = useState("");
+
+
+  const [bgTheme, setBgTheme] = useState("");
+  const [hTheme, setHTheme] = useState("rgba(36, 22, 129, 0.978)");
+  // const history = useHistory();
   const appTheme = { background: bgTheme };
   const headingStyle = { color: hTheme };
 
   useEffect(() => {
-    dispatch(preferenceActions.getUserPreferences());
+    // dispatch(preferenceActions.getUserPreferences());
     if (userPreferences?.theme === "Dark") {
       setBgTheme("rgba(0, 0, 0, 0.75)");
       setHTheme("whitesmoke");
+    } else {
+      setBgTheme("rgba(0, 0, 0, 0.15)");
     }
-    return () => {
-      dispatch(preferenceActions.cleanUpPreferences());
-    };
+    return;
+    // eslint-disable-next-line
   }, [dispatch]);
 
   // Collect users followed topics
@@ -53,16 +54,16 @@ export const Dashboard = () => {
   }, [dispatch]);
 
   // Execute search for followed topic
-  const searchTopic = (e) => {
-    e.preventDefault();
-    dispatch(newsFeedActions.getSearchResults(e.target.innerText));
-  };
+  // const searchTopic = (e) => {
+  //   e.preventDefault();
+  //   dispatch(newsFeedActions.getSearchResults(e.target.innerText));
+  // };
 
   // Collect users followed topics
   useEffect(() => {
     dispatch(articleActions.getAllArticles());
     return () => {
-      dispatch(articleActions.cleanUpArticles());
+      // dispatch(articleActions.cleanUpArticles());
     };
   }, [dispatch]);
 
@@ -70,7 +71,7 @@ export const Dashboard = () => {
   useEffect(() => {
     dispatch(preferenceActions.getUserPreferences());
     return () => {
-      dispatch(preferenceActions.cleanUpPreferences());
+      // dispatch(preferenceActions.cleanUpPreferences());
     };
   }, [dispatch]);
 
@@ -81,56 +82,68 @@ export const Dashboard = () => {
   };
 
   // save and reset edit state
-  const handleSave = (e) => {
+  const handleSave = async (e) => {
     e.preventDefault();
 
     switch (e.target.className) {
       case "done-follow-edit":
         setEdit("");
-        break;
+        setAddFollow(false);
+
+        return;
       case "save-follow-edit":
         dispatch(followsActions.updateFollow(followEdit, e.target.value));
-        break;
+        return;
       case "add-follow-edit":
-        if (newFollowEdit.length > 0) {
-          dispatch(followsActions.addFollow(newFollowEdit));
+        if (newFollowEdit.length > 0 ) {
+          await dispatch(followsActions.addFollow(newFollowEdit));
+          window.alert(`Topic: ${newFollowEdit} added`);
+
           setNewFollowEdit("");
           setAddFollowError("");
           setAddFollow(false);
         } else {
           setAddFollowError("Please enter a topic");
         }
-        break;
+        return;
       case "save-preference-edit":
+        // newPreferences["country"] = country;
+        // newPreferences["lang"] = language;
         const newPreferences = { ...userPreferences };
-        newPreferences["country"] = country;
         newPreferences["defaultFeed"] = feed;
-        newPreferences["lang"] = language;
         newPreferences["theme"] = theme;
         dispatch(preferenceActions.updatePreferences(newPreferences));
         setEdit("");
-        break;
+        return;
       case "done-article-edit":
         setEdit("");
-        break;
+        return;
       default:
-        break;
+        return;
     }
   };
   // save and reset edit state
-  const handleDelete = (e) => {
+  const handleDelete = async (e) => {
     e.preventDefault();
+
     switch (e.target.className) {
       case "delete-follow-button":
-        dispatch(followsActions.deleteOneFollow(e.target.value));
+        await dispatch(followsActions.deleteOneFollow(e.target.value));
+
+        window.alert(`Topic: ${e.target.id} deleted`);
+
         break;
       case "delete-article-button":
-        dispatch(articleActions.deleteOneArticle(e.target.value));
+        await dispatch(articleActions.deleteOneArticle(e.target.value));
+
+        window.alert(`Article from ${e.target.id.slice(0, 10)} deleted`);
+
         break;
       default:
         break;
     }
   };
+
   // add topic to database
   const handleAddFollow = (e) => {
     e.preventDefault();
@@ -166,33 +179,42 @@ export const Dashboard = () => {
             </div>
             <hr />
             <div className="preference-div">
-              <input
+              <label htmlFor="theme-input">Default Theme</label>
+              <select
                 id="default-theme-search"
-                type="search"
+                name="theme-input"
+                // type="search"
                 list="theme-list"
-                placeholder={
-                  userPreferences.theme === ""
-                    ? "Set default theme for your feed"
-                    : userPreferences.theme
+                placeholder="Set default theme for your feed"
+                defaultValue={
+                  userPreferences.theme === "" ? null : userPreferences.theme
                 }
-                onChange={(e) => setTheme(e.target.value)}
-              ></input>
-              <datalist id="theme-list">
+                onChange={(e) => {
+                  if (e.target.value !== userPreferences.theme) setTheme(e.target.value);
+                }}
+              >
+                {/* <datalist id="theme-list"> */}
                 <option>Light</option>
                 <option>Dark</option>
-              </datalist>
-              <input
+                {/* </datalist> */}
+              </select>
+              <label htmlFor="category-input">Default Category</label>
+              <select
                 id="default-category-search"
-                type="search"
+                name="category-input"
+                // type="search"
                 list="category-list"
-                placeholder={
+                placeholder="Set default category for your feed"
+                defaultValue={
                   userPreferences.defaultFeed === ""
-                    ? "Set default category for your feed"
+                    ? null
                     : userPreferences.defaultFeed
                 }
-                onChange={(e) => setFeed(e.target.value)}
-              ></input>
-              <datalist id="category-list">
+                onChange={(e) => {
+                  if (e.target.value !== userPreferences.defaultFeed) setFeed(e.target.value);
+                }}
+              >
+                {/* <datalist id="category-list"> */}
                 <option>Business</option>
                 <option>Entertainment</option>
                 <option>General</option>
@@ -200,20 +222,23 @@ export const Dashboard = () => {
                 <option>Science</option>
                 <option>Sports</option>
                 <option>Technology</option>
-              </datalist>
+                {/* </datalist> */}
+              </select>
             </div>
 
-            <div className="preference-div">
+            {/* <div className="preference-div">
+
               <input
                 id="language-search"
                 type="search"
                 list="language-list"
-                placeholder={
-                  userPreferences.lang === ""
-                    ? "Set preferred news language"
-                    : userPreferences.lang
+                placeholder="Set your preferred language"
+                defaultValue={
+                  userPreferences.lang === "" ? null : userPreferences.lang
                 }
-                onChange={(e) => setLanguage(e.target.value)}
+                onChange={(e) => {
+                  if (e.target.value !== "") setLanguage(e.target.value);
+                }}
               ></input>
               <datalist
                 id="language-list"
@@ -265,12 +290,15 @@ export const Dashboard = () => {
                 type="search"
                 list="country-list"
                 autoComplete="on"
-                placeholder={
+                placeholder="Set preferred country"
+                defaultValue={
                   userPreferences.country === ""
-                    ? "Set preferred country"
+                    ? null
                     : userPreferences.country
                 }
-                onChange={(e) => setCountry(e.target.value)}
+                onChange={(e) => {
+                  if (e.target.value !== "") setCountry(e.target.value);
+                }}
               ></input>
               <datalist
                 id="country-list"
@@ -332,7 +360,7 @@ export const Dashboard = () => {
                 <option value="Venezuela">ve</option>
                 <option value="South Africa"> za</option>
               </datalist>
-            </div>
+            </div> */}
             <hr />
           </div>
         ) : null}
@@ -360,21 +388,18 @@ export const Dashboard = () => {
         </div>
         <hr />
         <ul className="user-topics dashboard-list">
-          {addFollowError.length > 0 && edit === 'topics'? (
+          {addFollowError.length > 0 && edit === "topics" ? (
             <h4 id="topic-error">{addFollowError}</h4>
           ) : null}
           {addFollow && edit === "topics" && (
             <div id="add-follow-div">
               <input
                 id="add-follow-input"
+                placeholder="Add a new topic here"
                 onChange={(e) => setNewFollowEdit(e.target.value)}
                 required
               ></input>
-              <button
-                // value={follow.id}
-                className="add-follow-edit"
-                onClick={handleSave}
-              >
+              <button className="add-follow-edit" onClick={handleSave}>
                 Save
               </button>
             </div>
@@ -388,6 +413,7 @@ export const Dashboard = () => {
                     <>
                       <button
                         value={follow.id}
+                        id={follow.topicString}
                         className="delete-follow-button"
                         onClick={handleDelete}
                       ></button>
@@ -434,21 +460,28 @@ export const Dashboard = () => {
         <hr />
         <ul className="user-articles dashboard-list">
           {userArticles ? (
-            Object.values(userArticles).reverse().map((article) => (
-              <li key={article.id}>
-                {edit === "articles" ? (
-                  <button
-                    className="delete-article-button"
-                    value={article.id}
-                    onClick={handleDelete}
-                  ></button>
-                ) : null}
-                <img src={article.urlToImage} alt={article.title} />
-                <a href={article.url} target="_blank" rel="noreferrer noopener">
-                  <h3>{article.title}</h3>
-                </a>
-              </li>
-            ))
+            Object.values(userArticles)
+              .reverse()
+              .map((article) => (
+                <li key={article.id}>
+                  {edit === "articles" ? (
+                    <button
+                      className="delete-article-button"
+                      value={article.id}
+                      id={article.source}
+                      onClick={handleDelete}
+                    ></button>
+                  ) : null}
+                  <img src={article.urlToImage} alt={article.title} />
+                  <a
+                    href={article.url}
+                    target="_blank"
+                    rel="noreferrer noopener"
+                  >
+                    <h3>{article.title}</h3>
+                  </a>
+                </li>
+              ))
           ) : (
             <h3>You have saved an article yet.</h3>
           )}

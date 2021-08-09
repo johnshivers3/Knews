@@ -15,7 +15,7 @@ def post_user_articles():
                               url=article['article']['url'], urlToImage=article['article']['urlToImage'], publishedAt=article['article']['publishedAt'])
     db.session.add(newArticle)
     db.session.commit()
-    return {'message': f'{article} POST successful'}, 200
+    return {'message': article }, 200
 
 
 @saved_article_routes.route('/', methods=['GET'])

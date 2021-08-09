@@ -2,8 +2,8 @@
 :root {
   --main-highlight: whitesmoke;
   --main-dark: #808080;
-  --main-light: lightgrey;
-  --main-purple: rgba(36, 22, 129, 0.678);
+  --main-light: #d3d3d3;
+  --main-purple: #241681ad;
   --active-highlight: whitesmoke;
 }
 
@@ -11,12 +11,14 @@ html {
   width: 100vw;
   min-height: 100vh;
 }
-
+#root {
+  max-width: 100vw;
+}
 body {
   margin: 0;
   padding: 0;
   overflow-x: hidden;
-  width: 100vw;
+  max-width: 100vw;
   min-height: 100%;
   font-family: "Open Sans", sans-serif;
   color: var(--main-highlight);
@@ -43,4 +45,38 @@ input {
 .no-theme-wrapper {
   background: lightgray;
   min-height: 90vh;
+  max-width: 100vw;
+}
+.theme-wrapper {
+  background: lightgray;
+  min-height: 90vh;
+  max-width: 100vw;
+}
+
+#div-404 {
+  background-color: lightgrey;
+  min-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+#div-404 h1 {
+  margin: 0;
+}
+
+#alien {
+  height: 100px;
+  width: 100px;
+  background: url(./source-images/blueAlien.svg) center/100% no-repeat;
+}
+
+#scroll-to-top {
+  position: fixed;
+  bottom: 40px;
+  right: 40px;
+  height: 100px;
+  width: 100px;
+  background: url(./source-images/up-menu-arrows.png)  center/80% no-repeat
 }

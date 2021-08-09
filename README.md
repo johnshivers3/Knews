@@ -1,3 +1,6 @@
+
+
+
 # Knews App
 ![Screen Shot 2021-08-08 at 9 33 22 PM](https://user-images.githubusercontent.com/77175831/128655427-a359f85a-8b3e-4cef-a0f0-807de1069b30.png)
 
@@ -15,7 +18,8 @@ Knews App makes use the the [__NewsApi__](www.newsapi.org) service to bring you 
 > ![homepage](https://user-images.githubusercontent.com/77175831/128657724-86d6188a-bba9-4dd9-8230-326576437e45.jpg)
 
 ### A convenient place to get the stories you're interested in.
-> https://user-images.githubusercontent.com/77175831/128657938-f5df31dc-ba68-4864-b9b0-0344da82db76.mp4
+> https://user-images.githubusercontent.com/77175831/128659027-8b526028-9850-4110-a90a-53dd72bc08b5.mp4
+
 
 ### Add custom topics to follow for a quick feed of stories that match your topic
 > https://user-images.githubusercontent.com/77175831/128657914-01f5e906-fc71-48ea-b9cf-57a11d88e98a.mp4

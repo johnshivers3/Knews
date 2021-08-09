@@ -41,7 +41,7 @@ export const Results = ( ) => {
 
     return;
     // eslint-disable-next-line
-  }, [dispatch]);
+  }, [dispatch, categoryFeed, feedHeadlines, user]);
 
   const appTheme = { background: bgTheme };
   const headingStyle = { color: hTheme };

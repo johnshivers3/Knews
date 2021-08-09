@@ -40,7 +40,7 @@ export const NewsFeed = () => {
     }
 
     // eslint-disable-next-line
-  }, [dispatch]);
+  }, [dispatch, categoryFeed, feedHeadlines, user]);
 
   // useEffect(()=>{},[setFeedArticles])
   useEffect(() => {

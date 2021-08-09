@@ -11,6 +11,7 @@
 
 
 ## At a Glance
+Knews App makes use the the [__NewsApi__](www.newsapi.org) service to bring you top stories.
 > ![homepage](https://user-images.githubusercontent.com/77175831/128657724-86d6188a-bba9-4dd9-8230-326576437e45.jpg)
 
 ### A convenient place to get the stories you're interested in.
@@ -23,3 +24,10 @@
 
 ### Save articles to your dashboard to read later
 > https://user-images.githubusercontent.com/77175831/128657762-f0a3b084-c6cd-4a66-ae45-1e1141588419.mp4
+
+## Future Features
+ - Search bar to search for stories without saving
+ - Search result page with ability to sort and filter results
+ - Blocked terms to exclude during all queries to the news api.
+ - Default language to display stories in for home page news feed 
+ - Default country to display stories from for home page news feed

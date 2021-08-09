@@ -1,3 +1,11 @@
+import business from './../seed_data/business.json'
+import entertainment from './../seed_data/entertainment.json'
+import general from './../seed_data/general.json'
+import health from './../seed_data/health.json'
+import science from './../seed_data/science.json'
+import sports from './../seed_data/sports.json'
+import technology from './../seed_data/technology.json'
+
 const GET_TOP = "newsfeed/GET_TOP";
 const GET_RESULTS = "newsfeed/GET_RESULTS";
 const CLEAN_UP = "newsfeed/CLEAN_UP";
@@ -24,7 +32,7 @@ export const getTopHeadlines = () => async (dispatch) => {
     dispatch(getTop(topHeadlines));
     return topHeadlines;
   } else {
-    return ["An error occurred. Please try again."];
+    return general
   }
 };
 
@@ -36,7 +44,24 @@ export const getSearchResults = (query) => async (dispatch) => {
     dispatch(getResults(searchResults));
     return searchResults;
   } else {
-    return ["An error occurred. Please try again."];
+    switch (query.toLowerCase()) {
+      case 'business':
+        return business
+      case 'entertainment':
+        return entertainment
+      case 'general':
+        return general
+      case 'health':
+        return health
+      case 'science':
+        return science
+      case 'sports':
+        return sports
+      case 'techhnology':
+        return technology
+      default:
+        return ["An error has occured"];
+    }
   }
 };
 

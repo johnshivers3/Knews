@@ -62,7 +62,7 @@ export const Results = ( ) => {
     }
     return;
     // eslint-disable-next-line
-  }, [dispatch, categoryFeed]);
+  }, [dispatch, categoryFeed, feedHeadlines]);
 
   // Save article to database
 

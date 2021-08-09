@@ -4,6 +4,8 @@ import { Link } from "react-router-dom";
 import * as newsFeedActions from "../../store/newsfeed.js";
 import * as articleActions from "../../store/articles";
 import * as followActions from "../../store/follows";
+import * as preferenceActions from "../../store/preferences";
+
 import Logo from "../images/Logo.js";
 import ScrollToTop from "../ScrollToTop/ScrollToTop.js";
 import "./NewsFeed.css";
@@ -29,6 +31,7 @@ export const NewsFeed = () => {
 
   // Collect user preferences
   useEffect(() => {
+    dispatch(preferenceActions.getUserPreferences())
     if (userPreferences?.theme === "Dark") {
       setBgTheme("rgba(0, 0, 0, 0.75)");
       setHTheme("whitesmoke");
@@ -36,7 +39,6 @@ export const NewsFeed = () => {
       setBgTheme("rgba(0, 0, 0, 0.15)");
     }
 
-    return;
     // eslint-disable-next-line
   }, [dispatch]);
 
@@ -47,7 +49,7 @@ export const NewsFeed = () => {
     const query = userPreferences?.defaultFeed || "General";
     dispatch(newsFeedActions.getSearchResults(query));
 
-    return
+    return;
     // eslint-disable-next-line
   }, [dispatch, user]);
 
@@ -59,7 +61,7 @@ export const NewsFeed = () => {
     }
     return;
     // eslint-disable-next-line
-  }, [dispatch, categoryFeed]);
+  }, [dispatch, categoryFeed, feedHeadlines]);
 
   // Save article to database
 

@@ -38,6 +38,7 @@ Knews App makes use the the [__NewsApi__](www.newsapi.org) service to bring you 
 > https://user-images.githubusercontent.com/77175831/128657762-f0a3b084-c6cd-4a66-ae45-1e1141588419.mp4
 
 ## Future Features
+ - Enhance intuitivity. Alert user to new tab opening
  - Search bar to search for stories without saving
  - Search result page with ability to sort and filter results
  - Blocked terms to exclude during all queries to the news api.

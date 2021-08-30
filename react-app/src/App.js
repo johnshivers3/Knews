@@ -16,7 +16,7 @@ import { authenticate } from "./store/session";
 import * as newsFeedActions from "./store/newsfeed.js";
 import * as preferenceActions from "./store/preferences";
 
-function App({store}) {
+function App({ store }) {
   const [loaded, setLoaded] = useState(false);
   const dispatch = useDispatch();
   const userTheme = useSelector(
@@ -61,6 +61,7 @@ function App({store}) {
                 marginRight: "10px",
               }}
               href="/sign-up"
+              id='sign-up-link'
             >
               Sign Up
             </a>
@@ -71,7 +72,15 @@ function App({store}) {
         </>
 
         <div id="contact-links-div">
-          <h4>Developed by John Shivers</h4>
+          <div>
+            <h4>Developed by John Shivers</h4>
+            <Link
+              to={{ pathname: "https://www.ShiversDevelopment.com/" }}
+              target="_blank"
+            >
+              <h4>ShiversDevelopment.com</h4>
+            </Link>
+          </div>
 
           <div id="git">
             <Link
@@ -114,7 +123,7 @@ function App({store}) {
           </div>
         </Route>
         <Route path="/results/:query" exact={true}>
-          <Results userTheme={userTheme}/>
+          <Results userTheme={userTheme} />
         </Route>
         <ProtectedRoute path="/users" exact={true}>
           <UsersList />

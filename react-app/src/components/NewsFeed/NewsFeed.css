@@ -167,7 +167,6 @@ span#splash-feed {
   justify-content: flex-start;
   align-items: center;
   padding: 0 10vw;
-
 }
 span#splash-feed img {
   transform: scale(3);
@@ -192,6 +191,7 @@ span#splash-feed h2#tag-line {
   margin-right: 300px;
 }
 
+
 div#git {
   background: url(../../source-images/github-logo.svg) center/100% no-repeat;
   height: 40px;
@@ -199,6 +199,7 @@ div#git {
   margin: 0;
   box-sizing: border-box;
   display: flex;
+  transition: all 0.3s ease-in-out;
 }
 div#linkedin {
   background: url(../../source-images/linkedin.svg) center/100% no-repeat;
@@ -207,6 +208,7 @@ div#linkedin {
   margin: 0;
   box-sizing: border-box;
   display: flex;
+  transition: all 0.3s ease-in-out;
 }
 
 .contact-links {
@@ -225,7 +227,17 @@ div#linkedin {
 }
 #contact-links-div h4 {
   color: var(--main-purple);
+  margin: 0;
 }
+#contact-links-div a > h4 {
+  transition: all 0.4s ease-in-out;
+}
+#contact-links-div a > h4:hover,
+div#git:hover,
+div#linkedin:hover {
+  transform: scale(1.2);
+}
+
 #welcome-sign {
   font-size: x-large;
   width: 30vw;

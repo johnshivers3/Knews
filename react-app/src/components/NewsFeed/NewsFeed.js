@@ -31,7 +31,7 @@ export const NewsFeed = () => {
 
   // Collect user preferences
   useEffect(() => {
-    dispatch(preferenceActions.getUserPreferences())
+    dispatch(preferenceActions.getUserPreferences());
     if (userPreferences?.theme === "Dark") {
       setBgTheme("rgba(0, 0, 0, 0.75)");
       setHTheme("whitesmoke");
@@ -103,6 +103,8 @@ export const NewsFeed = () => {
                     marginRight: "10px",
                   }}
                   href="/sign-up"
+              id='sign-up-link'
+
                 >
                   Sign Up
                 </a>
@@ -135,7 +137,15 @@ export const NewsFeed = () => {
                 className="contact-links"
               ></Link>
             </div>
-            <h4>Developed by John Shivers</h4>
+            <div>
+              <h4>Developed by John Shivers</h4>
+              <Link
+                to={{ pathname: "https://www.ShiversDevelopment.com/" }}
+                target="_blank"
+              >
+                <h4>ShiversDevelopment.com</h4>
+              </Link>
+            </div>
           </div>
         </div>
       </span>

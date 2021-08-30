@@ -5,13 +5,14 @@ import * as newsFeedActions from "../../store/newsfeed.js";
 import * as articleActions from "../../store/articles";
 import * as followActions from "../../store/follows";
 import * as preferenceActions from "../../store/preferences";
-
 import Logo from "../images/Logo.js";
+import { useAlert } from "react-alert";
 import ScrollToTop from "../ScrollToTop/ScrollToTop.js";
 import "./NewsFeed.css";
 
 export const NewsFeed = () => {
   const dispatch = useDispatch();
+  const alert = useAlert();
   const feedHeadlines = useSelector((state) => state.newsfeed.news);
   const categoryFeed = useSelector((state) => state.newsfeed.searchResults);
   const allFollows = useSelector((state) => state.follows?.allFollows);
@@ -66,13 +67,14 @@ export const NewsFeed = () => {
   // Save article to database
 
   const addArticle = async (article) => {
-    if (!user) window.alert(`Sign Up or Log In \n to save articles.`);
-
-    const response = await dispatch(articleActions.addArticle(article));
-    if (response.message) {
-      window.alert(
-        `Article from ${response.message.article.source.name} saved`
-      );
+    if (!user) alert.info(`Sign Up or Log In \n to save articles.`);
+    else {
+      const response = await dispatch(articleActions.addArticle(article));
+      if (response.message) {
+        alert.success(
+          `Article from ${response.message.article.source.name} saved`
+        );
+      }
     }
   };
 
@@ -103,8 +105,7 @@ export const NewsFeed = () => {
                     marginRight: "10px",
                   }}
                   href="/sign-up"
-              id='sign-up-link'
-
+                  id="sign-up-link"
                 >
                   Sign Up
                 </a>
@@ -150,6 +151,7 @@ export const NewsFeed = () => {
         </div>
       </span>
       <div id="main-newsfeed-div">
+        {/* <PopUp/> */}
         <div className="newsfeed-header-div">
           <h1 style={headingStyle}>Top Stories</h1>
         </div>

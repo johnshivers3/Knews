@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-// import { useHistory } from "react-router-dom";
+import { useAlert } from "react-alert";
 
 import * as followsActions from "../../store/follows";
 import * as preferenceActions from "../../store/preferences";
@@ -26,10 +26,10 @@ export const Dashboard = () => {
   const [addFollow, setAddFollow] = useState(false);
   const [addFollowError, setAddFollowError] = useState("");
 
-
   const [bgTheme, setBgTheme] = useState("");
   const [hTheme, setHTheme] = useState("rgba(36, 22, 129, 0.978)");
-  // const history = useHistory();
+  const alert = useAlert();
+
   const appTheme = { background: bgTheme };
   const headingStyle = { color: hTheme };
 
@@ -95,9 +95,9 @@ export const Dashboard = () => {
         dispatch(followsActions.updateFollow(followEdit, e.target.value));
         return;
       case "add-follow-edit":
-        if (newFollowEdit.length > 0 ) {
+        if (newFollowEdit.length > 0) {
           await dispatch(followsActions.addFollow(newFollowEdit));
-          window.alert(`Topic: ${newFollowEdit} added`);
+          alert.success(`Topic: ${newFollowEdit} added`);
 
           setNewFollowEdit("");
           setAddFollowError("");
@@ -130,13 +130,13 @@ export const Dashboard = () => {
       case "delete-follow-button":
         await dispatch(followsActions.deleteOneFollow(e.target.value));
 
-        window.alert(`Topic: ${e.target.id} deleted`);
+        alert.success(`Topic: ${e.target.id} deleted`);
 
         break;
       case "delete-article-button":
         await dispatch(articleActions.deleteOneArticle(e.target.value));
 
-        window.alert(`Article from ${e.target.id.slice(0, 10)} deleted`);
+        alert.success(`Article from ${e.target.id.slice(0, 10)} deleted`);
 
         break;
       default:
@@ -190,7 +190,8 @@ export const Dashboard = () => {
                   userPreferences.theme === "" ? null : userPreferences.theme
                 }
                 onChange={(e) => {
-                  if (e.target.value !== userPreferences.theme) setTheme(e.target.value);
+                  if (e.target.value !== userPreferences.theme)
+                    setTheme(e.target.value);
                 }}
               >
                 {/* <datalist id="theme-list"> */}
@@ -211,7 +212,8 @@ export const Dashboard = () => {
                     : userPreferences.defaultFeed
                 }
                 onChange={(e) => {
-                  if (e.target.value !== userPreferences.defaultFeed) setFeed(e.target.value);
+                  if (e.target.value !== userPreferences.defaultFeed)
+                    setFeed(e.target.value);
                 }}
               >
                 {/* <datalist id="category-list"> */}

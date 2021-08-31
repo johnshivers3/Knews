@@ -34,45 +34,33 @@ export const Dashboard = () => {
   const headingStyle = { color: hTheme };
 
   useEffect(() => {
-    // dispatch(preferenceActions.getUserPreferences());
     if (userPreferences?.theme === "Dark") {
       setBgTheme("rgba(0, 0, 0, 0.75)");
       setHTheme("whitesmoke");
     } else {
       setBgTheme("rgba(0, 0, 0, 0.15)");
     }
-    return;
+
     // eslint-disable-next-line
   }, [dispatch]);
 
   // Collect users followed topics
   useEffect(() => {
     dispatch(followsActions.getAllFollows());
-    return () => {
-      dispatch(followsActions.cleanUpFollows());
-    };
   }, [dispatch]);
 
-  // Execute search for followed topic
-  // const searchTopic = (e) => {
-  //   e.preventDefault();
-  //   dispatch(newsFeedActions.getSearchResults(e.target.innerText));
   // };
 
   // Collect users followed topics
   useEffect(() => {
     dispatch(articleActions.getAllArticles());
-    return () => {
-      // dispatch(articleActions.cleanUpArticles());
-    };
+
   }, [dispatch]);
 
   // Collect user preferences
   useEffect(() => {
     dispatch(preferenceActions.getUserPreferences());
-    return () => {
-      // dispatch(preferenceActions.cleanUpPreferences());
-    };
+
   }, [dispatch]);
 
   // set edit state
@@ -92,7 +80,7 @@ export const Dashboard = () => {
 
         return;
       case "save-follow-edit":
-        dispatch(followsActions.updateFollow(followEdit, e.target.value));
+        dispatch(followsActions.updateFollow(followEdit, e.target.defaultValue));
         return;
       case "add-follow-edit":
         if (newFollowEdit.length > 0) {
@@ -190,6 +178,7 @@ export const Dashboard = () => {
                   userPreferences.theme === "" ? null : userPreferences.theme
                 }
                 onChange={(e) => {
+
                   if (e.target.value !== userPreferences.theme)
                     setTheme(e.target.value);
                 }}
@@ -212,6 +201,7 @@ export const Dashboard = () => {
                     : userPreferences.defaultFeed
                 }
                 onChange={(e) => {
+
                   if (e.target.value !== userPreferences.defaultFeed)
                     setFeed(e.target.value);
                 }}
@@ -423,7 +413,7 @@ export const Dashboard = () => {
                         placeholder={follow.topicString}
                         className="topic-edit-input"
                         defaultValue={follow.topicString}
-                        onChange={(e) => setFollowEdit(e.target.value)}
+                        onChange={(e) => setFollowEdit(e.target.defaultValue)}
                       />
                       <button
                         value={follow.id}

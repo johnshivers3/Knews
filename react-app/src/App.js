@@ -32,7 +32,7 @@ function App({ store }) {
       setLoaded(true);
     })();
   }, [dispatch]);
-  useEffect(() => {}, []);
+
 
   if (!loaded) {
     return null;
@@ -108,7 +108,7 @@ function App({ store }) {
   );
   const options = {
     timeout: 1500,
-    position: positions.MIDDLE,
+    position: positions.TOP_CENTER,
     containerStyle: { backdropFilter: "blur(2px)"}
   };
   return (
@@ -141,7 +141,7 @@ function App({ store }) {
           <Route path="/" exact={true}>
             <NewsFeed />
           </Route>
-          <Route path="/">
+          <Route >
             <Error />
           </Route>
         </Switch>

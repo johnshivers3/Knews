@@ -51,7 +51,7 @@ export const deletePreferences = (prefId) => async (dispatch) => {
 
   if (response.ok) {
     const pref = await response.json();
-    dispatch(cleanUpPreferences());
+
     dispatch(getUserPreferences());
     return pref;
   } else {
@@ -63,9 +63,7 @@ export const switchSetting = (setting) => (dispatch) => {
   dispatch(settingAction(setting));
 };
 
-export const cleanUpPreferences = () => (dispatch) => {
-  dispatch(cleanUp());
-};
+
 
 const initialState = { preferences: null, setting: null };
 
@@ -75,8 +73,6 @@ export default function reducer(state = initialState, action) {
       return { ...state, preferences: action.payload };
     case SET_SETTING:
       return { ...state, setting: action.payload };
-    case CLEAN_UP:
-      return initialState;
     default:
       return state;
   }

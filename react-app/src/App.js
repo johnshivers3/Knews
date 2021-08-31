@@ -15,6 +15,8 @@ import Error from "./components/Error";
 import { authenticate } from "./store/session";
 import * as newsFeedActions from "./store/newsfeed.js";
 import * as preferenceActions from "./store/preferences";
+import { positions, Provider } from "react-alert";
+import AlertTemplate from "react-alert-template-basic";
 
 function App({ store }) {
   const [loaded, setLoaded] = useState(false);
@@ -30,7 +32,7 @@ function App({ store }) {
       setLoaded(true);
     })();
   }, [dispatch]);
-  useEffect(() => {}, []);
+
 
   if (!loaded) {
     return null;
@@ -61,7 +63,7 @@ function App({ store }) {
                 marginRight: "10px",
               }}
               href="/sign-up"
-              id='sign-up-link'
+              id="sign-up-link"
             >
               Sign Up
             </a>
@@ -104,42 +106,48 @@ function App({ store }) {
       </div>
     </span>
   );
-
+  const options = {
+    timeout: 1500,
+    position: positions.TOP_CENTER,
+    containerStyle: { backdropFilter: "blur(2px)"}
+  };
   return (
-    <BrowserRouter>
-      <NavBar />
+    <Provider template={AlertTemplate} {...options}>
+      <BrowserRouter>
+        <NavBar />
 
-      <Switch>
-        <Route path="/login" exact={true}>
-          <div className="no-theme-wrapper">
-            <LoginForm />
-            {banner}
-          </div>
-        </Route>
-        <Route path="/sign-up" exact={true}>
-          <div className="no-theme-wrapper">
-            <SignUpForm />
-            {banner}
-          </div>
-        </Route>
-        <Route path="/results/:query" exact={true}>
-          <Results userTheme={userTheme} />
-        </Route>
-        <ProtectedRoute path="/users" exact={true}>
-          <UsersList />
-        </ProtectedRoute>
-        <ProtectedRoute path="/dashboard/:userId" exact={true}>
-          <Dashboard />
-        </ProtectedRoute>
-        <Route path="/" exact={true}>
-          <NewsFeed />
-        </Route>
-        <Route path="/">
-          <Error />
-        </Route>
-      </Switch>
-      <Footer />
-    </BrowserRouter>
+        <Switch>
+          <Route path="/login" exact={true}>
+            <div className="no-theme-wrapper">
+              <LoginForm />
+              {banner}
+            </div>
+          </Route>
+          <Route path="/sign-up" exact={true}>
+            <div className="no-theme-wrapper">
+              <SignUpForm />
+              {banner}
+            </div>
+          </Route>
+          <Route path="/results/:query" exact={true}>
+            <Results userTheme={userTheme} />
+          </Route>
+          <ProtectedRoute path="/users" exact={true}>
+            <UsersList />
+          </ProtectedRoute>
+          <ProtectedRoute path="/dashboard/:userId" exact={true}>
+            <Dashboard />
+          </ProtectedRoute>
+          <Route path="/" exact={true}>
+            <NewsFeed />
+          </Route>
+          <Route >
+            <Error />
+          </Route>
+        </Switch>
+        <Footer />
+      </BrowserRouter>
+    </Provider>
   );
 }
 

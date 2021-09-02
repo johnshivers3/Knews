@@ -80,7 +80,7 @@ export const Dashboard = () => {
 
         return;
       case "save-follow-edit":
-        dispatch(followsActions.updateFollow(followEdit, e.target.defaultValue));
+        dispatch(followsActions.updateFollow(followEdit, e.target.value));
         return;
       case "add-follow-edit":
         if (newFollowEdit.length > 0) {
@@ -355,7 +355,7 @@ export const Dashboard = () => {
             </div> */}
             <hr />
           </div>
-        ) : null}
+        ) : <div>Here</div>}
         {/* FOLLOWED TOPICS */}
         <div id="topics-header">
           <h2>Followed Topics</h2>

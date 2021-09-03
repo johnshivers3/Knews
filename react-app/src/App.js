@@ -138,7 +138,7 @@ function App({ store }) {
           <ProtectedRoute path="/dashboard/:userId" exact={true}>
             <Dashboard />
           </ProtectedRoute>
-          <Route path="/" exact={true}>
+          <Route path='/feed/:pagetheme' exact={true}>
             <NewsFeed />
           </Route>
           <Route >

@@ -38,7 +38,7 @@ export const updatePreferences = (preferences) => async (dispatch) => {
   if (response.ok) {
     const update = await response.json();
 
-    dispatch(getPreferences(update));
+    dispatch(getUserPreferences());
     return update;
   } else {
     return ["An error occurred. Please try again."];

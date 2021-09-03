@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import * as newsFeedActions from "../../store/newsfeed.js";
 import * as articleActions from "../../store/articles";
 import * as followActions from "../../store/follows";
@@ -11,6 +11,7 @@ import ScrollToTop from "../ScrollToTop/ScrollToTop.js";
 import "./NewsFeed.css";
 
 export const NewsFeed = () => {
+  const {pagetheme, newsfeed} = useParams()
   const dispatch = useDispatch();
   const alert = useAlert();
   const feedHeadlines = useSelector((state) => state.newsfeed.news);
@@ -33,7 +34,7 @@ export const NewsFeed = () => {
   // Collect user preferences
   useEffect(() => {
     dispatch(preferenceActions.getUserPreferences());
-    if (userPreferences?.theme === "Dark") {
+    if (pagetheme.toLowerCase() === "dark") {
       setBgTheme("rgba(0, 0, 0, 0.75)");
       setHTheme("whitesmoke");
     } else {
@@ -41,7 +42,7 @@ export const NewsFeed = () => {
     }
 
     // eslint-disable-next-line
-  }, [dispatch, categoryFeed, feedHeadlines, user]);
+  }, [dispatch, user]);
 
   // useEffect(()=>{},[setFeedArticles])
   useEffect(() => {

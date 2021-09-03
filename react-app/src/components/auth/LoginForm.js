@@ -9,6 +9,7 @@ const LoginForm = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const user = useSelector((state) => state.session.user);
+  const pagetheme = useSelector(state => state.preferences.preferences);
   const dispatch = useDispatch();
 
   const onLogin = async (e) => {
@@ -31,7 +32,8 @@ const LoginForm = () => {
   };
 
   if (user) {
-    return <Redirect to="/" />;
+
+    return pagetheme.theme ? <Redirect to={`/feed/${pagetheme.theme}`} /> : <Redirect to='/feed/light' />;
   }
 
   return (

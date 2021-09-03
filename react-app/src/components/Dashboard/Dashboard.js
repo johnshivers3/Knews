@@ -34,15 +34,15 @@ export const Dashboard = () => {
   const headingStyle = { color: hTheme };
 
   useEffect(() => {
+
+    // eslint-disable-next-line
     if (userPreferences?.theme === "Dark") {
       setBgTheme("rgba(0, 0, 0, 0.75)");
       setHTheme("whitesmoke");
     } else {
       setBgTheme("rgba(0, 0, 0, 0.15)");
     }
-
-    // eslint-disable-next-line
-  }, [dispatch]);
+  }, [dispatch, userPreferences?.theme]);
 
   // Collect users followed topics
   useEffect(() => {
@@ -355,7 +355,7 @@ export const Dashboard = () => {
             </div> */}
             <hr />
           </div>
-        ) : <div>Here</div>}
+        ) : null}
         {/* FOLLOWED TOPICS */}
         <div id="topics-header">
           <h2>Followed Topics</h2>

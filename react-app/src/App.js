@@ -11,6 +11,7 @@ import ProtectedRoute from "./components/auth/ProtectedRoute";
 import UsersList from "./components/UsersList";
 import Dashboard from "./components/Dashboard/Dashboard";
 import Results from "./components/Results/Results";
+import Knews from "./components/Knews/Knews";
 import Error from "./components/Error";
 import { authenticate } from "./store/session";
 import * as newsFeedActions from "./store/newsfeed.js";
@@ -24,14 +25,20 @@ function App({ store }) {
   const userTheme = useSelector(
     (state) => state.preferences.preferences?.theme
   );
+
+  const country = useSelector(
+    (state) => state.preferences.preferences?.country
+  );
+
   useEffect(() => {
     (async () => {
       await dispatch(authenticate());
-      await dispatch(newsFeedActions.getTopHeadlines());
       await dispatch(preferenceActions.getUserPreferences());
+      console.log(country);
+      await dispatch(newsFeedActions.getTopHeadlines(country));
       setLoaded(true);
     })();
-  }, [dispatch]);
+  }, [dispatch, country]);
 
 
   if (!loaded) {
@@ -140,6 +147,9 @@ function App({ store }) {
           </ProtectedRoute>
           <Route path='/feed/:pagetheme' exact={true}>
             <NewsFeed />
+          </Route>
+          <Route path="/" exact={true}>
+            <Knews/>
           </Route>
           <Route >
             <Error />

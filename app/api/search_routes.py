@@ -21,13 +21,15 @@ def get_search_result(query):
     return data
 
 
-@search_routes.route('/title/<query>')
-def get_search_result_by_title(query):
+@search_routes.route('/title/<query>/<language>')
+def get_search_result_by_title(query, language):
     '''
     This is route is a general query by title.
     '''
     encoded_query = urllib.parse.quote_plus(query)
-    payload = {'qInTitle': encoded_query, 'apiKey': Config.NEWS_KEY, 'pageSize':'100'}
+    # encoded_language = urllib.parse.quote_plus(language)
+    # encoded_country = urllib.parse.quote_plus(country)
+    payload = {'qInTitle': encoded_query, 'apiKey': Config.NEWS_KEY, 'language': language}
     response = requests.get(
         f'https://newsapi.org/v2/everything?pageSize=100', params=payload)
     data = response.json()
@@ -54,6 +56,7 @@ def get_top_headlines(country):
     This is route returns top headlines in the United States by default.
 
     '''
+
     if country is None:
         response = requests.get(
             f'https://newsapi.org/v2/top-headlines?country=us&apiKey={Config.NEWS_KEY}')

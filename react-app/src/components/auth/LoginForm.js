@@ -33,7 +33,7 @@ const LoginForm = () => {
 
   if (user) {
 
-    return pagetheme.theme ? <Redirect to={`/feed/${pagetheme.theme}`} /> : <Redirect to='/feed/light' />;
+    return pagetheme?.theme ? <Redirect to={`/feed/${pagetheme?.theme}`} /> : <Redirect to='/feed/light' />;
   }
 
   return (

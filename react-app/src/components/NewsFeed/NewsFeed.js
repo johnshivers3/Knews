@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, useLocation } from "react-router-dom";
 import * as newsFeedActions from "../../store/newsfeed.js";
 import * as articleActions from "../../store/articles";
 import * as followActions from "../../store/follows";
@@ -9,9 +9,10 @@ import Logo from "../images/Logo.js";
 import { useAlert } from "react-alert";
 import ScrollToTop from "../ScrollToTop/ScrollToTop.js";
 import "./NewsFeed.css";
+import Knews from "../Knews/Knews.js";
 
 export const NewsFeed = () => {
-  const {pagetheme, newsfeed} = useParams()
+  const { pagetheme, newsfeed } = useParams();
   const dispatch = useDispatch();
   const alert = useAlert();
   const feedHeadlines = useSelector((state) => state.newsfeed.news);
@@ -19,7 +20,7 @@ export const NewsFeed = () => {
   const allFollows = useSelector((state) => state.follows?.allFollows);
   const userPreferences = useSelector((state) => state.preferences.preferences);
   const user = useSelector((state) => state.session.user);
-
+  const location = useLocation()
   const [hTheme, setHTheme] = useState("rgba(36, 22, 129, 0.978)");
   const [bgTheme, setBgTheme] = useState("");
 
@@ -49,7 +50,10 @@ export const NewsFeed = () => {
     if (user) dispatch(followActions.getAllFollows());
 
     const query = userPreferences?.defaultFeed || "General";
-    dispatch(newsFeedActions.getSearchResults(query));
+    const language = userPreferences?.language || "en";
+    const country = userPreferences?.country || "us";
+
+    dispatch(newsFeedActions.getSearchResults(query, language));
 
     return;
     // eslint-disable-next-line
@@ -62,8 +66,7 @@ export const NewsFeed = () => {
       setFeedArticles(feedHeadlines?.articles);
     }
     return;
-    // eslint-disable-next-line
-  }, [dispatch, categoryFeed, feedHeadlines]);
+  }, [dispatch, categoryFeed, feedHeadlines, user]);
 
   // Save article to database
 
@@ -81,7 +84,12 @@ export const NewsFeed = () => {
 
   return (
     <div className="theme-wrapper" style={appTheme}>
-      <span id="splash-feed" style={splashTheme}>
+      <Knews
+        user={user}
+        headingStyle={headingStyle}
+        splashTheme={splashTheme}
+      />
+      {/* <span id="splash-feed" style={splashTheme}>
         <Logo />
         <div>
           <h1
@@ -150,7 +158,7 @@ export const NewsFeed = () => {
             </div>
           </div>
         </div>
-      </span>
+      </span> */}
       <div id="main-newsfeed-div">
         {/* <PopUp/> */}
         <div className="newsfeed-header-div">
@@ -270,9 +278,9 @@ export const NewsFeed = () => {
                       </a>
                       <hr />
                       <p>
-                        {article.content.substring(
+                        {article.content?.substring(
                           0,
-                          article.content.indexOf("[")
+                          article.content?.indexOf("[")
                         )}
                       </p>
                       <div className="upper link-div">

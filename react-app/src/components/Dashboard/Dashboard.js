@@ -10,15 +10,14 @@ import * as articleActions from "../../store/articles";
 import "./Dashboard.css";
 
 export const Dashboard = () => {
-  // const [language, setLanguage] = useState("");
-  // const [country, setCountry] = useState("");
   const dispatch = useDispatch();
   const [edit, setEdit] = useState("");
   const user = useSelector((state) => state.session.user);
   const userFollows = useSelector((state) => state.follows.allFollows);
   const userArticles = useSelector((state) => state.articles.allArticles);
   const userPreferences = useSelector((state) => state.preferences.preferences);
-
+  const [language, setLanguage] = useState(userPreferences?.lang);
+  const [country, setCountry] = useState(userPreferences?.theme);
   const [feed, setFeed] = useState(userPreferences?.defaultFeed);
   const [theme, setTheme] = useState(userPreferences?.theme);
   const [followEdit, setFollowEdit] = useState("");
@@ -34,7 +33,6 @@ export const Dashboard = () => {
   const headingStyle = { color: hTheme };
 
   useEffect(() => {
-
     // eslint-disable-next-line
     if (userPreferences?.theme === "Dark") {
       setBgTheme("rgba(0, 0, 0, 0.75)");
@@ -54,13 +52,11 @@ export const Dashboard = () => {
   // Collect users followed topics
   useEffect(() => {
     dispatch(articleActions.getAllArticles());
-
   }, [dispatch]);
 
   // Collect user preferences
   useEffect(() => {
     dispatch(preferenceActions.getUserPreferences());
-
   }, [dispatch]);
 
   // set edit state
@@ -95,9 +91,9 @@ export const Dashboard = () => {
         }
         return;
       case "save-preference-edit":
-        // newPreferences["country"] = country;
-        // newPreferences["lang"] = language;
         const newPreferences = { ...userPreferences };
+        newPreferences["country"] = country;
+        newPreferences["lang"] = language;
         newPreferences["defaultFeed"] = feed;
         newPreferences["theme"] = theme;
         dispatch(preferenceActions.updatePreferences(newPreferences));
@@ -167,192 +163,163 @@ export const Dashboard = () => {
             </div>
             <hr />
             <div className="preference-div">
-              <label htmlFor="theme-input">Default Theme</label>
-              <select
-                id="default-theme-search"
-                name="theme-input"
-                // type="search"
-                list="theme-list"
-                placeholder="Set default theme for your feed"
-                defaultValue={
-                  userPreferences.theme === "" ? null : userPreferences.theme
-                }
-                onChange={(e) => {
+              <div id="default-theme-select">
+                <label htmlFor="theme">
+                  <h2>Theme</h2>
+                </label>
+                <select
+                  autoComplete="on"
+                  name="theme"
+                  placeholder="Set default theme for your feed"
+                  defaultValue={
+                    userPreferences.theme === "" ? null : userPreferences.theme
+                  }
+                  onChange={(e) => {
+                    if (e.target.value !== userPreferences.theme)
+                      setTheme(e.target.value);
+                  }}
+                >
+                  <option>Light</option>
+                  <option>Dark</option>
+                </select>
+              </div>
 
-                  if (e.target.value !== userPreferences.theme)
-                    setTheme(e.target.value);
-                }}
-              >
-                {/* <datalist id="theme-list"> */}
-                <option>Light</option>
-                <option>Dark</option>
-                {/* </datalist> */}
-              </select>
-              <label htmlFor="category-input">Default Category</label>
-              <select
-                id="default-category-search"
-                name="category-input"
-                // type="search"
-                list="category-list"
-                placeholder="Set default category for your feed"
-                defaultValue={
-                  userPreferences.defaultFeed === ""
-                    ? null
-                    : userPreferences.defaultFeed
-                }
-                onChange={(e) => {
-
-                  if (e.target.value !== userPreferences.defaultFeed)
-                    setFeed(e.target.value);
-                }}
-              >
-                {/* <datalist id="category-list"> */}
-                <option>Business</option>
-                <option>Entertainment</option>
-                <option>General</option>
-                <option>Health</option>
-                <option>Science</option>
-                <option>Sports</option>
-                <option>Technology</option>
-                {/* </datalist> */}
-              </select>
+              <div id="default-category-select">
+                <label htmlFor="category">
+                  <h2>Category</h2>
+                </label>
+                <select
+                  autoComplete="on"
+                  name="category"
+                  placeholder="Set default category for your feed"
+                  defaultValue={
+                    userPreferences.defaultFeed === ""
+                      ? null
+                      : userPreferences.defaultFeed
+                  }
+                  onChange={(e) => {
+                    if (e.target.value !== userPreferences.defaultFeed)
+                      setFeed(e.target.value);
+                  }}
+                >
+                  <option>Business</option>
+                  <option>Entertainment</option>
+                  <option>General</option>
+                  <option>Health</option>
+                  <option>Science</option>
+                  <option>Sports</option>
+                  <option>Technology</option>
+                </select>
+              </div>
             </div>
 
-            {/* <div className="preference-div">
-
-              <input
-                id="language-search"
-                type="search"
-                list="language-list"
-                placeholder="Set your preferred language"
-                defaultValue={
-                  userPreferences.lang === "" ? null : userPreferences.lang
-                }
-                onChange={(e) => {
-                  if (e.target.value !== "") setLanguage(e.target.value);
-                }}
-              ></input>
-              <datalist
-                id="language-list"
-                style={{ display: "none" }}
-                value={language}
-              >
-                <option defaultValue={userPreferences.lang === ""} value="">
-                  Select default language
-                </option>
-                <option defaultValue={userPreferences.lang === "ar"} value="ar">
-                  Arabic, العربية
-                </option>
-                <option defaultValue={userPreferences.lang === "de"} value="de">
-                  German, Deutsch
-                </option>
-                <option defaultValue={userPreferences.lang === "en"} value="en">
-                  English
-                </option>
-                <option defaultValue={userPreferences.lang === "es"} value="es">
-                  Spanish, Castilian, Español
-                </option>
-                <option defaultValue={userPreferences.lang === "he"} value="he">
-                  Hebrew, עברית
-                </option>
-                <option defaultValue={userPreferences.lang === "it"} value="it">
-                  Italian, Italiano
-                </option>
-                <option defaultValue={userPreferences.lang === "nl"} value="nl">
-                  Dutch, Flemish
-                </option>
-                <option defaultValue={userPreferences.lang === "no"} value="no">
-                  Norwegian, Norsk
-                </option>
-                <option defaultValue={userPreferences.lang === "pt"} value="pt">
-                  Portuguese, Português
-                </option>
-                <option defaultValue={userPreferences.lang === "ru"} value="ru">
-                  Russian, русский
-                </option>
-                <option defaultValue={userPreferences.lang === "se"} value="se">
-                  Northern Sami, Davvisámegiella
-                </option>
-                <option defaultValue={userPreferences.lang === "zh"} value="zh">
-                  Chinese, 中文 (Zhōngwén), 汉语, 漢語
-                </option>
-              </datalist>
-              <input
-                id="country-search"
-                type="search"
-                list="country-list"
-                autoComplete="on"
-                placeholder="Set preferred country"
-                defaultValue={
-                  userPreferences.country === ""
-                    ? null
-                    : userPreferences.country
-                }
-                onChange={(e) => {
-                  if (e.target.value !== "") setCountry(e.target.value);
-                }}
-              ></input>
-              <datalist
-                id="country-list"
-                // autoComplete="on"
-                style={{ display: "none" }}
-              >
-                <option value="U.A.E">ae</option>
-                <option value="Argentina">ar</option>
-                <option value="Austria">at</option>
-                <option value="Australia">au</option>
-                <option value="Belgium">be</option>
-                <option value="Bulgaria">bg</option>
-                <option value="Brazil">br</option>
-                <option value="Canada">ca</option>
-                <option value="Switzerland">ch</option>
-                <option value="China">cn</option>
-                <option value="Colombia">co</option>
-                <option value="Cuba">cu</option>
-                <option value="Czechia">cz</option>
-                <option value="Germany">de</option>
-                <option value="Egypt">eg</option>
-                <option value="France">fr</option>
-                <option value="United Kingdom"> gb</option>
-                <option value="Greece">gr</option>
-                <option value="Hong Kong"> hk</option>
-                <option value="Hungary">hu</option>
-                <option value="Indonesia">id</option>
-                <option value="Ireland">ie</option>
-                <option value="Israel">il</option>
-                <option value="India">in</option>
-                <option value="Italy">it</option>
-                <option value="Japan">jp</option>
-                <option value="Korea">kr</option>
-                <option value="Lithuania">lt</option>
-                <option value="Latvia">lv</option>
-                <option value="Morocco">ma</option>
-                <option value="Mexico">mx</option>
-                <option value="Malaysia">my</option>
-                <option value="Nigeria">ng</option>
-                <option value="Netherlands">nl</option>
-                <option value="Norway">no</option>
-                <option value="New Zealand"> nz</option>
-                <option value="Philippines">ph</option>
-                <option value="Poland">pl</option>
-                <option value="Portugal">pt</option>
-                <option value="Romania">ro</option>
-                <option value="Serbia">rs</option>
-                <option value="Russia">ru</option>
-                <option value="Saudi Arabia"> sa</option>
-                <option value="Sweden">se</option>
-                <option value="Singapore">sg</option>
-                <option value="Slovenia">si</option>
-                <option value="Slovakia">sk</option>
-                <option value="Thailand">th</option>
-                <option value="Turkey">tr</option>
-                <option value="Taiwan">tw</option>
-                <option value="Ukraine">ua</option>
-                <option value="United States"> us</option>
-                <option value="Venezuela">ve</option>
-                <option value="South Africa"> za</option>
-              </datalist>
-            </div> */}
+            <div className="preference-div">
+              <div id="language-select">
+                <label htmlFor="language">
+                  <h2>Language</h2>
+                </label>
+                <select
+                  name="language"
+                  autoComplete="on"
+                  placeholder="Set your preferred language"
+                  defaultValue={
+                    userPreferences.lang === "" ? null : userPreferences.lang
+                  }
+                  onChange={(e) => {
+                    if (e.target.value !== "") setLanguage(e.target.value);
+                  }}
+                >
+                  <option>Select default language</option>
+                  <option value="ar">Arabic, العربية</option>
+                  <option value="de">German, Deutsch</option>
+                  <option value="en">English</option>
+                  <option value="es">Spanish, Castilian, Español</option>
+                  <option value="he">Hebrew, עברית</option>
+                  <option value="it">Italian, Italiano</option>
+                  <option value="nl">Dutch, Flemish</option>
+                  <option value="no">Norwegian, Norsk</option>
+                  <option value="pt">Portuguese, Português</option>
+                  <option value="ru">Russian, русский</option>
+                  <option value="se">Northern Sami, Davvisámegiella</option>
+                  <option value="zh">
+                    Chinese, 中文 (Zhōngwén), 汉语, 漢語
+                  </option>
+                </select>
+              </div>
+              <div id="country-select">
+                <label htmlFor="country">
+                  <h2>Country</h2>
+                </label>
+                <select
+                  name="country"
+                  autoComplete="on"
+                  placeholder="Set preferred country"
+                  defaultValue={
+                    userPreferences.country === ""
+                      ? null
+                      : userPreferences.country
+                  }
+                  onChange={(e) => {
+                    if (e.target.value !== "") setCountry(e.target.value);
+                  }}
+                >
+                  <option value="ae">U.A.E.</option>
+                  <option value="ar">Argentina </option>
+                  <option value="at">Austria </option>
+                  <option value="au">Australia </option>
+                  <option value="be">Belgium </option>
+                  <option value="bg">Bulgaria </option>
+                  <option value="br">Brazil </option>
+                  <option value="ca">Canada </option>
+                  <option value="ch">Switzerland </option>
+                  <option value="cn">China </option>
+                  <option value="co">Colombia </option>
+                  <option value="cu">Cuba </option>
+                  <option value="cz">Czechia </option>
+                  <option value="de">Germany </option>
+                  <option value="eg">Egypt </option>
+                  <option value="fr">France </option>
+                  <option value="gb"> United Kingdom</option>
+                  <option value="gr">Greece </option>
+                  <option value="hk"> Hong Kong</option>
+                  <option value="hu">Hungary </option>
+                  <option value="id">Indonesia </option>
+                  <option value="ie">Ireland </option>
+                  <option value="il">Israel </option>
+                  <option value="in">India </option>
+                  <option value="it">Italy </option>
+                  <option value="jp">Japan </option>
+                  <option value="kr">Korea </option>
+                  <option value="lt">Lithuania </option>
+                  <option value="lv">Latvia </option>
+                  <option value="ma">Morocco </option>
+                  <option value="mx">Mexico </option>
+                  <option value="my">Malaysia </option>
+                  <option value="ng">Nigeria </option>
+                  <option value="nl">Netherlands </option>
+                  <option value="no">Norway </option>
+                  <option value="nz"> New Zealand</option>
+                  <option value="ph">Philippines </option>
+                  <option value="pl">Poland </option>
+                  <option value="pt">Portugal </option>
+                  <option value="ro">Romania </option>
+                  <option value="rs">Serbia </option>
+                  <option value="ru">Russia </option>
+                  <option value="sa"> Saudi Arabia</option>
+                  <option value="se">Sweden </option>
+                  <option value="sg">Singapore </option>
+                  <option value="si">Slovenia </option>
+                  <option value="sk">Slovakia </option>
+                  <option value="th">Thailand </option>
+                  <option value="tr">Turkey </option>
+                  <option value="tw">Taiwan </option>
+                  <option value="ua">Ukraine </option>
+                  <option value="us"> United States</option>
+                  <option value="ve">Venezuela </option>
+                  <option value="za"> South Africa</option>
+                </select>
+              </div>
+            </div>
             <hr />
           </div>
         ) : null}

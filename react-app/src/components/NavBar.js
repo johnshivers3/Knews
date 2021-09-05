@@ -37,8 +37,8 @@ const NavBar = () => {
               <li>
                 <NavLink
                   to={
-                    pagetheme.theme
-                      ? `/feed/${pagetheme.theme.toLowerCase()}`
+                    pagetheme?.theme
+                      ? `/feed/${pagetheme?.theme.toLowerCase()}`
                       : "/feed/light"
                   }
                   exact={true}

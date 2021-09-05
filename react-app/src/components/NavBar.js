@@ -18,12 +18,17 @@ const NavBar = () => {
     dispatch(login(email, password));
   };
 
-
-
   return (
     <nav>
       <div id="logo-nav">
-        <Link to="/">
+        <Link
+          to={
+            pagetheme?.theme
+              ? `/feed/${pagetheme?.theme.toLowerCase()}`
+              : "/feed/light"
+          }
+          exact={true}
+        >
           <Logo />
         </Link>
         {/* <h1>KNEWS</h1> */}

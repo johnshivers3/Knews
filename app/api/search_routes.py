@@ -60,12 +60,6 @@ def get_top_headlines(country, category):
     This is route returns top headlines in the United States by default.
 
     '''
-
-    if country is None:
-        country = 'us'
-    if category is None:
-        category = 'general'
-
     payload = {'country': country, 'category': category,
                 'apiKey': Config.NEWS_KEY, 'pageSize': '100'}
 

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { Link, useParams,  } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import * as newsFeedActions from "../../store/newsfeed.js";
 import * as articleActions from "../../store/articles";
 import * as followActions from "../../store/follows";
@@ -33,7 +33,6 @@ export const NewsFeed = () => {
 
   // Collect user preferences
   useEffect(() => {
-
     dispatch(preferenceActions.getUserPreferences());
     if (pagetheme.toLowerCase() === "dark") {
       setBgTheme("rgba(0, 0, 0, 0.75)");
@@ -41,22 +40,19 @@ export const NewsFeed = () => {
     } else {
       setBgTheme("rgba(0, 0, 0, 0.15)");
     }
-
-
   }, [dispatch, user, pagetheme]);
 
-
   useEffect(() => {
-
     if (user) dispatch(followActions.getAllFollows());
 
-    const query = userPreferences?.defaultFeed ?? "General";
-    const language = userPreferences?.language ?? "en";
-
-    dispatch(newsFeedActions.getSearchResults(query, language));
+    dispatch(
+      newsFeedActions.getSearchResults(
+        userPreferences?.defaultFeed ?? "General",
+        userPreferences?.language ?? "en"
+      )
+    );
 
     return;
-
   }, [dispatch, user, userPreferences?.defaultFeed, userPreferences?.language]);
 
   useEffect(() => {

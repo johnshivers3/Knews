@@ -37,8 +37,7 @@ function App({ store }) {
     (async () => {
       await dispatch(authenticate());
       await dispatch(preferenceActions.getUserPreferences());
-      console.log(country);
-      await dispatch(newsFeedActions.getTopHeadlines(country, defaultFeed));
+      await dispatch(newsFeedActions.getTopHeadlines( country ?? 'us', defaultFeed ?? 'general'));
       setLoaded(true);
     })();
   }, [dispatch, country, defaultFeed]);

@@ -24,8 +24,8 @@ const cleanUp = () => ({
   type: CLEAN_UP,
 });
 
-export const getTopHeadlines = (country = 'us') => async (dispatch) => {
-  const response = await fetch(`/api/search/top-headlines/${country}`);
+export const getTopHeadlines = (country, category) => async (dispatch) => {
+  const response = await fetch(`/api/search/top-headlines/${country}/${category}`);
 
   if (response.ok) {
     const topHeadlines = await response.json();

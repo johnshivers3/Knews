@@ -17,7 +17,7 @@ export const Dashboard = () => {
   const userArticles = useSelector((state) => state.articles.allArticles);
   const userPreferences = useSelector((state) => state.preferences.preferences);
   const [language, setLanguage] = useState(userPreferences?.lang);
-  const [country, setCountry] = useState(userPreferences?.theme);
+  const [country, setCountry] = useState(userPreferences?.country);
   const [feed, setFeed] = useState(userPreferences?.defaultFeed);
   const [theme, setTheme] = useState(userPreferences?.theme);
   const [followEdit, setFollowEdit] = useState("");
@@ -255,7 +255,7 @@ export const Dashboard = () => {
                   autoComplete="on"
                   placeholder="Set preferred country"
                   defaultValue={
-                    userPreferences.country === ""
+                    userPreferences?.country === ""
                       ? null
                       : userPreferences.country
                   }

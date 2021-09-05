@@ -6,12 +6,14 @@ import * as articleActions from "../../store/articles";
 import * as followActions from "../../store/follows";
 import * as preferenceActions from "../../store/preferences";
 import Logo from "../images/Logo.js";
-
+import { useAlert } from "react-alert";
 import "./Results.css";
 
 export const Results = () => {
   const dispatch = useDispatch();
   const { query } = useParams();
+  const alert = useAlert();
+
   const feedHeadlines = useSelector((state) => state.newsfeed.news);
   const categoryFeed = useSelector((state) => state.newsfeed.searchResults);
   const allFollows = useSelector((state) => state.follows?.allFollows);
@@ -68,11 +70,11 @@ export const Results = () => {
   // Save article to database
 
   const addArticle = async (article) => {
-    if (!user) window.alert(`Sign Up or Log In \n to save articles.`);
+    if (!user) alert.info(`Sign Up or Log In \n to save articles.`);
 
     const response = await dispatch(articleActions.addArticle(article));
     if (response.message) {
-      window.alert(
+      alert.success(
         `Article from ${response.message.article.source.name} saved`
       );
     }

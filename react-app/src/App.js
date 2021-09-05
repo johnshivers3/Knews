@@ -29,17 +29,19 @@ function App({ store }) {
   const country = useSelector(
     (state) => state.preferences.preferences?.country
   );
+  const defaultFeed = useSelector(
+    (state) => state.preferences.preferences?.defaultFeed
+  );
 
   useEffect(() => {
     (async () => {
       await dispatch(authenticate());
       await dispatch(preferenceActions.getUserPreferences());
       console.log(country);
-      await dispatch(newsFeedActions.getTopHeadlines(country));
+      await dispatch(newsFeedActions.getTopHeadlines(country, defaultFeed));
       setLoaded(true);
     })();
-  }, [dispatch, country]);
-
+  }, [dispatch, country, defaultFeed]);
 
   if (!loaded) {
     return null;
@@ -114,9 +116,9 @@ function App({ store }) {
     </span>
   );
   const options = {
-    timeout: 1500,
-    position: positions.TOP_CENTER,
-    containerStyle: { backdropFilter: "blur(2px)"}
+    timeout: 2000,
+    position: positions.MIDDLE,
+    containerStyle: { backdropFilter: "blur(2px)" },
   };
   return (
     <Provider template={AlertTemplate} {...options}>
@@ -145,13 +147,13 @@ function App({ store }) {
           <ProtectedRoute path="/dashboard/:userId" exact={true}>
             <Dashboard />
           </ProtectedRoute>
-          <Route path='/feed/:pagetheme' exact={true}>
+          <Route path="/feed/:pagetheme" exact={true}>
             <NewsFeed />
           </Route>
           <Route path="/" exact={true}>
-            <Knews/>
+            <Knews />
           </Route>
-          <Route >
+          <Route>
             <Error />
           </Route>
         </Switch>

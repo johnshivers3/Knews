@@ -1,0 +1,20 @@
+.welcome {
+  background-color: var(--main-purple);
+}
+
+#rolling-alien {
+  position: absolute;
+  animation: 5s ease-out 0s infinite roll;
+}
+
+@keyframes roll {
+  from {
+    margin-left: 0%;
+    transform: rotate(0deg);
+  }
+  to {
+    margin-left: 110%;
+    transform: rotate(360deg);
+
+  }
+}

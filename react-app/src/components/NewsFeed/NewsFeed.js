@@ -1,16 +1,17 @@
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import * as newsFeedActions from "../../store/newsfeed.js";
 import * as articleActions from "../../store/articles";
 import * as followActions from "../../store/follows";
 import * as preferenceActions from "../../store/preferences";
-import Logo from "../images/Logo.js";
 import { useAlert } from "react-alert";
 import ScrollToTop from "../ScrollToTop/ScrollToTop.js";
 import "./NewsFeed.css";
+import Knews from "../Knews/Knews.js";
 
 export const NewsFeed = () => {
+  const { pagetheme } = useParams();
   const dispatch = useDispatch();
   const alert = useAlert();
   const feedHeadlines = useSelector((state) => state.newsfeed.news);
@@ -33,36 +34,35 @@ export const NewsFeed = () => {
   // Collect user preferences
   useEffect(() => {
     dispatch(preferenceActions.getUserPreferences());
-    if (userPreferences?.theme === "Dark") {
+    if (pagetheme.toLowerCase() === "dark") {
       setBgTheme("rgba(0, 0, 0, 0.75)");
       setHTheme("whitesmoke");
     } else {
       setBgTheme("rgba(0, 0, 0, 0.15)");
     }
+  }, [dispatch, user, pagetheme]);
 
-    // eslint-disable-next-line
-  }, [dispatch, categoryFeed, feedHeadlines, user]);
-
-  // useEffect(()=>{},[setFeedArticles])
   useEffect(() => {
     if (user) dispatch(followActions.getAllFollows());
 
-    const query = userPreferences?.defaultFeed || "General";
-    dispatch(newsFeedActions.getSearchResults(query));
+    dispatch(
+      newsFeedActions.getSearchResults(
+        userPreferences?.defaultFeed ?? "General",
+        userPreferences?.language ?? "en"
+      )
+    );
 
     return;
-    // eslint-disable-next-line
-  }, [dispatch, user]);
+  }, [dispatch, user, userPreferences?.defaultFeed, userPreferences?.language]);
 
   useEffect(() => {
-    if (user) {
+    if (userPreferences?.defaultFeed) {
       setFeedArticles(categoryFeed?.articles);
     } else {
       setFeedArticles(feedHeadlines?.articles);
     }
     return;
-    // eslint-disable-next-line
-  }, [dispatch, categoryFeed, feedHeadlines]);
+  }, [dispatch, categoryFeed, feedHeadlines, userPreferences?.defaultFeed]);
 
   // Save article to database
 
@@ -80,78 +80,12 @@ export const NewsFeed = () => {
 
   return (
     <div className="theme-wrapper" style={appTheme}>
-      <span id="splash-feed" style={splashTheme}>
-        <Logo />
-        <div>
-          <h1
-            id="newsfeed-heading"
-            style={headingStyle}
-            onClick={() => window.location.reload(false)}
-          >
-            KNEWS
-          </h1>
-          <h2 id="tag-line">Your personal news app</h2>
-        </div>
-        <div>
-          {!user ? (
-            <>
-              <h2>Curate your news experience</h2>
-              <h3>
-                <a
-                  style={{
-                    fontWeight: "bold",
-                    fontSize: "larger",
-                    color: `${headingStyle.color}`,
-                    marginRight: "10px",
-                  }}
-                  href="/sign-up"
-                  id="sign-up-link"
-                >
-                  Sign Up
-                </a>
-                to view the stories YOU want to see
-              </h3>
-              <h3>Follow your favorite topics</h3>
-              <h3>Save articles to read later</h3>
-            </>
-          ) : (
-            <>
-              <h2>Curate your news experience</h2>
-              <h3>Follow your favorite topics</h3>
-              <h3>Save articles to read later</h3>
-            </>
-          )}
-          <div id="contact-links-div">
-            <div id="git">
-              <Link
-                to={{ pathname: "https://github.com/johnshivers3/Knews" }}
-                target="_blank"
-                rel="noreferrer noopener"
-                className="contact-links"
-              ></Link>
-            </div>
-            <div id="linkedin">
-              <Link
-                to={{ pathname: "https://www.linkedin.com/in/john-shivers3/" }}
-                target="_blank"
-                rel="noreferrer noopener"
-                className="contact-links"
-              ></Link>
-            </div>
-            <div>
-              <h4>Developed by John Shivers</h4>
-              <Link
-                to={{ pathname: "https://www.ShiversDevelopment.com/" }}
-                target="_blank"
-              >
-                <h4>ShiversDevelopment.com</h4>
-              </Link>
-            </div>
-          </div>
-        </div>
-      </span>
+      <Knews
+        user={user}
+        headingStyle={headingStyle}
+        splashTheme={splashTheme}
+      />
       <div id="main-newsfeed-div">
-        {/* <PopUp/> */}
         <div className="newsfeed-header-div">
           <h1 style={headingStyle}>Top Stories</h1>
         </div>
@@ -269,9 +203,9 @@ export const NewsFeed = () => {
                       </a>
                       <hr />
                       <p>
-                        {article.content.substring(
+                        {article.content?.substring(
                           0,
-                          article.content.indexOf("[")
+                          article.content?.indexOf("[")
                         )}
                       </p>
                       <div className="upper link-div">

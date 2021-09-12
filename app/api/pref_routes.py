@@ -5,7 +5,7 @@ from app.models import db, UserPreferences
 pref_routes = Blueprint('pref', __name__)
 
 
-@pref_routes.route('/', methods=['PATCH'])
+@pref_routes.route('/', methods=['PUT'])
 def patch_user_prefs():
     '''
     update preferences associated with user in database

@@ -21,6 +21,8 @@ export const getUserPreferences = () => async (dispatch) => {
 
   if (response.ok) {
     const preferences = await response.json();
+    console.log(preferences);
+
     dispatch(getPreferences(preferences));
     return preferences;
   } else {
@@ -29,8 +31,9 @@ export const getUserPreferences = () => async (dispatch) => {
 };
 
 export const updatePreferences = (preferences) => async (dispatch) => {
+  console.log(preferences);
   const response = await fetch(`/api/pref/`, {
-    method: "PATCH",
+    method: "PUT",
     headers: { "CONTENT-TYPE": "application/json" },
     body: JSON.stringify({ preferences }),
   });
@@ -62,8 +65,6 @@ export const deletePreferences = (prefId) => async (dispatch) => {
 export const switchSetting = (setting) => (dispatch) => {
   dispatch(settingAction(setting));
 };
-
-
 
 const initialState = { preferences: null, setting: null };
 

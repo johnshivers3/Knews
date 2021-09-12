@@ -56,19 +56,19 @@ export const Error = () => {
   );
 
   useEffect(() => {
-    if (countdown === 0) history.push("/");
+    if (countdown <= 0) history.push('/feed/light')
     const interval = setInterval(() => setCountdown((prev) => prev - 1), 1000);
 
     return () => {
       clearInterval(interval);
     };
-    // eslint-disable-next-line
-  }, [countdown]);
+
+  }, [countdown, history]);
   return (
     <div id="div-404">
       <div id="alien"></div>
-      <h2>Something went wrong...</h2>
-      <p>Redirecting to the main page... {countdown}</p>
+      <h1>Something went wrong...</h1>
+      <h2>Redirecting to the main page... {countdown}</h2>
       {banner}
     </div>
   );

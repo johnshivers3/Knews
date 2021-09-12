@@ -6,12 +6,14 @@ import * as articleActions from "../../store/articles";
 import * as followActions from "../../store/follows";
 import * as preferenceActions from "../../store/preferences";
 import Logo from "../images/Logo.js";
-
+import { useAlert } from "react-alert";
 import "./Results.css";
 
-export const Results = ( ) => {
+export const Results = () => {
   const dispatch = useDispatch();
   const { query } = useParams();
+  const alert = useAlert();
+
   const feedHeadlines = useSelector((state) => state.newsfeed.news);
   const categoryFeed = useSelector((state) => state.newsfeed.searchResults);
   const allFollows = useSelector((state) => state.follows?.allFollows);
@@ -28,7 +30,7 @@ export const Results = ( ) => {
 
   // Collect user preferences
   useEffect(() => {
-     dispatch(preferenceActions.getUserPreferences());
+    dispatch(preferenceActions.getUserPreferences());
 
     if (userPreferences?.theme === "Dark") {
       setBgTheme("rgba(0, 0, 0, 0.75)");
@@ -50,9 +52,10 @@ export const Results = ( ) => {
   useEffect(() => {
     if (user) dispatch(followActions.getAllFollows());
 
-    dispatch(newsFeedActions.getSearchResults(query));
-    return
-  }, [dispatch, user, query]);
+    const language = userPreferences?.language || "en";
+
+    dispatch(newsFeedActions.getSearchResults(query, language));
+  }, [dispatch, user, query, userPreferences?.language]);
 
   useEffect(() => {
     if (user) {
@@ -67,11 +70,11 @@ export const Results = ( ) => {
   // Save article to database
 
   const addArticle = async (article) => {
-    if (!user) window.alert(`Sign Up or Log In \n to save articles.`);
+    if (!user) alert.info(`Sign Up or Log In \n to save articles.`);
 
     const response = await dispatch(articleActions.addArticle(article));
     if (response.message) {
-      window.alert(
+      alert.success(
         `Article from ${response.message.article.source.name} saved`
       );
     }
@@ -136,7 +139,15 @@ export const Results = ( ) => {
                 className="contact-links"
               ></Link>
             </div>
-            <h4>Developed by John Shivers</h4>
+            <div>
+              <h4>Developed by John Shivers</h4>
+              <Link
+                to={{ pathname: "https://www.ShiversDevelopment.com/" }}
+                target="_blank"
+              >
+                <h4>ShiversDevelopment.com</h4>
+              </Link>
+            </div>
           </div>
         </div>
       </span>

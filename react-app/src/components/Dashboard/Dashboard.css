@@ -27,7 +27,10 @@ div#dashboard-main-div hr {
   flex-direction: column;
 }
 .preference-div {
-  display: flex;
+  display: grid;
+  grid-template-areas:
+    "theme category"
+    "language country";
   justify-content: space-around;
   width: 100%;
   align-items: center;
@@ -50,15 +53,63 @@ div#dashboard-main-div hr {
   border-radius: 0.3rem;
   padding: 10%;
 }
+#default-theme-select label,
+#default-category-select label,
+#country-select label,
+#language-select label {
+  font-size: medium;
+  margin: 0 20px;
+}
 
-#default-theme-search,
-#default-category-search,
-#country-search,
-#language-search {
+#default-theme-select select,
+#default-category-select select,
+#country-select select,
+#language-select select {
+  width: 50%;
+  padding: 0 15px;
+  font-size: large;
+  color: var(--main-purple);
+  border-radius: 0.3rem;
+}
+#default-theme-select {
+  grid-area: "theme";
+  display: flex;
+  justify-content: space-between;
   width: 20vw;
   padding: 0.5%;
   margin: 10px 20px;
-  font-size: large;
+  color: var(--main-purple);
+}
+
+#default-category-select {
+  grid-area: "category";
+  display: flex;
+  justify-content: space-between;
+  width: 20vw;
+  padding: 0.5%;
+  margin: 10px 20px;
+  color: var(--main-purple);
+}
+
+#country-select {
+  grid-area: "country";
+  display: flex;
+  justify-content: space-between;
+  width: 20vw;
+  padding: 0.5%;
+  margin: 10px 20px;
+
+  color: var(--main-purple);
+}
+
+#language-select {
+  grid-area: "language";
+  display: flex;
+  justify-content: space-between;
+  width: 20vw;
+  padding: 0.5%;
+  margin: 10px 20px;
+
   color: var(--main-purple);
 }
 
@@ -87,8 +138,6 @@ div#dashboard-main-div hr {
   padding: 5px;
   margin: 0 5w;
 }
-
-
 
 .user-topics li .search-follow-button,
 div#add-follow-div button,
@@ -123,7 +172,7 @@ ul.dashboard-list li {
   align-items: center;
   margin: 10vw;
   max-height: 15vh;
-  width:100%;
+  width: 100%;
   justify-content: flex-start;
 }
 

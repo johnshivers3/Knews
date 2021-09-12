@@ -11,6 +11,7 @@ import ProtectedRoute from "./components/auth/ProtectedRoute";
 import UsersList from "./components/UsersList";
 import Dashboard from "./components/Dashboard/Dashboard";
 import Results from "./components/Results/Results";
+import Knews from "./components/Knews/Knews";
 import Error from "./components/Error";
 import { authenticate } from "./store/session";
 import * as newsFeedActions from "./store/newsfeed.js";
@@ -24,15 +25,22 @@ function App({ store }) {
   const userTheme = useSelector(
     (state) => state.preferences.preferences?.theme
   );
+
+  const country = useSelector(
+    (state) => state.preferences.preferences?.country
+  );
+  const defaultFeed = useSelector(
+    (state) => state.preferences.preferences?.defaultFeed
+  );
+
   useEffect(() => {
     (async () => {
       await dispatch(authenticate());
-      await dispatch(newsFeedActions.getTopHeadlines());
       await dispatch(preferenceActions.getUserPreferences());
+      await dispatch(newsFeedActions.getTopHeadlines( country ?? 'us', defaultFeed ?? 'general'));
       setLoaded(true);
     })();
-  }, [dispatch]);
-
+  }, [dispatch, country, defaultFeed]);
 
   if (!loaded) {
     return null;
@@ -107,9 +115,9 @@ function App({ store }) {
     </span>
   );
   const options = {
-    timeout: 1500,
-    position: positions.TOP_CENTER,
-    containerStyle: { backdropFilter: "blur(2px)"}
+    timeout: 2000,
+    position: positions.MIDDLE,
+    containerStyle: { backdropFilter: "blur(2px)" },
   };
   return (
     <Provider template={AlertTemplate} {...options}>
@@ -138,10 +146,13 @@ function App({ store }) {
           <ProtectedRoute path="/dashboard/:userId" exact={true}>
             <Dashboard />
           </ProtectedRoute>
-          <Route path="/" exact={true}>
+          <Route path="/feed/:pagetheme" exact={true}>
             <NewsFeed />
           </Route>
-          <Route >
+          <Route path="/" exact={true}>
+            <Knews />
+          </Route>
+          <Route>
             <Error />
           </Route>
         </Switch>

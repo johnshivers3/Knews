@@ -20,12 +20,13 @@ nav h1 {
   font-style: oblique;
   margin-left: 20px;
 }
-
-.fas.fa-ellipsis-h {
-  font-size: 50px;
-  color: var(--main-purple);
-  margin: 10px 0 0px 0;
-  padding: 0;
+li#ellipsis-li {
+  height:80px;
+}
+li#ellipsis-li img{
+  transform: scaleY(.6) ;
+  width: 50%;
+  height: 100px;
 }
 
 #logo-nav {
@@ -99,7 +100,7 @@ label.transition-wrapper {
   bottom: 0px;
   right: 0;
   padding: 20px 60px 0 0;
-  transition: bottom 1s ease-in-out 0.1s;
+  transition: all 1s ease-in-out 0.1s;
   border-radius: 0 0 0 2rem;
   border-left: 1px solid var(--main-highlight);
 }

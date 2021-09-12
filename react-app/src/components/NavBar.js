@@ -5,6 +5,7 @@ import LogoutButton from "./auth/LogoutButton";
 import { Logo } from "./images/Logo";
 import { login } from "../store/session";
 import "./NavBar.css";
+import Hamburger from "./images/hamburger";
 
 const NavBar = () => {
   const dispatch = useDispatch();
@@ -92,7 +93,7 @@ const NavBar = () => {
               ) : null}
 
               <li id="ellipsis-li">
-                <i className="fas fa-ellipsis-h"></i>
+                <Hamburger />
               </li>
             </ul>
           </div>

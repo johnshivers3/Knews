@@ -58,7 +58,7 @@ div#dashboard-main-div hr {
 #country-select label,
 #language-select label {
   font-size: medium;
-  margin: 0 20px;
+  /* margin: 0 20px;  */
 }
 
 #default-theme-select select,
@@ -71,21 +71,21 @@ div#dashboard-main-div hr {
   color: var(--main-purple);
   border-radius: 0.3rem;
 }
-#default-theme-select {
+div#default-theme-select {
   grid-area: "theme";
   display: flex;
   justify-content: space-between;
-  width: 20vw;
+  width: 25vw;
   padding: 0.5%;
   margin: 10px 20px;
   color: var(--main-purple);
 }
 
-#default-category-select {
+div#default-category-select {
   grid-area: "category";
   display: flex;
   justify-content: space-between;
-  width: 20vw;
+  width: 25vw;
   padding: 0.5%;
   margin: 10px 20px;
   color: var(--main-purple);
@@ -213,17 +213,15 @@ ul.dashboard-list img {
   margin-right: 28vw;
 }
 
-.setting-button.topics,
-.setting-button.articles {
+.setting-button {
   position: relative;
   display: flex;
   align-self: center;
   transform: scale(0.8);
 }
 
-.setting-button.topics:hover:after,
-.setting-button.articles:hover:after,
-.setting-button.preferences:hover:after {
+
+.setting-button:hover:after {
   position: absolute;
   content: attr(title);
   font-size: 20px;
@@ -259,6 +257,19 @@ ul.dashboard-list img {
   background: url("../../source-images/minus-circle-icon.svg");
 }
 
+.delete-follow-button:hover:after,
+.delete-article-button:hover:after{
+  position: absolute;
+  content: attr(title);
+  font-size: 40px;
+  display: inline-block;
+  left: 70%;
+  top: 70%;
+
+  background-color: rgb(255, 255, 255);
+  color: var(--main-purple);
+  border-radius: 0.2rem;
+}
 .heading-edit-buttons {
   display: flex;
   align-items: center;

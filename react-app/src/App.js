@@ -117,7 +117,6 @@ function App({ store }) {
   const options = {
     timeout: 2000,
     position: positions.MIDDLE,
-    containerStyle: { backdropFilter: "blur(2px)" },
   };
   return (
     <Provider template={AlertTemplate} {...options}>

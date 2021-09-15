@@ -22,11 +22,12 @@ export const NewsFeed = () => {
 
   const [hTheme, setHTheme] = useState("rgba(36, 22, 129, 0.978)");
   const [bgTheme, setBgTheme] = useState("");
+  const [activeTopic, setActiveTopic] = useState("");
 
   const [feedArticles, setFeedArticles] = useState();
 
   const placeHolder =
-    "http://placehold.jp/32/d3d3d3/241681/150x150.png?text=Image%20Not%20Found";
+    "https://dummyimage.com/400x300/dedede/241681.jpg&text=Image+Not+Found";
   const appTheme = { background: bgTheme };
   const headingStyle = { color: hTheme };
   const splashTheme = { background: "var(--main-purple)" };
@@ -64,6 +65,9 @@ export const NewsFeed = () => {
     return;
   }, [dispatch, categoryFeed, feedHeadlines, userPreferences?.defaultFeed]);
 
+  useEffect(() => {
+    //re-render
+  }, [activeTopic]);
   // Save article to database
 
   const addArticle = async (article) => {
@@ -85,11 +89,36 @@ export const NewsFeed = () => {
         headingStyle={headingStyle}
         splashTheme={splashTheme}
       />
+      <div className="newsfeed-header-div">
+        <h1 style={headingStyle}>Top Stories</h1>
+      </div>
       <div id="main-newsfeed-div">
-        <div className="newsfeed-header-div">
-          <h1 style={headingStyle}>Top Stories</h1>
+        {/* <div></div> */}
+        <div id="newsfeed-follows">
+          {user && (
+            <>
+              <h1 >Followed Topics</h1>
+              <hr />
+              {allFollows &&
+                Object.values(allFollows)
+                  .reverse()
+                  .map((topic, i) => (
+                    <Link
+                      to={`/results/${topic.topicString}`}
+                      key={i}
+                      id={
+                        activeTopic === topic.topicString
+                          ? "active-topic"
+                          : null
+                      }
+                      onClick={() => setActiveTopic(topic.topicString)}
+                    >
+                      <h2>{topic.topicString}</h2>
+                    </Link>
+                  ))}
+            </>
+          )}
         </div>
-
         {feedArticles?.length > 0 && (
           <>
             <div className="highlight-section">
@@ -148,26 +177,6 @@ export const NewsFeed = () => {
           </>
         )}
 
-        <div id="newsfeed-follows">
-          {user && (
-            <>
-              <h1 style={headingStyle}>Followed Topics</h1>
-              <hr />
-              {allFollows &&
-                Object.values(allFollows)
-                  .reverse()
-                  .map((topic, i) => (
-                    <Link
-                      to={`/results/${topic.topicString}`}
-                      key={i}
-                      style={headingStyle}
-                    >
-                      <h2>{topic.topicString}</h2>
-                    </Link>
-                  ))}
-            </>
-          )}
-        </div>
         {feedArticles &&
           feedArticles.slice(1).map((article, i) => {
             switch (i) {

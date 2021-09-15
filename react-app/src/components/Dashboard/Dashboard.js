@@ -16,8 +16,8 @@ export const Dashboard = () => {
   const userFollows = useSelector((state) => state.follows.allFollows);
   const userArticles = useSelector((state) => state.articles.allArticles);
   const userPreferences = useSelector((state) => state.preferences.preferences);
-  const [language, setLanguage] = useState(userPreferences?.lang);
-  const [country, setCountry] = useState(userPreferences?.country);
+  // const [language, setLanguage] = useState(userPreferences?.lang);
+  // const [country, setCountry] = useState(userPreferences?.country);
   const [feed, setFeed] = useState(userPreferences?.defaultFeed);
   const [theme, setTheme] = useState(userPreferences?.theme);
   const [followEdit, setFollowEdit] = useState("");
@@ -92,8 +92,8 @@ export const Dashboard = () => {
         return;
       case "save-preference-edit":
         const newPreferences = { ...userPreferences };
-        newPreferences["country"] = country;
-        newPreferences["lang"] = language;
+        // newPreferences["country"] = country;
+        // newPreferences["lang"] = language;
         newPreferences["defaultFeed"] = feed;
         newPreferences["theme"] = theme;
         dispatch(preferenceActions.updatePreferences(newPreferences));

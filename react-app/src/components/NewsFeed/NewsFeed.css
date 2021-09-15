@@ -1,25 +1,20 @@
 .newsfeed-header-div {
+  display: flex;
+  align-content: center;
   width: 100%;
-  margin: auto;
-  width: 33vw;
+  height: 100px;
   font-size: xx-large;
-  height: 15em;
   color: var(--main-purple);
 }
 .newsfeed-header-div h1 {
-  margin: 0;
-  padding: 0 80px;
-}
-
-.newsfeed-header-div h4 {
-  margin: 0;
-  padding: 40px 80px 40px 100px;
+  margin: 20px 80px;
 }
 
 #main-newsfeed-div {
-  display: inline-grid;
-  grid-template-columns: repeat(3, 1fr);
-  row-gap: 3.5rem;
+  display: grid;
+  grid-template-columns: repeat(3, 33vw);
+  grid-template-rows: minmax(auto, 800px);
+  row-gap: 5rem;
   padding: 3.5rem 0;
   width: 100vw;
 }
@@ -27,10 +22,10 @@
 .highlight-section img {
   display: flex;
   align-self: center;
-  width: 100%;
+  width: 70%;
   height: 50%;
-  object-fit: contain;
-  min-height: 300px;
+  object-fit: fill;
+  min-height: 400px;
   background: linear-gradient(
     0.25turn,
     transparent,
@@ -56,12 +51,13 @@
 .highlight-section {
   display: flex;
   flex-direction: column;
+  grid-column: 2 / span 2;
   align-self: center;
-  width: 33vw;
+  margin: 0 8%;
   height: 90%;
   background: linear-gradient(grey, grey, grey, grey, transparent);
   border-radius: 0.5rem;
-  padding: 2rem;
+  padding: 3rem;
   border-bottom: 1px solid var(--main-highlight);
 }
 
@@ -69,7 +65,7 @@
   display: flex;
   justify-self: center;
   flex-direction: column;
-  max-width: 20vw;
+  width: 20vw;
   height: 90%;
   background: linear-gradient(grey, grey, grey, grey, transparent);
   border-radius: 0.5rem;
@@ -97,7 +93,7 @@
   display: flex;
   justify-self: center;
   text-align: center;
-  max-width: 20vw;
+  width: 20vw;
   height: 70%;
   background: linear-gradient(grey, grey, grey, grey, transparent);
   border-radius: 0.5rem;
@@ -191,7 +187,6 @@ span#splash-feed h2#tag-line {
   margin-right: 300px;
 }
 
-
 div#git {
   background: url(../../source-images/github-logo.svg) center/100% no-repeat;
   height: 40px;
@@ -244,11 +239,27 @@ div#linkedin:hover {
 }
 
 #newsfeed-follows {
-  /* font-size: large; */
-  padding: 10% 15% 10% 15%;
-  max-width: 23vw;
+  font-size: large;
+  border-radius: 0.5rem;
   overflow-y: scroll;
+  background: #d3d3d3;
+  padding: 5%;
+  margin: 0 8%;
 }
+
+#newsfeed-follows h1 {
+  color: var(--main-purple);
+}
+
 #newsfeed-follows h2 {
+  display: flex;
+  align-items: center;
+  height: 50px;
   margin-left: 20px;
+}
+
+#newsfeed-follows > a#active-topic h2 {
+  font-size: 36px;
+
+  text-decoration: underline;
 }

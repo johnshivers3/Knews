@@ -4,17 +4,19 @@
 
 #rolling-alien {
   position: absolute;
-  animation: 5s ease-out 0s infinite roll;
+    margin-left: 50%;
+
+  animation: 3s ease-in-out 0s infinite alternate roll;
 }
 
 @keyframes roll {
   from {
-    margin-left: 0%;
-    transform: rotate(0deg);
+    /* margin-left: 0%; */
+    transform: scale(1) rotate(0deg);
   }
   to {
-    margin-left: 110%;
-    transform: rotate(360deg);
+    /* margin-left: 110%; */
+    transform: scale(1.8) rotate(720deg);
 
   }
 }

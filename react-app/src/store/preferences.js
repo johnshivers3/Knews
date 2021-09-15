@@ -1,5 +1,4 @@
 const GET_PREFS = "preferences/GET_PREFS";
-const CLEAN_UP = "preferences/CLEAN_UP";
 const SET_SETTING = "preferences/SET_SETTING";
 
 const getPreferences = (preferences) => ({
@@ -12,9 +11,7 @@ const settingAction = (setting) => ({
   payload: setting,
 });
 
-const cleanUp = () => ({
-  type: CLEAN_UP,
-});
+
 
 export const getUserPreferences = () => async (dispatch) => {
   const response = await fetch("/api/pref/");

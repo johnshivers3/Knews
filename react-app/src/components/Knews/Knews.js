@@ -16,7 +16,7 @@ export const Knews = ({ user, splashTheme, headingStyle }) => {
   useEffect(() => {
     setTimeout(() => {
       if (welcome) history.push("/feed/light");
-    }, 5000);
+    }, 6000);
   }, [welcome, history]);
 
   return (
@@ -45,7 +45,7 @@ export const Knews = ({ user, splashTheme, headingStyle }) => {
                 <br />
                 Thanks for visiting.
                 <br />
-                Redirecting to feed...
+                Loading Feed...
               </h1>
             </div>
           ) : !user ? (

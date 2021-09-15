@@ -5,6 +5,7 @@ import * as newsFeedActions from "../../store/newsfeed.js";
 import * as articleActions from "../../store/articles";
 import * as followActions from "../../store/follows";
 import * as preferenceActions from "../../store/preferences";
+import ScrollToTop from "../ScrollToTop/ScrollToTop.js";
 import Logo from "../images/Logo.js";
 import { useAlert } from "react-alert";
 import "./Results.css";
@@ -338,6 +339,7 @@ export const Results = () => {
             }
           })}
       </div>
+      <ScrollToTop />
     </div>
   );
 };

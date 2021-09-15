@@ -78,7 +78,7 @@ input {
   right: 40px;
   height: 100px;
   width: 100px;
-  background: url(./source-images/up-menu-arrows.png)  center/80% no-repeat;
+  background: url(./source-images/up-menu-arrows.svg)  center/80% no-repeat;
   backdrop-filter: blur(1px);
   border-radius: 50%;
   transition: all 1s ease-out;

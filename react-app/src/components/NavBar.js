@@ -1,5 +1,5 @@
 // import React, { useState, useEffect } from "react";
-import { Link, NavLink, useHistory, Redirect } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import LogoutButton from "./auth/LogoutButton";
 import { Logo } from "./images/Logo";
@@ -9,7 +9,7 @@ import Hamburger from "./images/hamburger";
 
 const NavBar = () => {
   const dispatch = useDispatch();
-  const history = useHistory();
+
   const user = useSelector((state) => state.session.user);
   const pagetheme = useSelector((state) => state.preferences.preferences);
 

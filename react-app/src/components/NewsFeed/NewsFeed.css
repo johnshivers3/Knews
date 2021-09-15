@@ -14,7 +14,7 @@
   display: grid;
   grid-template-columns: repeat(3, 33vw);
   grid-template-rows: minmax(auto, 800px);
-  row-gap:  5rem;
+  row-gap: 5rem;
   padding: 3.5rem 0;
   width: 100vw;
 }
@@ -65,7 +65,7 @@
   display: flex;
   justify-self: center;
   flex-direction: column;
-  max-width: 20vw;
+  width: 20vw;
   height: 90%;
   background: linear-gradient(grey, grey, grey, grey, transparent);
   border-radius: 0.5rem;
@@ -93,7 +93,7 @@
   display: flex;
   justify-self: center;
   text-align: center;
-  max-width: 20vw;
+  width: 20vw;
   height: 70%;
   background: linear-gradient(grey, grey, grey, grey, transparent);
   border-radius: 0.5rem;
@@ -240,10 +240,17 @@ div#linkedin:hover {
 
 #newsfeed-follows {
   font-size: large;
-  margin: 20px 80px;
-  max-width: 25vw;
+  border-radius: 0.5rem;
   overflow-y: scroll;
+  background: #d3d3d3;
+  padding: 5%;
+  margin: 0 8%;
 }
+
+#newsfeed-follows h1 {
+  color: var(--main-purple);
+}
+
 #newsfeed-follows h2 {
   display: flex;
   align-items: center;
@@ -251,8 +258,8 @@ div#linkedin:hover {
   margin-left: 20px;
 }
 
-#newsfeed-follows > a#active-topic h2{
+#newsfeed-follows > a#active-topic h2 {
   font-size: 36px;
-  text-shadow: 2px 2px rgba(255, 255, 255, 0.027);
+
   text-decoration: underline;
 }

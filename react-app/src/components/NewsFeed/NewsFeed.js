@@ -102,7 +102,7 @@ export const NewsFeed = () => {
                     <Link
                       to={`/results/${topic.topicString}`}
                       key={i}
-                      style={headingStyle}
+                      className={pagetheme}
                     >
                       <h2>{topic.topicString}</h2>
                     </Link>

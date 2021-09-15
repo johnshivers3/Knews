@@ -10,13 +10,11 @@
   margin: 20px 80px;
 }
 
-
-
 #main-newsfeed-div {
   display: grid;
   grid-template-columns: repeat(3, 33vw);
   grid-template-rows: minmax(auto, 800px);
-  row-gap: 3.5rem;
+  row-gap:  5rem;
   padding: 3.5rem 0;
   width: 100vw;
 }
@@ -189,7 +187,6 @@ span#splash-feed h2#tag-line {
   margin-right: 300px;
 }
 
-
 div#git {
   background: url(../../source-images/github-logo.svg) center/100% no-repeat;
   height: 40px;
@@ -248,5 +245,14 @@ div#linkedin:hover {
   overflow-y: scroll;
 }
 #newsfeed-follows h2 {
+  display: flex;
+  align-items: center;
+  height: 50px;
   margin-left: 20px;
+}
+
+#newsfeed-follows > a#active-topic h2{
+  font-size: 36px;
+  text-shadow: 2px 2px rgba(255, 255, 255, 0.027);
+  text-decoration: underline;
 }

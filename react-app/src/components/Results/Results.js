@@ -23,6 +23,7 @@ export const Results = () => {
 
   const [hTheme, setHTheme] = useState("rgba(36, 22, 129, 0.978)");
   const [bgTheme, setBgTheme] = useState("");
+  const [activeTopic, setActiveTopic] = useState("");
 
   const [feedArticles, setFeedArticles] = useState();
 
@@ -68,6 +69,9 @@ export const Results = () => {
     // eslint-disable-next-line
   }, [dispatch, categoryFeed, feedHeadlines]);
 
+  useEffect(() => {
+
+  },[activeTopic])
   // Save article to database
 
   const addArticle = async (article) => {
@@ -169,7 +173,9 @@ export const Results = () => {
                     <Link
                       to={`/results/${topic.topicString}`}
                       key={i}
-                      style={headingStyle}
+
+                      id={activeTopic === topic.topicString ? 'active-topic' : null}
+                      onClick={() => setActiveTopic(topic.topicString)}
                     >
                       <h2>{topic.topicString}</h2>
                     </Link>

@@ -124,31 +124,31 @@ function App({ store }) {
         <NavBar />
 
         <Switch>
-          <Route path="/login" exact={true}>
+          <Route path="/login" exact={true} >
             <div className="no-theme-wrapper">
               <LoginForm />
               {banner}
             </div>
           </Route>
-          <Route path="/sign-up" exact={true}>
+          <Route path="/sign-up" exact={true} >
             <div className="no-theme-wrapper">
               <SignUpForm />
               {banner}
             </div>
           </Route>
-          <Route path="/results/:query" exact={true}>
+          <Route path="/results/:query" exact={true} >
             <Results userTheme={userTheme} />
           </Route>
-          <ProtectedRoute path="/users" exact={true}>
+          <ProtectedRoute path="/users" exact={true} >
             <UsersList />
           </ProtectedRoute>
-          <ProtectedRoute path="/dashboard/:userId" exact={true}>
+          <ProtectedRoute path="/dashboard/:userId" exact={true} >
             <Dashboard />
           </ProtectedRoute>
-          <Route path="/feed/:pagetheme" exact={true}>
+          <Route path="/feed/:pagetheme" exact={true} >
             <NewsFeed />
           </Route>
-          <Route path="/" exact={true}>
+          <Route path="/" exact={true} >
             <Knews />
           </Route>
           <Route>

@@ -8,7 +8,7 @@ import * as preferenceActions from "../../store/preferences";
 import ScrollToTop from "../ScrollToTop/ScrollToTop.js";
 import Logo from "../images/Logo.js";
 import { useAlert } from "react-alert";
-import "./Results.css";
+// import "./Results.css";
 
 export const Results = () => {
   const dispatch = useDispatch();
@@ -152,71 +152,11 @@ export const Results = () => {
           </div>
         </div>
       </span>
+      <div className="newsfeed-header-div">
+        <h1 style={headingStyle}>Top Stories</h1>
+
+      </div>
       <div id="main-newsfeed-div">
-        <div className="newsfeed-header-div">
-          <h1 style={headingStyle}>Top Stories</h1>
-          <h4 style={headingStyle}>{query.toUpperCase()}</h4>
-        </div>
-        <div>
-          {feedArticles?.length > 0 && (
-            <>
-              <div className="highlight-section">
-                <img
-                  src={
-                    feedArticles[0].urlToImage &&
-                    feedArticles[0].urlToImage !== null
-                      ? feedArticles[0].urlToImage
-                      : placeHolder
-                  }
-                  onError={(e) => {
-                    e.target.onerror = null;
-                    e.target.src = placeHolder;
-                  }}
-                  alt={feedArticles[0].title}
-                  height="100px"
-                  width="100px"
-                />
-                <div className="highlight-content">
-                  <a
-                    href={feedArticles[0].url}
-                    target="_blank"
-                    rel="noreferrer noopener"
-                  >
-                    <h3>{feedArticles[0].title}</h3>
-                  </a>
-                  <hr />
-                  <p>
-                    {feedArticles[0].content.substring(
-                      0,
-                      feedArticles[0].content.indexOf("[")
-                    )}
-                  </p>
-                  <div className="top link-div">
-                    <a
-                      href={feedArticles[0].url}
-                      target="_blank"
-                      rel="noreferrer noopener"
-                    >
-                      {feedArticles[0].source.name}
-                    </a>
-                    {!user && (
-                      <>
-                        <p>Sign Up or Login</p>
-                        <p>to save articles</p>
-                      </>
-                    )}
-                    <button
-                      title="Add Article"
-                      className="save top"
-                      onClick={() => addArticle(feedArticles[0])}
-                    ></button>
-                  </div>
-                  <p className="author">Author: {feedArticles[0].author}</p>
-                </div>
-              </div>
-            </>
-          )}
-        </div>
         <div id="newsfeed-follows">
           {user && (
             <>
@@ -237,8 +177,67 @@ export const Results = () => {
             </>
           )}
         </div>
+        {feedArticles?.length > 0 && (
+          <>
+            <div className="highlight-section">
+              <img
+                src={
+                  feedArticles[0].urlToImage &&
+                  feedArticles[0].urlToImage !== null
+                    ? feedArticles[0].urlToImage
+                    : placeHolder
+                }
+                onError={(e) => {
+                  e.target.onerror = null;
+                  e.target.src = placeHolder;
+                }}
+                alt={feedArticles[0].title}
+                height="100px"
+                width="100px"
+              />
+              <div className="highlight-content">
+                <a
+                  href={feedArticles[0].url}
+                  target="_blank"
+                  rel="noreferrer noopener"
+                >
+                  <h3>{feedArticles[0].title}</h3>
+                </a>
+                <hr />
+                <p>
+                  {feedArticles[0].content.substring(
+                    0,
+                    feedArticles[0].content.indexOf("[")
+                  )}
+                </p>
+                <div className="top link-div">
+                  <a
+                    href={feedArticles[0].url}
+                    target="_blank"
+                    rel="noreferrer noopener"
+                  >
+                    {feedArticles[0].source.name}
+                  </a>
+                  {!user && (
+                    <>
+                      <p>Sign Up or Login</p>
+                      <p>to save articles</p>
+                    </>
+                  )}
+                  <button
+                    title="Add Article"
+                    className="save top"
+                    onClick={() => addArticle(feedArticles[0])}
+                  ></button>
+                </div>
+                <p className="author">Author: {feedArticles[0].author}</p>
+              </div>
+            </div>
+          </>
+        )}
+
         {feedArticles &&
-          feedArticles.slice(1).map((article, i) => {
+          feedArticles.slice(2).map((article, i) => {
             switch (i) {
               case 0:
               case 1:

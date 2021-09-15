@@ -85,11 +85,31 @@ export const NewsFeed = () => {
         headingStyle={headingStyle}
         splashTheme={splashTheme}
       />
+      <div className="newsfeed-header-div">
+        <h1 style={headingStyle}>Top Stories</h1>
+      </div>
       <div id="main-newsfeed-div">
-        <div className="newsfeed-header-div">
-          <h1 style={headingStyle}>Top Stories</h1>
+        {/* <div></div> */}
+        <div id="newsfeed-follows">
+          {user && (
+            <>
+              <h1 style={headingStyle}>Followed Topics</h1>
+              <hr />
+              {allFollows &&
+                Object.values(allFollows)
+                  .reverse()
+                  .map((topic, i) => (
+                    <Link
+                      to={`/results/${topic.topicString}`}
+                      key={i}
+                      style={headingStyle}
+                    >
+                      <h2>{topic.topicString}</h2>
+                    </Link>
+                  ))}
+            </>
+          )}
         </div>
-
         {feedArticles?.length > 0 && (
           <>
             <div className="highlight-section">
@@ -148,26 +168,6 @@ export const NewsFeed = () => {
           </>
         )}
 
-        <div id="newsfeed-follows">
-          {user && (
-            <>
-              <h1 style={headingStyle}>Followed Topics</h1>
-              <hr />
-              {allFollows &&
-                Object.values(allFollows)
-                  .reverse()
-                  .map((topic, i) => (
-                    <Link
-                      to={`/results/${topic.topicString}`}
-                      key={i}
-                      style={headingStyle}
-                    >
-                      <h2>{topic.topicString}</h2>
-                    </Link>
-                  ))}
-            </>
-          )}
-        </div>
         {feedArticles &&
           feedArticles.slice(1).map((article, i) => {
             switch (i) {

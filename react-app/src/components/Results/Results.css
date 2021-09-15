@@ -1,14 +1,14 @@
 .newsfeed-header-div {
+  display: flex;
+  align-content: center;
   width: 100%;
-  margin: auto;
-  width: 33vw;
+  height: 100px;
   font-size: xx-large;
-  height: 15em;
   color: var(--main-purple);
 }
 .newsfeed-header-div h1 {
-  margin: 0;
-  padding: 0 80px;
+  padding: 20px 80px;
+  text-align: left;
 }
 
 .newsfeed-header-div h4 {
@@ -17,8 +17,9 @@
 }
 
 #main-newsfeed-div {
-  display: inline-grid;
-  grid-template-columns: repeat(3, 1fr);
+  display: grid;
+  grid-template-columns: repeat(3, auto);
+  grid-template-rows: minmax(auto, 800px);
   row-gap: 3.5rem;
   padding: 3.5rem 0;
   width: 100vw;
@@ -30,7 +31,7 @@
   width: 100%;
   height: 50%;
   object-fit: contain;
-  min-height: 300px;
+  min-height: 400px;
   background: linear-gradient(
     0.25turn,
     transparent,
@@ -56,8 +57,9 @@
 .highlight-section {
   display: flex;
   flex-direction: column;
+  grid-column: 1 / span 2;
   align-self: center;
-  width: 33vw;
+  margin: 0 9%;
   height: 90%;
   background: linear-gradient(grey, grey, grey, grey, transparent);
   border-radius: 0.5rem;
@@ -167,7 +169,6 @@ span#splash-feed {
   justify-content: flex-start;
   align-items: center;
   padding: 0 10vw;
-
 }
 span#splash-feed img {
   transform: scale(3);
@@ -192,6 +193,7 @@ span#splash-feed h2#tag-line {
   margin-right: 300px;
 }
 
+
 div#git {
   background: url(../../source-images/github-logo.svg) center/100% no-repeat;
   height: 40px;
@@ -199,6 +201,7 @@ div#git {
   margin: 0;
   box-sizing: border-box;
   display: flex;
+  transition: all 0.3s ease-in-out;
 }
 div#linkedin {
   background: url(../../source-images/linkedin.svg) center/100% no-repeat;
@@ -207,6 +210,7 @@ div#linkedin {
   margin: 0;
   box-sizing: border-box;
   display: flex;
+  transition: all 0.3s ease-in-out;
 }
 
 .contact-links {
@@ -225,7 +229,17 @@ div#linkedin {
 }
 #contact-links-div h4 {
   color: var(--main-purple);
+  margin: 0;
 }
+#contact-links-div a > h4 {
+  transition: all 0.4s ease-in-out;
+}
+#contact-links-div a > h4:hover,
+div#git:hover,
+div#linkedin:hover {
+  transform: scale(1.2);
+}
+
 #welcome-sign {
   font-size: x-large;
   width: 30vw;
@@ -233,8 +247,8 @@ div#linkedin {
 
 #newsfeed-follows {
   /* font-size: large; */
-  padding: 10% 15% 10% 15%;
-  max-width: 23vw;
+  padding: 10% 25% 10% 5%;
+  max-width: 25vw;
   overflow-y: scroll;
 }
 #newsfeed-follows h2 {

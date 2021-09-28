@@ -15,7 +15,7 @@
 
 
 ## Table of Contents
- - [Good Knews Wiki](https://github.com/johnshivers3/Knews/wiki/Good-Knews!)
+ - [Knews Wiki](https://github.com/johnshivers3/Knews/wiki/Good-Knews!)
  - [Database Schema](https://github.com/johnshivers3/Knews/wiki/Database-Schema)
  - [Feature List](https://github.com/johnshivers3/Knews/wiki/Feature-List)
  - [API Documentation](https://github.com/johnshivers3/Knews/wiki/API-Documentation)

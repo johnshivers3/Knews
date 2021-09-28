@@ -10,7 +10,7 @@
 
 
 ## Motivations
- - Knews App was bourne out of my desire to just see good news sometime
+ - Knews App was born out of my desire to only see good news when I open a news app.
  - Building a tool that uses open source data to find solutions has been a challenge I've been exctied to take on.
 
 

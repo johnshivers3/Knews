@@ -10,7 +10,7 @@ import ScrollToTop from "../ScrollToTop/ScrollToTop.js";
 import "./NewsFeed.css";
 import Knews from "../Knews/Knews.js";
 
-export const NewsFeed = () => {
+export const NewsFeed = ({userTheme}) => {
   const { pagetheme } = useParams();
   const dispatch = useDispatch();
   const alert = useAlert();

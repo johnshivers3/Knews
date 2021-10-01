@@ -146,7 +146,7 @@ function App({ store }) {
             <Dashboard />
           </ProtectedRoute>
           <Route path="/feed/:pagetheme" exact={true} >
-            <NewsFeed />
+            <NewsFeed userTheme={userTheme}/>
           </Route>
           <Route path="/" exact={true} >
             <Knews />
